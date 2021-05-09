@@ -1,0 +1,63 @@
+#logo {
+	height: 90px;
+}
+
+input {
+	cursor: url("../cursore/text.cur"), text;
+	
+	border-radius: 5px;
+	background-color: #ECECEC;
+	border: solid 2px #BABABA;
+}
+
+#find {
+	background-color: #FFFEC0;
+	padding: 0px 5px;
+	border: solid 2px #32B624;
+	border-radius: 5px;
+	color: #535353;
+	text-decoration: none;
+	width: 40px;
+}
+#find:hover {
+	opacity: 0.8;
+}
+
+#hr1 {
+	width: 680px;
+	height: 0.1px;
+}
+
+#hr2 {
+	width: 0.1px;
+	height: 16px;
+}
+
+.user {
+	color: #45C561;
+	font-size: 13px;
+	text-decoration: none;
+}
+.user:hover {
+	text-decoration: underline;
+}
+#create{
+	
+}
+#login{
+	
+}
+
+a, video{
+	cursor: url("../cursore/pointer.cur"), pointer;
+}
+.video{
+  background: darkgray;
+}
+video:hover{
+  background: gray;
+}
+video{
+	width: 250px;
+	height: 150px;
+}

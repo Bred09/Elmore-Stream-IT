@@ -1,0 +1,28 @@
+body {
+	cursor: url('cursore/cursor.cur'), auto;
+}
+
+a:hover {
+	cursor: url('cursore/pointer.cur'), pointer;
+}
+
+#content{
+	display: grid;
+	grid: auto/1fr 1fr;
+	justify-content: space-around;
+	
+	height: 400px;
+	width: 1000px;
+	background: darkgray;
+}
+video{
+	background: gray;
+}
+#sidebar{
+	background: gray;
+}
+
+#content>*{
+	width: 490px;
+	height: 200px;
+}
