@@ -5,3 +5,5 @@ myvenv
 db.sqlite3
 /static
 .DS_Store
+node_modules
+Elmore-Stream-IT

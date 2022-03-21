@@ -1,0 +1,27 @@
+
+.wrapper{
+  display: grid;
+  grid-template: repeat(3, 150px)/repeat(5, 250px);
+  grid-gap: 140px 15px;
+	justify-self: center;
+
+  background: silver;
+}
+
+
+
+.video{
+  background: darkgray;
+}
+video:hover{
+  background: gray;
+}
+video{
+  width: 250px;
+  height: 150px;
+}
+
+
+.video-box {
+  cursor: url("../cursore/pointer.cur"), pointer;
+}

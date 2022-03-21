@@ -1,0 +1,79 @@
+a, video {
+  cursor: url("../cursore/pointer.cur"), pointer;
+}
+
+.header {
+  height: 100px;
+  padding: 2% 6%;
+}
+
+#logo {
+  height: 100px;
+/*   t r b l */
+  margin:  0 30px 0 0;
+}
+.logo-box {
+  float: left
+}
+
+.find-box {
+}
+
+.header input {
+  cursor: url("../cursore/text.cur"), text;
+  height: 40px;
+  width: 30%;
+  border-radius: 5px;
+  background-color: #ECECEC;
+  border: solid 2px #BABABA;
+  padding: 0 10px;
+  margin: 20px 10px 10px 0;
+}
+.header input:focus {
+  border-color: #2d2d2d;
+}
+.header input::-moz-focus-inner {
+  border: 0;
+}
+
+.btn-find {
+  background-color: #FFFEC0;
+  padding: 6px 8px;
+  border: solid 2px #32B624;
+  border-radius: 5px;
+  font-size: 22px;
+}
+.btn-find:hover {
+  opacity: 0.8;
+}
+
+
+.signinup {
+/*   t r b l */
+margin: -20px 0 0 0;
+  float: right;
+  display: inline-flex;
+}
+#hr1 {
+  width: 14px;
+  transform: rotate(90deg)
+}
+
+
+.user {
+  color: #45C561;
+  font-size: 14px;
+  text-decoration: none;
+}
+.user:hover {
+  text-decoration: underline;
+}
+
+/*убирает стандартную обводку файрфокс и сафари*/
+input, textarea {
+  outline:none;
+}
+a{
+  color: #535353;
+  text-decoration: none;
+}

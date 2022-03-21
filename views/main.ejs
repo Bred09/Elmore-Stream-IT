@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+ <html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="icon" type="image/x-icon" href="../media/favicon.svg">
+		<link href="main/style.css" rel="stylesheet" type="text/css"/>
+		<link href="main/header.css" rel="stylesheet" type="text/css"/>
+		<link href="main/wrapper.css" rel="stylesheet" type="text/css"/>
+		<link href="main/footer.css" rel="stylesheet" type="text/css"/>
+		<!-- Theme -->
+		<link rel="stylesheet" href="main/light.css" type="text/css" class="theme-link">
+		<title>ELMORE STREAM IT</title>
+	</head>
+	<body>
+		<div class='header'>
+			<div class="logo-box"><img id='logo' src='../media/logoDark.svg'></div>
+			
+			<div class="find-box">
+				<input placeholder='Введите ваш запрос'>
+				<button class="btn-find">
+					<a href='/find' id='find'>Find</a>
+				</button>
+			</div>
+
+			<div class="signinup">
+				<a href='/auth' class='user' id="create">
+					Create Account
+				</a>
+				
+				<hr id='hr1'>
+				
+				<a href='/auth' class='user' id="login">
+						Login
+				</a>
+			</div>
+			<hr id='hr2'>
+		</div>
+	<!-- туловище сайта -->
+		<div class='wrapper'>
+			<div class="video-box">
+				<a href="/play">
+					<div>
+						<video poster="../media/post.jpg"></video>
+						<h3>Gumball fail</h3>
+						<h4>Anais00039254</h4>
+						<h6>Views: 201432</h6>
+					</div>
+				</a>
+			</div>
+
+			<a href="/play">
+				<div class="video">
+					<video poster="../media/post.jpg"></video>
+					<h3><%= users.name %></h3>
+					<h3><%= users.num %></h3>
+				</div>
+			</a>
+			
+			<div class="video"><video></video></div>
+			<div class="video"><video></video></div>
+			<div class="video"><video></video></div>
+			<div class="video"><video></video></div>
+			<div class="video"><video></video></div>
+			<div class="video"><video></video></div>
+			<div class="video"><video></video></div>
+			<div class="video"><video></video></div>
+			<div class="video"><video></video></div>
+			<div class="video"><video></video></div>
+			<div class="video"><video></video></div>
+			<div class="video"><video></video></div>
+			<div class="video"><video></video></div>
+			
+		</div>
+		
+		<div id='footer'>
+			<button class="change-theme">Light</button>
+			OOO "Elmore.Cor"
+		</div>
+<script src="main/changeTheme.js" type="script"></script>
+	</body>
+</html>
