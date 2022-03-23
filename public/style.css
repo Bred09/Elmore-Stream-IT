@@ -1,0 +1,23 @@
+a {
+  color: #535353;
+  text-decoration: none;
+}
+
+/*убирает стандартную обводку файрфокс и сафари*/
+input, textarea {
+  outline:none;
+}
+
+
+body{
+  margin: 0;
+  padding: 0;
+}
+html {
+  margin: 0;
+  padding: 0;
+}
+*, html{
+  cursor: url("../media/cursore/cursore.svg"), auto;
+  font-family: sans-serif;
+}

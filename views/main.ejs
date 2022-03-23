@@ -3,7 +3,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<link rel="icon" type="image/x-icon" href="../media/favicon.svg">
-		<link href="main/style.css" rel="stylesheet" type="text/css"/>
+		<link href="../style.css" rel="stylesheet" type="text/css"/>
+		<link href="../btns.css" rel="stylesheet" type="text/css"/>
 		<link href="main/header.css" rel="stylesheet" type="text/css"/>
 		<link href="main/wrapper.css" rel="stylesheet" type="text/css"/>
 		<link href="main/footer.css" rel="stylesheet" type="text/css"/>
@@ -13,12 +14,12 @@
 	</head>
 	<body>
 		<div class='header'>
-			<div class="logo-box"><img id='logo' src='../media/logoDark.svg'></div>
+			<div class="logo-box"><img id='logo' src='../media/logo.svg'></div>
 			
 			<div class="find-box">
 				<input placeholder='Введите ваш запрос'>
 				<button class="btn-find">
-					<a href='/find' id='find'>Find</a>
+					Find
 				</button>
 			</div>
 
@@ -36,46 +37,97 @@
 			<hr id='hr2'>
 		</div>
 	<!-- туловище сайта -->
+	<div class="wrapper-box">
+		<h1>Suggested</h1>
 		<div class='wrapper'>
 			<div class="video-box">
-				<a href="/play">
-					<div>
-						<video poster="../media/post.jpg"></video>
-						<h3>Gumball fail</h3>
-						<h4>Anais00039254</h4>
-						<h6>Views: 201432</h6>
+				<a href="/play" class="video-link">
+					<div class="video">
+						<img src="../media/poster.jpg" class="poster"></img>
+						<br>
+						<br>
+						<span class="title info">Gumball fail1</span><br>
+						<span class="posted info">posted by <a class="blue-link">Anais00039254</a><br></span>
+						<span class="views info">201432 views</span>
 					</div>
 				</a>
 			</div>
+			<div class="video-box">
+				<a href="/play">
+					<div class="video">
+						<img src="../media/poster.jpg" class="poster"></img>
+						<br>
+						<br>
+						<span class="title info">Gumball fail1</span><br>
+						<span class="posted info">posted by<br></span>
+						<span class="views info">201432 views</span>
+					</div>
+				</a>
+			</div><div class="video-box">
+				<a href="/play">
+					<div class="video">
+						<img src="../media/poster.jpg" class="poster"></img>
+						<br>
+						<br>
+						<span class="title info">Gumball fail1</span><br>
+						<span class="posted info">posted by <a class="blue-link">Anais00039254</a><br></span>
+						<span class="views info">201432 views</span>
+					</div>
+				</a>
+			</div>
+			<div class="video-box">
+				<a href="/play">
+					<div class="video">
+						<img src="../media/poster.jpg" class="poster"></img>
+						<br>
+						<br>
+						<span class="title info">Gumball fail1</span><br>
+						<span class="posted info">posted by <a class="blue-link">Anais00039254</a><br></span>
+						<span class="views info">201432 views</span>
+					</div>
+				</a>
+			</div>
+			<div class="video-box">
+				<a href="/play">
+					<div class="video">
+						<img src="../media/poster.jpg" class="poster"></img>
+						<br>
+						<br>
+						<span class="title info">Gumball fail1</span><br>
+						<span class="posted info">posted by <a class="blue-link">Anais00039254</a><br></span>
+						<span class="views info">201432 views</span>
+					</div>
+				</a>
+			</div>
+			<div class="video-box">
+				<a href="/play">
+					<div class="video">
+						<img src="../media/poster.jpg" class="poster"></img>
+						<br>
+						<br>
+						<span class="title info">Gumball fail1</span><br>
+						<span class="posted info">posted by <a class="blue-link">Anais00039254</a><br></span>
+						<span class="views info">201432 views</span>
+					</div>
+				</a>
+			</div>
+		</div>
+	</div>
 
-			<a href="/play">
-				<div class="video">
-					<video poster="../media/post.jpg"></video>
-					<h3><%= users.name %></h3>
-					<h3><%= users.num %></h3>
-				</div>
-			</a>
-			
-			<div class="video"><video></video></div>
-			<div class="video"><video></video></div>
-			<div class="video"><video></video></div>
-			<div class="video"><video></video></div>
-			<div class="video"><video></video></div>
-			<div class="video"><video></video></div>
-			<div class="video"><video></video></div>
-			<div class="video"><video></video></div>
-			<div class="video"><video></video></div>
-			<div class="video"><video></video></div>
-			<div class="video"><video></video></div>
-			<div class="video"><video></video></div>
-			<div class="video"><video></video></div>
-			
+		<div class='footer'>
+			<hr>
+			<div class="grid-footer">
+				<p class="par en">
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, accusamus, omnis! Unde omnis atque quae voluptatibus numquam alias quia, excepturi ipsum, dolorum. Eveniet, doloribus? Consectetur, nesciunt at. Aspernatur, labore alias quaerat nam tempora reprehenderit hic.
+				</p>
+				<div class="tawog"><img src="../media/tawog.png" alt="The Amazing World of Gumball" width="24%"></div>
+				<p class="par ru">
+					Этот сайт создан фанатом "Удивительного мира Гамбола". Это не официальный сайт. бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла
+				</p>
+			</div>
 		</div>
 		
-		<div id='footer'>
-			<button class="change-theme">Light</button>
-			OOO "Elmore.Cor"
-		</div>
+		
 <script src="main/changeTheme.js" type="script"></script>
 	</body>
 </html>

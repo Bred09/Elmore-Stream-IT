@@ -1,3 +1,7 @@
+a{
+  cursor: pointer;
+}
+
 .wrapper-box{
   padding: 0 2%;
 }
@@ -19,7 +23,6 @@
   color: #fff;
 }
 
-/*проблема тут*/
 .video-box .video-link {
   display: block;
   height: 100%;

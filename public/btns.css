@@ -1,0 +1,13 @@
+.green-link {
+  color: #34b44a;
+}
+.green-link:hover {
+  text-decoration: underline;
+}
+
+.blue-link {
+  color: #009fff;
+}
+.blue-link:hover {
+  text-decoration: underline;
+}
