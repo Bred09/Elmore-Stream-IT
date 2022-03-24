@@ -9,12 +9,14 @@ const db = require('./db');
 // routes
 const routes = require('./routes');
 
+
+// bodyParser
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
+
 // Plugins
 app.set('view engine', 'ejs')
-// более короткая версия
-// app.use(express.static('public'));
-// более конкретная версия
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public'));
 app.use(staticAsset(path.join(__dirname, 'public')));
 
 	//Views

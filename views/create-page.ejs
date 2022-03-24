@@ -3,9 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<link rel="icon" type="image/x-icon" href="../../media/favicon.svg">
-		<link href="../css/create/style.css" rel="stylesheet" type="text/css"/>
-
-		<script src="script.js" defer></script>
+		<link href="/css/create/style.css" rel="stylesheet" type="text/css"/>
 		<title>Create new account</title>
 		<!-- main css files -->
 		<link href="../css/main.css" rel="stylesheet" type="text/css"/>
@@ -18,23 +16,27 @@
 		<%- include("layouts/header") %>
 		<div class="wrapper-box">
 			<div class="wrapper">
-				<h3>Create new account</h3>
+				<h3 class="box-title">Create new account</h3>
 
-					<div>Logine</div>
-					<input class="user-field green-inp">
+				<form method="post" class="create-form">
+					<div>Login</div>
+					<input class="field-login user-field green-inp">
 
 					<div id="pass">Password</div>
-					<input class="user-field green-inp" type="password">
+					<input class="field-pass user-field green-inp" type="password">
 					
 					<div>Repeat</div>
-					<input class="user-field green-inp" type="password">
+					<input class="field-repe user-field green-inp" type="password">
 
 					<a href="/" class="min_text green-lnk">Back</a>
 					<a href="login" class="min_text green-lnk">Login</a>
 
-				<button class="create green-btn">Create</button>
+					<button class="create-btn btn create green-btn">Create</button>
+					<div class="alert"></div>
+				</form>
 			</div>
 		</div>
 		<%- include("layouts/footer") %>
+	<script type="text/javascript" src="/js/create/script.js"></script>
 	</body>
 </html>

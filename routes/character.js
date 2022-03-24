@@ -1,7 +1,6 @@
 const router = require('express').Router();
 // db
 const db = require('../db');
-var stylePathCharacter = "character";
 
 let sql = `SELECT * FROM videos`;
 router.get('/gumball123', (req, res) => {
@@ -10,8 +9,7 @@ router.get('/gumball123', (req, res) => {
 		console.log(result);
 		
 		res.render('character', {
-			data: result,
-			wrapper: stylePathCharacter
+			data: result
 		});
 	});
 	
