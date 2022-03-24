@@ -3,48 +3,26 @@
 	<head>
 		<meta charset="UTF-8">
 		<link rel="icon" type="image/x-icon" href="../media/favicon.svg">
-		<link href="../style.css" rel="stylesheet" type="text/css"/>
-		<link href="../btns.css" rel="stylesheet" type="text/css"/>
-		<link href="main/header.css" rel="stylesheet" type="text/css"/>
-		<link href="main/wrapper.css" rel="stylesheet" type="text/css"/>
-		<link href="main/footer.css" rel="stylesheet" type="text/css"/>
+
+		<!-- Стили -->
+		<link rel="stylesheet" href="<%= assetFingerprint('/css/main.css') %>" type="text/css"/>
+		<link rel="stylesheet" href="<%= assetFingerprint('/css/btns.css') %>" type="text/css"/>
+		<link rel="stylesheet" href="<%= assetFingerprint('/css/header.css') %>" type="text/css"/>
+
+		<link rel="stylesheet" href="<%= assetFingerprint('/css/main/wrapper.css') %>" type="text/css"/>
+
+		<link rel="stylesheet" href="<%= assetFingerprint('/css/footer.css') %>" type="text/css"/>
+
 		<!-- Theme -->
 		<link rel="stylesheet" href="main/light.css" type="text/css" class="theme-link">
 		<title>ELMORE STREAM IT</title>
 	</head>
 	<body>
-		<div class='header'>
-			<div class="logo-box"><img id='logo' src='../media/logo.svg'></div>
-			
-			<div class="find-box">
-				<input placeholder='Введите ваш запрос'>
-				<button class="btn-find">
-					Find
-				</button>
-			</div>
-
-			<div class="signinup">
-				<a href='/auth/create' class='user' id="create">
-					Create Account
-				</a>
-				
-				<hr id='hr1'>
-				
-				<a href='/auth/login' class='user' id="login">
-						Login
-				</a>
-			</div>
-			<hr id='hr2'>
-		</div>
+		<%- include("layouts/header") %>
+<link rel="stylesheet" href="wrapper.css" type="text/css">
 	<!-- туловище сайта -->
 	<div class="wrapper-box">
 		<h1>Suggested</h1>
-	<h5>
-		
-		
-	</h5>
-
-
 		<div class='wrapper'>
 			<% data.forEach(function(user) { %>
 				<div class="video-box">
@@ -56,7 +34,7 @@
 							<span class="title info"><%= user.title %></span><br>
 							<span class="posted info">
 								<object>
-									posted by <a class="blue-link"><%= user.author %></a>
+									posted by <a href="/character/<%= user.author %>" class="blue-link"><%= user.author %></a>
 								</object><br>
 							</span>
 							<span class="views info"><%= user.views %> views</span>
@@ -66,21 +44,4 @@
 			<% }); %>
 		</div>
 	</div>
-
-		<div class='footer'>
-			<hr>
-			<div class="grid-footer">
-				<p class="par en">
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, accusamus, omnis! Unde omnis atque quae voluptatibus numquam alias quia, excepturi ipsum, dolorum. Eveniet, doloribus? Consectetur, nesciunt at. Aspernatur, labore alias quaerat nam tempora reprehenderit hic.
-				</p>
-				<div class="tawog"><img src="../media/tawog.png" alt="The Amazing World of Gumball" width="24%"></div>
-				<p class="par ru">
-					Этот сайт создан фанатом "Удивительного мира Гамбола". Это не официальный сайт. бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла бла
-				</p>
-			</div>
-		</div>
-		
-		
-<script src="main/changeTheme.js" type="script"></script>
-	</body>
-</html>
+<%- include("layouts/footer") %>

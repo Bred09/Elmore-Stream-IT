@@ -3,30 +3,36 @@
 	<head>
 		<meta charset="UTF-8">
 		<link rel="icon" type="image/x-icon" href="../../media/favicon.svg">
-		<link href="../../style.css" rel="stylesheet" type="text/css"/>
-		<link href="style.css" rel="stylesheet" type="text/css"/>
+		<link href="../css/create/style.css" rel="stylesheet" type="text/css"/>
+
 		<script src="script.js" defer></script>
 		<title>Create new account</title>
+		<!-- main css files -->
+		<link href="../css/main.css" rel="stylesheet" type="text/css"/>
+		<link href="../css/btns.css" rel="stylesheet" type="text/css"/>
+		<!-- layouts -->
+		<link href="../css/header.css" rel="stylesheet" type="text/css"/>
+		<link href="../css/footer.css" rel="stylesheet" type="text/css"/>
 	</head>
 	<body>
-	<a href="/"><img src="../../media/logo.svg" class="logo"></a>
+		<%- include("layouts/header") %>
 		<div class="wrapper-box">
-			<div id="wrapper">
-				<h3>Create new account <%- data %></h3>
+			<div class="wrapper">
+				<h3>Create new account</h3>
 
 					<div>Logine</div>
-					<input>
+					<input class="user-field green-inp">
 
 					<div id="pass">Password</div>
-					<input type="password">
+					<input class="user-field green-inp" type="password">
 					
 					<div>Repeat</div>
-					<input type="password">
+					<input class="user-field green-inp" type="password">
 
-					<a href="/" class="min_text">Back</a>
-					<a href="/login" class="min_text">Login</a>
+					<a href="/" class="min_text green-lnk">Back</a>
+					<a href="login" class="min_text green-lnk">Login</a>
 
-				<a href="#" id="login">Create</a>
+				<button class="create green-btn">Create</button>
 			</div>
 		</div>
 		<%- include("layouts/footer") %>

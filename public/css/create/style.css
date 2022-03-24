@@ -1,7 +1,3 @@
-.logo {
-	height: 100px;
-}
-
 h3{
 	display: grid;
 	grid-column: 1/3;
@@ -9,58 +5,43 @@ h3{
 	margin-bottom: 50px;
 }
 
-#wrapper{
+.wrapper{
 	display: grid;
-	grid-template-columns: 50% 50%;
+	grid: auto / 50% 50%;
 	grid-gap: 15px 0px;
-	border-top: solid 10px #57E977;
+	border-top: solid 10px #34b44a;
 	padding: 70px 30px;
 	box-shadow: -10px 10px 40px gray;
 }
-body{
+.wrapper-box{
 	width: 350px;
 	margin: 5% auto;
 	box-shadow: 10px 10px 40px gray;
 }
-a{
+.wrapper a{
 	justify-self: center;
 	text-decoration: none;
-	color: #45C561;
 }
 .min_text{
-	font-size: 12px;
 	margin-top: 50px;
 }
 .min_text:hover{
 	text-decoration: underline;
 }
 
-input{
+.user-field{
 	border: solid 1px black;
 	opacity: 0.3;
 	color: #45c561;
 }
-input:focus-within{
+.user-field:focus-within{
 	border-bottom: solid 1px black;
 	opacity: 1;
 }
 
-#login{
+
+.create{
 	grid-column: 1/3;
 	border-radius: 0px;
 	padding: 5px 90px;
-	background: #ffffff;
-	color: #74E28C;
-	border: solid 1px #74E28C;
-}
-#login:hover{
-	background: #74E28C;
-	color: white;
-	transition: 0.5s;
-}
-
-img{
-	position: fixed;
-	left: 10px;
-	top: 10px;
 }

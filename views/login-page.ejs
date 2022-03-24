@@ -3,34 +3,34 @@
 	<head>
 		<meta charset="UTF-8">
 		<link rel="icon" type="image/x-icon" href="../media/favicon.svg">
-		<link href="../style.css" rel="stylesheet" type="text/css"/>
+		<link href="../css/login/style.css" rel="stylesheet" type="text/css"/>
 		<title>Login</title>
-
-		<link href="style.css" rel="stylesheet" type="text/css"/>
-		<link href="dark.css" rel="stylesheet" type="text/css"/>
+		<!-- main css files -->
+		<link href="../css/main.css" rel="stylesheet" type="text/css"/>
+		<link href="../css/btns.css" rel="stylesheet" type="text/css"/>
+		<!-- layouts -->
+		<link href="../css/header.css" rel="stylesheet" type="text/css"/>
+		<link href="../css/footer.css" rel="stylesheet" type="text/css"/>
 	</head>
 	<body>
-	<div class="favicon">
-		<a href="/">
-			<img src="../../media/favicon.svg" class="logo">
-		</a>
-	</div>
+		<%- include("layouts/header") %>
+		<div class="wrapper-box">
+			<div class="wrapper">
+				<h3>Login</h3>
 
-		<div id="wrapper">
-			<h3>Login</h3>
+					<div>Logine</div>
+					<input class="user-field green-inp">
 
-				<div>Logine</div>
-				<input>
+					<div>Password</div>
+					<input class="user-field green-inp" type="password">
 
-				<div>Password</div>
-				<input type="password">
+					<a href="reset" class="green-lnk">Reset password</a>
+					<a href="create" class="green-lnk">New account</a>
 
-				<a href="reset" class="min_text">Reset password</a>
-				<a href="create" class="min_text">New account</a>
-
-			<a href="../MAIN/main.html" id="login" target="_blank">Login</a>
+				<button class="login green-btn">Login</button>
+			</div>
 		</div>
 
-	<script src="script.js" defer></script>
+		<%- include("layouts/footer") %>
 	</body>
 </html>

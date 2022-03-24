@@ -6,7 +6,8 @@
 
 .grid-footer {
   display: grid;
-  grid: 1fr / repeat(auto-fit, minmax(400px, 1fr));
+  grid: 1fr / repeat(auto-fit, minmax(200px, 1fr));
+  align-items: center;
 }
 
 .tawog img {

@@ -55,13 +55,3 @@
   width: 14px;
   transform: rotate(90deg)
 }
-
-
-.user {
-  color: #45C561;
-  font-size: 14px;
-  text-decoration: none;
-}
-.user:hover {
-  text-decoration: underline;
-}

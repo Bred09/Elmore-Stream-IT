@@ -3,23 +3,31 @@
 	<head>
 		<meta charset="UTF-8">
 		<link rel="icon" type="image/x-icon" href="../../media/favicon.svg">
-		<link href="../../style.css" rel="stylesheet" type="text/css"/>
-		<link href="style.css" rel="stylesheet" type="text/css"/>
+		<link href="../css/reset/style.css" rel="stylesheet" type="text/css"/>
 		<script src="script.js" defer></script>
 		<title>Reset password</title>
+		<!-- main css files -->
+		<link href="../css/main.css" rel="stylesheet" type="text/css"/>
+		<link href="../css/btns.css" rel="stylesheet" type="text/css"/>
+		<!-- layouts -->
+		<link href="../css/header.css" rel="stylesheet" type="text/css"/>
+		<link href="../css/footer.css" rel="stylesheet" type="text/css"/>
 	</head>
 	<body>
-	<a href="/"><img src="../../media/logo.svg" class="logo"></a>
-		<div id="wrapper">
-			<h3>Reset password</h3>
+		<%- include("layouts/header") %>
+		<div class="wrapper-box">
+			<div class="wrapper">
+				<h3>Reset password</h3>
 
-				<div>Logine</div>
-				<input>
+					<div>Logine</div>
+					<input class="green-inp">
 
-				<a href="create" class="min_text">New account</a>
-				<a href="login" class="min_text">Login</a>
+					<a href="create" class="green-lnk">New account</a>
+					<a href="login" class="green-lnk">Login</a>
 
-			<a href="find" id="login">Find</a>
+				<button class="find green-btn">Find</button>
+			</div>
 		</div>
+		<%- include("layouts/footer") %>
 	</body>
 </html>
