@@ -1,0 +1,63 @@
+h3{
+	display: grid;
+	grid-column: 1/3;
+	justify-self: center;
+	margin-bottom: 50px;
+}
+
+#wrapper{
+	display: grid;
+	grid: auto/50% 50%;
+	grid-gap: 15px 0px;
+	border-top: solid 10px #57E977;
+	padding: 70px 30px;
+	box-shadow: -10px 10px 40px gray;
+}
+.wrapper-box{
+	width: 350px;
+	margin: 5% auto;
+	box-shadow: 10px 10px 40px gray;
+}
+a{
+	justify-self: center;
+	text-decoration: none;
+	color: #45C561;
+}
+.min_text{
+	font-size: 12px;
+	margin-top: 50px;
+}
+.min_text:hover{
+	text-decoration: underline;
+}
+
+input{
+	border: solid 1px black;
+	opacity: 0.3;
+	color: #45c561;
+}
+input:focus-within{
+	border-bottom: solid 1px black;
+	opacity: 1;
+}
+
+#login{
+	grid-column: 1/3;
+	border-radius: 0px;
+	padding: 5px 90px;
+	background: #ffffff;
+	color: #74E28C;
+	border: solid 1px #74E28C;
+}
+#login:hover{
+	background: #74E28C;
+	color: white;
+	transition: 0.5s;
+}
+
+.logo{
+	position: fixed;
+	left: 10%;
+	top: 2%;
+	height: 100px;
+}

@@ -5,5 +5,5 @@ const play = require('./play');
 module.exports = {
 	main,
 	auth,
-	play,
+	play
 };

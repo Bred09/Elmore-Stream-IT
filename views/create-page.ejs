@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="icon" type="image/x-icon" href="../../media/favicon.svg">
+		<link href="../../style.css" rel="stylesheet" type="text/css"/>
+		<link href="style.css" rel="stylesheet" type="text/css"/>
+		<script src="script.js" defer></script>
+		<title>Create new account</title>
+	</head>
+	<body>
+	<a href="/"><img src="../../media/logo.svg" class="logo"></a>
+		<div class="wrapper-box">
+			<div id="wrapper">
+				<h3>Create new account <%- data %></h3>
+
+					<div>Logine</div>
+					<input>
+
+					<div id="pass">Password</div>
+					<input type="password">
+					
+					<div>Repeat</div>
+					<input type="password">
+
+					<a href="/" class="min_text">Back</a>
+					<a href="/login" class="min_text">Login</a>
+
+				<a href="#" id="login">Create</a>
+			</div>
+		</div>
+		<%- include("layouts/footer") %>
+	</body>
+</html>

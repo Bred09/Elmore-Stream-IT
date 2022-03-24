@@ -18,6 +18,7 @@
   "homepage": "https://github.com/Bred09/Elmore-Stream-IT#readme",
   "dependencies": {
     "ejs": "^3.1.6",
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "mysql": "^2.18.1"
   }
 }

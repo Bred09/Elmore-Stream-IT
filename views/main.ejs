@@ -24,13 +24,13 @@
 			</div>
 
 			<div class="signinup">
-				<a href='/auth' class='user' id="create">
+				<a href='/auth/create' class='user' id="create">
 					Create Account
 				</a>
 				
 				<hr id='hr1'>
 				
-				<a href='/auth' class='user' id="login">
+				<a href='/auth/login' class='user' id="login">
 						Login
 				</a>
 			</div>
@@ -39,78 +39,31 @@
 	<!-- туловище сайта -->
 	<div class="wrapper-box">
 		<h1>Suggested</h1>
+	<h5>
+		
+		
+	</h5>
+
+
 		<div class='wrapper'>
-			<div class="video-box">
-				<a href="/play" class="video-link">
-					<div class="video">
-						<img src="../media/poster.jpg" class="poster"></img>
-						<br>
-						<br>
-						<span class="title info">Gumball fail1</span><br>
-						<span class="posted info">posted by <a class="blue-link">Anais00039254</a><br></span>
-						<span class="views info">201432 views</span>
-					</div>
-				</a>
-			</div>
-			<div class="video-box">
-				<a href="/play">
-					<div class="video">
-						<img src="../media/poster.jpg" class="poster"></img>
-						<br>
-						<br>
-						<span class="title info">Gumball fail1</span><br>
-						<span class="posted info">posted by<br></span>
-						<span class="views info">201432 views</span>
-					</div>
-				</a>
-			</div><div class="video-box">
-				<a href="/play">
-					<div class="video">
-						<img src="../media/poster.jpg" class="poster"></img>
-						<br>
-						<br>
-						<span class="title info">Gumball fail1</span><br>
-						<span class="posted info">posted by <a class="blue-link">Anais00039254</a><br></span>
-						<span class="views info">201432 views</span>
-					</div>
-				</a>
-			</div>
-			<div class="video-box">
-				<a href="/play">
-					<div class="video">
-						<img src="../media/poster.jpg" class="poster"></img>
-						<br>
-						<br>
-						<span class="title info">Gumball fail1</span><br>
-						<span class="posted info">posted by <a class="blue-link">Anais00039254</a><br></span>
-						<span class="views info">201432 views</span>
-					</div>
-				</a>
-			</div>
-			<div class="video-box">
-				<a href="/play">
-					<div class="video">
-						<img src="../media/poster.jpg" class="poster"></img>
-						<br>
-						<br>
-						<span class="title info">Gumball fail1</span><br>
-						<span class="posted info">posted by <a class="blue-link">Anais00039254</a><br></span>
-						<span class="views info">201432 views</span>
-					</div>
-				</a>
-			</div>
-			<div class="video-box">
-				<a href="/play">
-					<div class="video">
-						<img src="../media/poster.jpg" class="poster"></img>
-						<br>
-						<br>
-						<span class="title info">Gumball fail1</span><br>
-						<span class="posted info">posted by <a class="blue-link">Anais00039254</a><br></span>
-						<span class="views info">201432 views</span>
-					</div>
-				</a>
-			</div>
+			<% data.forEach(function(user) { %>
+				<div class="video-box">
+					<a href="<%= user.path %>" class="video-link">
+						<div class="video">
+							<img src="<%= user.poster %>" class="poster"></img>
+							<br>
+							<br>
+							<span class="title info"><%= user.title %></span><br>
+							<span class="posted info">
+								<object>
+									posted by <a class="blue-link"><%= user.author %></a>
+								</object><br>
+							</span>
+							<span class="views info"><%= user.views %> views</span>
+						</div>
+					</a>
+				</div>
+			<% }); %>
 		</div>
 	</div>
 

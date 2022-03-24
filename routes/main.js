@@ -1,12 +1,21 @@
 const router = require('express').Router();
+// db
+const db = require('../db');
 
-var result = {name: 'BEKa', num: 9};
-var my_obj = ['a'];
+let sql = `SELECT * FROM videos`;
+
+
 
 router.get('', (req, res) => {
-	res.render('main', {
-		users: result
+	db.query(sql, (err, result) => {
+		if (err) throw err;
+		console.log(result);
+		
+		res.render('main', {
+			data: result
+		});
 	});
+
 });
 
 module.exports = router;

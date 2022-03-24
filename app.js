@@ -2,6 +2,8 @@
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3000;
+// mysql
+const db = require('./db');
 // routes
 const routes = require('./routes');
 
@@ -14,10 +16,10 @@ app.use(express.static('public'));
 app.use('/', routes.main);
 
 // sign in/up
-app.use('/auth', routes.auth);
+app.use('/auth/', routes.auth);
 
 // play video
-app.use('/play', routes.play);
+app.use('/play/', routes.play);
 
 
 
