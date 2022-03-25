@@ -27,7 +27,7 @@ var errorAlert1 = `
 `;
 
 // Отправляем данные форма на бэк
-$('.create').on('click', (e) => {
+$('.create-btn').on('click', (e) => {
     e.preventDefault();
 
     var data = {
@@ -45,10 +45,10 @@ $('.create').on('click', (e) => {
         console.log(data);
         if (data.ok == true) {
             $('.create-form .alert').remove();
-            $('.create-form .create').replaceWith(successAlert)
+            $('.create-form .create-btn').replaceWith(successAlert)
         } else {
             $('.create-form .alert').remove();
-            $('.create-form .create').after(errorAlert0 + data['error'] + errorAlert1)
+            $('.create-form .create-btn').after(errorAlert0 + data['error'] + errorAlert1)
         }
     });
 });

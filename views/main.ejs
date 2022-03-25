@@ -2,24 +2,18 @@
  <html>
 	<head>
 		<meta charset="UTF-8">
-		<link rel="icon" type="image/x-icon" href="../media/favicon.svg">
-
-		<!-- Стили -->
+		<link rel="icon" type="image/x-icon" href="/media/favicon.svg">
+		<link rel="stylesheet" href="<%= assetFingerprint('/css/main/wrapper.css') %>" type="text/css"/>
+		<title>ELMORE STREAM IT</title>
+		<!-- main css files -->
 		<link rel="stylesheet" href="<%= assetFingerprint('/css/main.css') %>" type="text/css"/>
 		<link rel="stylesheet" href="<%= assetFingerprint('/css/btns.css') %>" type="text/css"/>
-		<link rel="stylesheet" href="<%= assetFingerprint('/css/header.css') %>" type="text/css"/>
-
-		<link rel="stylesheet" href="<%= assetFingerprint('/css/main/wrapper.css') %>" type="text/css"/>
-
-		<link rel="stylesheet" href="<%= assetFingerprint('/css/footer.css') %>" type="text/css"/>
-
-		<!-- Theme -->
-		<link rel="stylesheet" href="main/light.css" type="text/css" class="theme-link">
-		<title>ELMORE STREAM IT</title>
+		<!-- layouts -->
+		<link href="<%= assetFingerprint('/css/header.css') %>" rel="stylesheet" type="text/css"/>
+		<link href="<%= assetFingerprint('/css/footer.css') %>" rel="stylesheet" type="text/css"/>
 	</head>
 	<body>
 		<%- include("layouts/header") %>
-<link rel="stylesheet" href="wrapper.css" type="text/css">
 	<!-- туловище сайта -->
 	<div class="wrapper-box">
 		<h1>Suggested</h1>

@@ -18,23 +18,40 @@ router.post('/create', (req, res) => {
 	if (!login || !password || !passwordConfirm) {
 		res.json({
 			ok: false,
-			error: 'Not all fields are filled in!',
+			error: 'not all fields are filled in!',
 			fields: ['login', 'password', 'passwordConfirm']
 		});
 	} else if (login.length < 3 || login.length > 16) {
 		res.json({
 			ok: false,
-			error: 'Login length from 3 to 16 characters!',
+			error: 'login length from 3 to 16 characters!',
 			fields: ['login']
 		});
 	} else if (password !== passwordConfirm) {
 		res.json({
 			ok: false,
-			error: 'Passwords don\'t match!',
+			error: 'passwords don\'t match!',
 			fields: ['password', 'passwordConfirm']
 		});
+	} else if (!/^[a-zA-Z0-9]+$/.test(login)) {
+	    res.json({
+	      ok: false,
+	      error: 'the password can have only Latin characters and numbers without spaces!',
+	      fields: ['login']
+	    });
+	} else if (!/^[a-zA-Z0-9]+$/.test(password)) {
+	    res.json({
+	      ok: false,
+	      error: 'the password can have only Latin characters and numbers without spaces!',
+	      fields: ['password']
+	    });
+	} else if (password.length < 6 || password.length > 20) {
+		res.json({
+			ok: false,
+			error: 'the minimum password length is 6 and the maximum is 20 characters!',
+			fields: ['password']
+		});
 	}
-
 	// Если все правильно то проверяем на дубль
 	else {
 		let sql = `SELECT * FROM characters WHERE login LIKE '${login}'`;
@@ -69,6 +86,41 @@ router.get('/login', (req, res) => {
 	res.render('login-page', {
 		data: data
 	});
+});
+
+// Sigin in
+router.post('/in', (req, res) => {
+	const login = req.body.login;
+	const password = req.body.password;
+	console.log(login)
+	console.log(password)
+
+	if (!login || !password) {
+		res.json({
+			ok: false,
+			error: 'not all fields are filled in!',
+			fields: ['login', 'password']
+		});
+	} else {
+		let sql = `SELECT * FROM characters WHERE login = '${login}' AND password = '${password}'`;
+		db.query(sql, (err, result) => {
+			if (err) throw err;
+			if (!result[0]) {
+				// Если юзер не найден
+				res.json({
+					ok: false,
+					error: 'username or password is incorrect',
+					fields: ['login', 'password']
+				});
+			} else {
+				// Если юзер найден ВПУСКАЕМ ЕГО
+				console.log(result);
+				res.json({
+					ok: true
+				});
+			}
+		});
+	}
 });
 
 // Reset password page

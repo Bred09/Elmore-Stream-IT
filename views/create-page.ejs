@@ -2,21 +2,22 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<link rel="icon" type="image/x-icon" href="../../media/favicon.svg">
 		<link href="/css/create/style.css" rel="stylesheet" type="text/css"/>
+		<link rel="icon" type="image/x-icon" href="/media/favicon.svg">
 		<title>Create new account</title>
 		<!-- main css files -->
-		<link href="../css/main.css" rel="stylesheet" type="text/css"/>
-		<link href="../css/btns.css" rel="stylesheet" type="text/css"/>
+		<link rel="stylesheet" href="<%= assetFingerprint('/css/main.css') %>" type="text/css"/>
+		<link rel="stylesheet" href="<%= assetFingerprint('/css/btns.css') %>" type="text/css"/>
+		<link href="<%= assetFingerprint('/css/form-box.css') %>" rel="stylesheet" type="text/css"/>
 		<!-- layouts -->
-		<link href="../css/header.css" rel="stylesheet" type="text/css"/>
-		<link href="../css/footer.css" rel="stylesheet" type="text/css"/>
+		<link href="<%= assetFingerprint('/css/header.css') %>" rel="stylesheet" type="text/css"/>
+		<link href="<%= assetFingerprint('/css/footer.css') %>" rel="stylesheet" type="text/css"/>
 	</head>
 	<body>
 		<%- include("layouts/header") %>
 		<div class="wrapper-box">
 			<div class="wrapper">
-				<h3 class="box-title">Create new account</h3>
+				<h3 class="box-title">Create new character</h3>
 
 				<form method="post" class="create-form">
 					<div>Login</div>
@@ -31,8 +32,8 @@
 					<a href="/" class="min_text green-lnk">Back</a>
 					<a href="login" class="min_text green-lnk">Login</a>
 
-					<button class="create-btn btn create green-btn">Create</button>
-					<div class="alert"></div>
+					<button class="create-btn btn green-btn">Create</button>
+					<div class="alert"><br></div>
 				</form>
 			</div>
 		</div>

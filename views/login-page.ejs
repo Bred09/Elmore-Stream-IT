@@ -2,35 +2,39 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<link rel="icon" type="image/x-icon" href="../media/favicon.svg">
-		<link href="../css/login/style.css" rel="stylesheet" type="text/css"/>
+		<link href="/css/login/style.css" rel="stylesheet" type="text/css"/>
+		<link rel="icon" type="image/x-icon" href="/media/favicon.svg">
 		<title>Login</title>
 		<!-- main css files -->
-		<link href="../css/main.css" rel="stylesheet" type="text/css"/>
-		<link href="../css/btns.css" rel="stylesheet" type="text/css"/>
+		<link rel="stylesheet" href="<%= assetFingerprint('/css/main.css') %>" type="text/css"/>
+		<link rel="stylesheet" href="<%= assetFingerprint('/css/btns.css') %>" type="text/css"/>
+		<link href="<%= assetFingerprint('/css/form-box.css') %>" rel="stylesheet" type="text/css"/>
 		<!-- layouts -->
-		<link href="../css/header.css" rel="stylesheet" type="text/css"/>
-		<link href="../css/footer.css" rel="stylesheet" type="text/css"/>
+		<link href="<%= assetFingerprint('/css/header.css') %>" rel="stylesheet" type="text/css"/>
+		<link href="<%= assetFingerprint('/css/footer.css') %>" rel="stylesheet" type="text/css"/>
 	</head>
 	<body>
 		<%- include("layouts/header") %>
 		<div class="wrapper-box">
 			<div class="wrapper">
-				<h3>Login</h3>
-
-					<div>Logine</div>
-					<input class="user-field green-inp">
+				<h3>Sign in</h3>
+				<form class="login-form" method="post">
+					<div>Login</div>
+					<input class="field-login green-inp">
 
 					<div>Password</div>
-					<input class="user-field green-inp" type="password">
+					<input class="field-pass green-inp" type="password">
 
 					<a href="reset" class="green-lnk">Reset password</a>
 					<a href="create" class="green-lnk">New account</a>
 
-				<button class="login green-btn">Login</button>
+					<button class="login-btn green-btn btn">Login</button>
+					<div class="alert"></div>
+				</form>
 			</div>
 		</div>
-
+		
 		<%- include("layouts/footer") %>
+		<script src="/js/login/script.js"></script>
 	</body>
 </html>
