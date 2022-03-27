@@ -1,16 +1,5 @@
-
-#display{
-	width: 900px;
-	background: darkgray;
-}
-video{
-	background: gray;
-}
-#sidebar{
-	background: gray;
-}
-
-#display>*{
-	width: 490px;
-	height: 200px;
+.display {
+	background: #2d2d2d;
+	color: #fff;
+	text-align: center;
 }

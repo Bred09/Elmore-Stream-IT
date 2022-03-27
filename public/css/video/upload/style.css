@@ -1,0 +1,7 @@
+.upload-form a {
+	text-align: center;
+}
+
+.upload-btn{
+	grid-column: 1/3;
+}

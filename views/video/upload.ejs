@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link href="/css/video/upload/style.css" rel="stylesheet" type="text/css"/>
+		<link rel="icon" type="image/x-icon" href="/media/favicon.svg">
+		<title>Upload video</title>
+		<!-- main css files -->
+		<link rel="stylesheet" href="<%= assetFingerprint('/css/main.css') %>" type="text/css"/>
+		<link rel="stylesheet" href="<%= assetFingerprint('/css/btns.css') %>" type="text/css"/>
+		<link href="<%= assetFingerprint('/css/form-box.css') %>" rel="stylesheet" type="text/css"/>
+		<!-- layouts -->
+		<link href="<%= assetFingerprint('/css/header.css') %>" rel="stylesheet" type="text/css"/>
+		<link href="<%= assetFingerprint('/css/footer.css') %>" rel="stylesheet" type="text/css"/>
+	</head>
+	<body>
+		<%- include("../layouts/header") %>
+		<div class="wrapper-box">
+			<div class="wrapper">
+				<h3>Upload video</h3>
+				<form class="upload-form" method="post">
+					<div>Poster</div>
+					<input class="poster-fld green-inp">
+
+					<div>Title</div>
+					<input class="title-fld green-inp">
+
+					<a href="/" class="green-lnk">Home</a>
+
+					<button class="upload-btn green-btn btn">Upload</button>
+					<div class="alert"><br></div>
+				</form>
+			</div>
+		</div>
+	<%- include("../layouts/footer") %>
+	<script src="/js/video/upload/script.js"></script>
+	</body>
+</html>

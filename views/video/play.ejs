@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/x-icon" href="/media/favicon.svg">
+<!-- Styles -->
+	<link rel="stylesheet" href="<%= assetFingerprint('/css/play/style.css') %>" type="text/css">
+<!-- Title -->
+	<title>William Exam Fail!</title>
+		<!-- main css files -->
+		<link rel="stylesheet" href="<%= assetFingerprint('/css/main.css') %>" type="text/css"/>
+		<link rel="stylesheet" href="<%= assetFingerprint('/css/btns.css') %>" type="text/css"/>
+		<link href="<%= assetFingerprint('/css/form-box.css') %>" rel="stylesheet" type="text/css"/>
+		<!-- layouts -->
+		<link href="<%= assetFingerprint('/css/header.css') %>" rel="stylesheet" type="text/css"/>
+		<link href="<%= assetFingerprint('/css/footer.css') %>" rel="stylesheet" type="text/css"/>
+</head>
+	<body>
+	<%- include("../layouts/header") %>
+
+		
+	<!-- Display -->
+		<div class="display">
+			<p><video src="/upload/<%= video.path %>" poster="/media/<%= video.poster %>" controls="controls"></video></p>
+			<p><%= video.id %></p>
+			<p><%= video.author %></p>
+			<p><%= video.poster %></p>
+			<p><%= video.title %></p>
+			<p><%= video.path %></p>
+			<p><%= video.views %></p>
+			<p><%= video.likes %></p>
+			<p><%= video.dislikes %></p>
+			<p><%= video.loaded %></p>
+		</div>
+		
+	<%- include("../layouts/footer") %>
+	</body>
+</html>
+
+

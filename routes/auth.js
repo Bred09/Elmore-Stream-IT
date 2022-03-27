@@ -1,14 +1,11 @@
 const router = require('express').Router();
 // db
 const db = require('../db');
-var data = "udali potom"
 
 
 // Create new account page
 router.get('/create', (req, res) => {
-	res.render('create-page', {
-		data: data
-	});
+	res.render('create-page');
 });
 // Create new
 router.post('/create', (req, res) => {
@@ -84,17 +81,13 @@ router.post('/create', (req, res) => {
 
 // Login page
 router.get('/login', (req, res) => {
-	res.render('login-page', {
-		data: data
-	});
+	res.render('login-page');
 });
 
 // Sigin in
 router.post('/in', (req, res) => {
 	const login = req.body.login;
 	const password = req.body.password;
-	console.log(login)
-	console.log(password)
 
 	if (!login || !password) {
 		res.json({
@@ -108,7 +101,7 @@ router.post('/in', (req, res) => {
 	      error: 'the password can have only Latin characters and numbers without spaces!',
 	      fields: ['password']
 	    });
-	}else {
+	} else {
 		let sql = `SELECT * FROM characters WHERE login = '${login}' AND password = '${password}'`;
 		db.query(sql, (err, result) => {
 			if (err) throw err;
@@ -146,9 +139,7 @@ router.get('/logout', (req, res) => {
 
 // Reset password page
 router.get('/reset', (req, res) => {
-	res.render('reset-page', {
-		data: data
-	});
+	res.render('reset-page');
 });
 
 module.exports = router;

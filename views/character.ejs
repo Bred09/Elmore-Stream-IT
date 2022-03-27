@@ -1,13 +1,31 @@
-<%- include("layouts/header") %>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link href="/css/video/upload/style.css" rel="stylesheet" type="text/css"/>
+		<link rel="icon" type="image/x-icon" href="/media/favicon.svg">
+		<title>Upload video</title>
+		<!-- main css files -->
+		<link rel="stylesheet" href="<%= assetFingerprint('/css/main.css') %>" type="text/css"/>
+		<link rel="stylesheet" href="<%= assetFingerprint('/css/btns.css') %>" type="text/css"/>
+		<!-- layouts -->
+		<link href="<%= assetFingerprint('/css/header.css') %>" rel="stylesheet" type="text/css"/>
+		<link href="<%= assetFingerprint('/css/footer.css') %>" rel="stylesheet" type="text/css"/>
+	</head>
+	<body>
+	<%- include("layouts/header") %>
 
 	
-<!-- Display -->
-	<div id="display">
-		<h1>Gumball123</h1>
-		<h3>Uploads videos: 4</h3>
-		<h3>Likes: 45</h3>
-		<h3>Dislikes: 134</h3>
-		<a href="/auth/logout"><button>Logout</button></a>
-	</div>
-	
-<%- include("layouts/footer") %>
+	<!-- Display -->
+		<div id="display">
+			<h1>Gumball123</h1>
+			<h3>Uploads videos: 4</h3>
+			<h3>Likes: 45</h3>
+			<h3>Dislikes: 134</h3>
+			<a href="/auth/logout"><button>Logout</button></a>
+			<a href="/video/upload"><button>Upload new video</button></a>
+		</div>
+
+	<%- include("layouts/footer") %>
+	</body>
+</html>
