@@ -1,13 +1,40 @@
 // Imports
 const express = require('express');
-const app = express();
 const PORT = process.env.PORT || 3000;
 const staticAsset = require('static-asset');
 const path = require('path');
 // mysql
 const db = require('./db');
+//session
+const session = require('express-session');
+const MySQLStore = require('express-mysql-session')(session);
 // routes
 const routes = require('./routes');
+//express
+const app = express();
+
+
+// sessions
+var sessionStore = new MySQLStore({
+	expiration: 600000,
+	createDatabaseTable: true,
+	schema: {
+		tableName: 'sessiontbl',
+		columnNames: {
+			session_id: 'session_id',
+			expires: 'expires',
+			data: 'data'
+		}
+	}
+}, db);
+
+app.use(session({
+	key: 'keyin',
+	secret: "huy",
+	resave: false,
+	saveUninitialized: true,
+	store: sessionStore
+}));
 
 
 // bodyParser

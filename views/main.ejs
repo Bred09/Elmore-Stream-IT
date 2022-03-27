@@ -17,6 +17,7 @@
 	<!-- туловище сайта -->
 	<div class="wrapper-box">
 		<h1>Suggested</h1>
+
 		<div class='wrapper'>
 			<% data.forEach(function(user) { %>
 				<div class="video-box">
@@ -39,3 +40,10 @@
 		</div>
 	</div>
 <%- include("layouts/footer") %>
+<script>
+	<% if (userLogin) { %>
+		$('.signinup').html(`<a href='/character/<%= userLogin %>' class='user green-lnk' id="login"><%= userLogin %></a>`)
+	<% } %>
+</script>
+<script src="/js/main/script.js"></script>
+	</body>

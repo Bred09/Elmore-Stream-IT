@@ -32,7 +32,7 @@ $('.login-btn').on('click', (e) => {
         console.log(data);
         if (data.ok == true) {
             console.log(data);
-            $('.login-form .alert').remove();
+            $(location).attr("href","/")
         } else {
             $('.login-form .alert').remove();
             $('.login-form .login-btn').after(errorAlert0 + data['error'] + errorAlert1)

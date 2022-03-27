@@ -3,6 +3,7 @@ const router = require('express').Router();
 const db = require('../db');
 var data = "udali potom"
 
+
 // Create new account page
 router.get('/create', (req, res) => {
 	res.render('create-page', {
@@ -101,7 +102,13 @@ router.post('/in', (req, res) => {
 			error: 'not all fields are filled in!',
 			fields: ['login', 'password']
 		});
-	} else {
+	} else if (!/^[a-zA-Z0-9]+$/.test(password)) {
+	    res.json({
+	      ok: false,
+	      error: 'the password can have only Latin characters and numbers without spaces!',
+	      fields: ['password']
+	    });
+	}else {
 		let sql = `SELECT * FROM characters WHERE login = '${login}' AND password = '${password}'`;
 		db.query(sql, (err, result) => {
 			if (err) throw err;
@@ -114,7 +121,9 @@ router.post('/in', (req, res) => {
 				});
 			} else {
 				// Если юзер найден ВПУСКАЕМ ЕГО
-				console.log(result);
+				req.session.userId = result[0]['id'];
+				req.session.userLogin = result[0]['login'];
+				console.log(`WELCOME ${req.session.userLogin} req.session.userId: ${req.session.userId} sessionID: ${req.session.id}`);
 				res.json({
 					ok: true
 				});
@@ -122,6 +131,18 @@ router.post('/in', (req, res) => {
 		});
 	}
 });
+
+//Logout
+router.get('/logout', (req, res) => {
+	req.session.destroy((err) => {
+		if (!err) {
+			console.log('Log out!')
+			res.redirect('/');
+		} else {
+			res.redirect('/');
+		}
+	});
+})
 
 // Reset password page
 router.get('/reset', (req, res) => {

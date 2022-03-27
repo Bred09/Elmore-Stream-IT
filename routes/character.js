@@ -3,13 +3,13 @@ const router = require('express').Router();
 const db = require('../db');
 
 let sql = `SELECT * FROM videos`;
-router.get('/gumball123', (req, res) => {
+router.get('/beka', (req, res) => {
+	var userData = req.session;
 	db.query(sql, (err, result) => {
 		if (err) throw err;
-		console.log(result);
-		
 		res.render('character', {
-			data: result
+			data: result,
+			userData: userData
 		});
 	});
 	
