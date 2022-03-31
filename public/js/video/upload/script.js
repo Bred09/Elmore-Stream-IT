@@ -17,7 +17,7 @@ $('.green-inp').on('input keyup', (e) => {
 });
 
 // Отправляем данные форма на бэк
-$('.upload-btn').on('click', (e) => {
+$('.upload-btn').on('click', function(e) {
     e.preventDefault();
 
     var data = {
@@ -31,7 +31,7 @@ $('.upload-btn').on('click', (e) => {
         data: JSON.stringify(data),
         contentType: 'application/json',
         url: '/video/upload'
-    }).done( (data) => {
+    }).done( function(data) {
         console.log(data);
         if (data.ok == true) {
             $('.upload-form .alert').html(successAlert)
@@ -39,4 +39,26 @@ $('.upload-btn').on('click', (e) => {
             $('.upload-form .alert').html('Error!')
         }
     });
+});
+
+// Отправляем видео
+$('.vid-upl').on('submit', function(e) {
+    e.preventDefault();
+
+    var formData = new FormData(this);
+    console.log(formData);
+
+    $.ajax({
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        url: '/video/upload',
+        processData: false,
+        success: function (r) {
+            console.log(r);
+        },
+        error: function (e) {
+            console.log(e);
+        }
+    })
 });

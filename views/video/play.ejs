@@ -7,7 +7,7 @@
 <!-- Styles -->
 	<link rel="stylesheet" href="<%= assetFingerprint('/css/play/style.css') %>" type="text/css">
 <!-- Title -->
-	<title>William Exam Fail!</title>
+	<title><%= video.title %></title>
 		<!-- main css files -->
 		<link rel="stylesheet" href="<%= assetFingerprint('/css/main.css') %>" type="text/css"/>
 		<link rel="stylesheet" href="<%= assetFingerprint('/css/btns.css') %>" type="text/css"/>
@@ -22,7 +22,7 @@
 		
 	<!-- Display -->
 		<div class="display">
-			<p><video src="/upload/<%= video.path %>" poster="/media/<%= video.poster %>" controls="controls"></video></p>
+			<iframe width="1068" height="600" src="<%= video.path %>" frameborder="0" scrolling="no" allowfullscreen></iframe>
 			<p><%= video.id %></p>
 			<p><%= video.author %></p>
 			<p><%= video.poster %></p>
@@ -33,7 +33,8 @@
 			<p><%= video.dislikes %></p>
 			<p><%= video.loaded %></p>
 		</div>
-		
+
+
 	<%- include("../layouts/footer") %>
 	</body>
 </html>

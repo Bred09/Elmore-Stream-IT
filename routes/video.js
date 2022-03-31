@@ -1,6 +1,30 @@
 const router = require('express').Router();
+const multer = require('multer');
+const path = require('path');
 // db
 const db = require('../db');
+
+const storage = multer.diskStorage({
+	destination: (req, file, cb) => {
+		cb(null, 'uploads');
+	},
+	filename: (req, file, cb) => {
+		cb(null, Date.now() + path.extname(file.originalname))
+	}
+});
+const upload = multer({
+	storage,
+	limits: { fileSize: 2 * 1024 * 1024 },
+	fileFilter: (req, file, cb) => {
+		const ext = path.extname(file.originalname);
+		if (ext !== '.mp4' && ext !== '.avi') {
+			const err = new Error('Extention');
+			err.code = 'EXTENTION';
+			return cb(err);
+		}
+		cb(null, true);
+	}
+}).single('file');
 
 
 // Upload new video page
@@ -17,76 +41,96 @@ router.get('/upload', (req, res) => {
 })
 // Upload new video
 router.post('/upload', (req, res) => {
-	const poster = req.body.poster;
-	const title = req.body.title.trim().replace(/ +(?= )/g, '');
+	// const poster = req.body.poster;
+	// const title = req.body.title.trim().replace(/ +(?= )/g, '');
 
-	if (!poster || !title) {
-		res.json({
-			ok: false,
-			error: 'not all fields are filled in!',
-			fields: ['title', 'poster']
-		});
-	} else if (title.length < 1 || title.length > 20) {
-		res.json({
-			ok: false,
-			error: 'title length from 1 to 20 characters!',
-			fields: ['title']
-		});
-	}
-	// Если все правильно пропускаем
-	else {
-		// Если все проверки пройдены = ЗАГРУЖАЕМ НОВОЕ ВИДЕО
-		let sql = `INSERT INTO videos (poster, title, author) VALUES ('${poster}', '${title}', '${req.session.userLogin}')`;
-		db.query(sql, (err, result) => {
-			if (err) throw err;
-			if (result) {
-				console.log(result);
-				res.json({
-					ok: true
-				});
+	upload(req, res, err => {
+		let error = '';
+		if (err) {
+			if (err.code === 'LIMIT_FILE_SIZE') {
+				error = "Видео не более 1гб"
 			}
+			if (err.code === 'EXTENTION') {
+				error = "Расширение только \".mp4\", \".avi\""
+			}
+		}
+		res.json({
+			ok: !error,
+			error
 		});
-	}
-	console.log(req.body);
-})
+	});
+
+	// if (!poster || !title) {
+	// 	res.json({
+	// 		ok: false,
+	// 		error: 'not all fields are filled in!',
+	// 		fields: ['title', 'poster']
+	// 	});
+	// } else if (title.length < 1 || title.length > 20) {
+	// 	res.json({
+	// 		ok: false,
+	// 		error: 'title length from 1 to 20 characters!',
+	// 		fields: ['title']
+	// 	});
+	// }
+	// // Если все правильно пропускаем
+	// else {
+	// 	// Если все проверки пройдены = ЗАГРУЖАЕМ НОВОЕ ВИДЕО
+	// 	let sql = `INSERT INTO videos (poster, title, author) VALUES ('${poster}', '${title}', '${req.session.userLogin}')`;
+	// 	db.query(sql, (err, result) => {
+	// 		if (err) throw err;
+	// 		if (result) {
+	// 			console.log(result);
+	// 			res.json({
+	// 				ok: true
+	// 			});
+	// 		}
+	// 	});
+	// }
+	// console.log(req.body);
+});
 
 // Vide page
-router.get('/:video', (req, res, next) => {
+router.get('/:video', async (req, res, next) => {
 	const userId = req.session.userId;
 	const userLogin = req.session.userLogin;
-	const url = req.params.video;
-	console.log(`URL: ${url}`)
-	if (!url) {
+	const videId = req.params.video;
+	console.log(`URL: ${videId}`)
+	if (!videId) {
 		const err = new Error('Not Found');
 		err.status = 404;
 		next(err);
 		console.log('Error 404!!!');
 	} else {
-		let sql = `SELECT * FROM videos WHERE id = '${url}'`;
-		db.query(sql, (err, result) => {
-			if (err) throw err;
-			if (!result[0]) {
-				// Если видео не найден
-				res.json({
-					ok: false,
-					error: 'Video not found!'
-				});
-				console.log(`Video not found. Result: ${result}`)
-				console.log('Video not found!')
-			} else {
-				const video = result[0];
-				console.log(video)
-				// Если видео найдено ПОКАЗЫВАЕМ
-				res.render('video/play', {
-					video,
-					user: {
-						id: userId,
-						login: userLogin
-					}
-				});
-				console.log(`Video ${url} found!`);
-			}
-		});
+		try {
+			let sql = `SELECT * FROM videos WHERE id = '${videId}'`;
+			const queryToDB = await db.query(sql, (err, result) => {
+				if (err) throw err;
+				if (!result[0]) {
+					// Если видео не найден
+					res.json({
+						ok: false,
+						error: 'Video not found!'
+					});
+					console.log(`Video not found. Result: ${result}`)
+					console.log('Video not found!')
+				} else {
+					const video = result[0];
+					console.log(video)
+					// Если видео найдено ПОКАЗЫВАЕМ
+					res.render('video/play', {
+						video,
+						user: {
+							id: userId,
+							login: userLogin
+						}
+					});
+					console.log(`Video ${videId} found!`);
+				}
+			});
+		} catch {
+			throw new Error("Server error!")
+		}
 	}
 })
 

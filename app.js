@@ -46,14 +46,6 @@ app.set('view engine', 'ejs')
 app.use(express.static('public'));
 app.use(staticAsset(path.join(__dirname, 'public')));
 
-// If 404 page
-// app.use((req, res, next) => {
-// 	const err = new Error('Not Found');
-// 	err.status = 404;
-// 	next(err);
-// 	console.log('Error 404!!!');
-// });
-
 	//Views
 // home
 app.use('/', routes.main);
@@ -61,15 +53,11 @@ app.use('/', routes.main);
 // sign in/up
 app.use('/auth/', routes.auth);
 
+// user page
+app.use('/character/', routes.user);
+
 // video upload
 app.use('/video/', routes.video);
-
-// play video
-app.use('/play/', routes.play);
-
-// Profile of character
-app.use('/character/', routes.character);
-
 
 
 
