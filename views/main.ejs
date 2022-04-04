@@ -4,6 +4,7 @@
 		<meta charset="UTF-8">
 		<link rel="icon" type="image/x-icon" href="/media/favicon.svg">
 		<link rel="stylesheet" href="<%= assetFingerprint('/css/main/wrapper.css') %>" type="text/css"/>
+		<link rel="stylesheet" href="<%= assetFingerprint('/css/main/style.css') %>" type="text/css"/>
 		<title>ELMORE STREAM IT</title>
 		<!-- main css files -->
 		<link rel="stylesheet" href="<%= assetFingerprint('/css/main.css') %>" type="text/css"/>
@@ -23,7 +24,7 @@
 				<div class="video-box">
 					<a href="/video/<%= user.id %>" class="video-link">
 						<div class="video">
-							<img src="/media/<%= user.poster %>" class="poster"></img>
+							<img src="https://video.sibnet.ru/upload/cover/video_<%= user.poster %>_0.jpg" class="poster" alr="<%= user.title %>"></img>
 							<br>
 							<br>
 							<span class="title info"><%= user.title %></span><br>
@@ -38,6 +39,7 @@
 				</div>
 			<% }); %>
 		</div>
+		<button class="btn green-btn more">more videos</button>
 	</div>
 <%- include("layouts/footer") %>
 <script>

@@ -16,7 +16,7 @@ html {
   margin: 0;
   padding: 0;
 }
-*, html *{
-  cursor: url("../media/cursore/cursore.svg"), auto;
+*, html{
+  cursor: url("/media/cursore/cursor.png"), auto;
   font-family: sans-serif;
 }

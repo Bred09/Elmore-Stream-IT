@@ -1,12 +1,10 @@
-.wrapper-box{
+.wrapper-box {
   padding: 0 2%;
 }
-.wrapper{
+.wrapper {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   grid-gap: 0 30px;
-  justify-content: center;
-  align-content: center;
 /*   t r b l */
 }
 .video-box {

@@ -17,7 +17,7 @@ router.get('/:login', (req, res, next) => {
 		next(err);
 		console.log('Error 404!!!');
 	} else {
-		let sql = `SELECT * FROM characters WHERE login = '${login}'`;
+		let sql = `SELECT * FROM users WHERE login = '${login}'`;
 		db.query(sql, (err, result) => {
 			if (err) throw err;
 			if (!result[0]) {
@@ -32,9 +32,8 @@ router.get('/:login', (req, res, next) => {
 				let sql = `SELECT * FROM videos WHERE author = '${login}'`;
 				db.query(sql, (err, result) => {
 					if (err) throw err;
-					if (!result[0]) {
-						console.log(`Видео юзера ${login} не найдены`);
-					} else {
+					if (result) {
+						if (!result[0]) {console.log(`Видео юзера ${login} не найдены`);}
 						res.render('character', {
 							login,
 							user: {

@@ -52,12 +52,12 @@ router.post('/create', (req, res) => {
 	}
 	// Если все правильно то проверяем на дубль
 	else {
-		let sql = `SELECT * FROM characters WHERE login LIKE '${login}'`;
+		let sql = `SELECT * FROM users WHERE login LIKE '${login}'`;
 		db.query(sql, (err, result) => {
 			if (err) throw err;
 			if (!result[0]) {
 				// Если все проверки пройдены = СОЗДАЕМ НОВОГО ПЕРСОНАЖА
-				let sql = `INSERT INTO characters (id, login, password, videos) VALUES (NULL, '${login}', '${password}', 'video.mp4') `;
+				let sql = `INSERT INTO users (login, password) VALUES ('${login}', '${password}') `;
 				db.query(sql, (err, result) => {
 					if (err) throw err;
 					if (result) {
@@ -102,7 +102,7 @@ router.post('/in', (req, res) => {
 	      fields: ['password']
 	    });
 	} else {
-		let sql = `SELECT * FROM characters WHERE login = '${login}' AND password = '${password}'`;
+		let sql = `SELECT * FROM users WHERE login = '${login}' AND password = '${password}'`;
 		db.query(sql, (err, result) => {
 			if (err) throw err;
 			if (!result[0]) {

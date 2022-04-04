@@ -41,56 +41,61 @@ router.get('/upload', (req, res) => {
 })
 // Upload new video
 router.post('/upload', (req, res) => {
-	// const poster = req.body.poster;
-	// const title = req.body.title.trim().replace(/ +(?= )/g, '');
-
-	upload(req, res, err => {
-		let error = '';
-		if (err) {
-			if (err.code === 'LIMIT_FILE_SIZE') {
-				error = "Видео не более 1гб"
-			}
-			if (err.code === 'EXTENTION') {
-				error = "Расширение только \".mp4\", \".avi\""
-			}
-		}
-		res.json({
-			ok: !error,
-			error
-		});
-	});
-
-	// if (!poster || !title) {
-	// 	res.json({
-	// 		ok: false,
-	// 		error: 'not all fields are filled in!',
-	// 		fields: ['title', 'poster']
-	// 	});
-	// } else if (title.length < 1 || title.length > 20) {
-	// 	res.json({
-	// 		ok: false,
-	// 		error: 'title length from 1 to 20 characters!',
-	// 		fields: ['title']
-	// 	});
-	// }
-	// // Если все правильно пропускаем
-	// else {
-	// 	// Если все проверки пройдены = ЗАГРУЖАЕМ НОВОЕ ВИДЕО
-	// 	let sql = `INSERT INTO videos (poster, title, author) VALUES ('${poster}', '${title}', '${req.session.userLogin}')`;
-	// 	db.query(sql, (err, result) => {
-	// 		if (err) throw err;
-	// 		if (result) {
-	// 			console.log(result);
-	// 			res.json({
-	// 				ok: true
-	// 			});
+	const poster = req.body.poster;
+	const title = req.body.title.trim().replace(/ +(?= )/g, '');
+	const description = req.body.description.trim().replace(/ +(?= )/g, '');
+	const path = req.body.path.trim().replace(/ +(?= )/g, '');
+// Upload file
+	// upload(req, res, err => {
+	// 	let error = '';
+	// 	if (err) {
+	// 		if (err.code === 'LIMIT_FILE_SIZE') {
+	// 			error = "Видео не более 1гб"
 	// 		}
+	// 		if (err.code === 'EXTENTION') {
+	// 			error = "Расширение только \".mp4\", \".avi\""
+	// 		}
+	// 	}
+	// 	res.json({
+	// 		ok: !error,
+	// 		error
 	// 	});
-	// }
-	// console.log(req.body);
+	// });
+
+	if (!poster || !title) {
+		res.json({
+			ok: false,
+			error: 'not all fields are filled in!',
+			fields: ['title', 'poster']
+		});
+	} else if (title.length < 1 || title.length > 50) {
+		res.json({
+			ok: false,
+			error: 'title length from 1 to 50 characters!',
+			fields: ['title']
+		});
+	}
+	// Если все правильно пропускаем
+	else {
+		// Если все проверки пройдены = ЗАГРУЖАЕМ НОВОЕ ВИДЕО
+		let sql = `INSERT INTO videos (
+			poster, title, description, path, author) VALUES 
+			('${poster}', '${title}', '${description}', '${path}', '${req.session.userLogin}')
+		`;
+		db.query(sql, (err, result) => {
+			if (err) throw err;
+			if (result) {
+				console.log(result);
+				res.json({
+					ok: true
+				});
+			}
+		});
+	}
+	console.log(req.body);
 });
 
-// Vide page
+// Video page
 router.get('/:video', async (req, res, next) => {
 	const userId = req.session.userId;
 	const userLogin = req.session.userLogin;

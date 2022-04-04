@@ -22,11 +22,12 @@
 		
 	<!-- Display -->
 		<div class="display">
-			<iframe width="1068" height="600" src="<%= video.path %>" frameborder="0" scrolling="no" allowfullscreen></iframe>
+			<iframe width="1068" height="600" src="https://video.sibnet.ru/shell.php?videoid=<%= video.path %>&share=0&autoplay=1" frameborder="0" scrolling="no" allowfullscreen></iframe>
 			<p><%= video.id %></p>
 			<p><%= video.author %></p>
 			<p><%= video.poster %></p>
 			<p><%= video.title %></p>
+			<p><%= video.description %></p>
 			<p><%= video.path %></p>
 			<p><%= video.views %></p>
 			<p><%= video.likes %></p>

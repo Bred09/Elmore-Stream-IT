@@ -19,11 +19,14 @@
 	<!-- Display -->
 		<div id="display">
 			<h1><%= login %></h1>
+			<% if(data == '') { %>
+				<h3>The user doesn't have a video yet</h3>
+			<% } %>
 			<% data.forEach(function(user) { %>
 				<div class="video-box">
 					<a href="/video/<%= user.id %>" class="video-link">
 						<div class="video">
-							<img src="/media/<%= user.poster %>" class="poster"></img>
+							<img src="https://video.sibnet.ru/upload/cover/video_<%= user.poster %>_0.jpg" class="poster"></img>
 							<br>
 							<br>
 							<span class="title info"><%= user.title %></span><br>

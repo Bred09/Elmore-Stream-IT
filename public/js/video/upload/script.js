@@ -22,7 +22,9 @@ $('.upload-btn').on('click', function(e) {
 
     var data = {
         poster: $('.poster-fld').val(),
-        title: $('.title-fld').val()
+        title: $('.title-fld').val(),
+        description: $('.description-fld').val(),
+        path: $('.path-fld').val()
     }
     console.log(data);
 
