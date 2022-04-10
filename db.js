@@ -5,7 +5,9 @@ const db = mysql.createConnection({
   host: "localhost",
   user: "root",
   database: "esi",
-  password: ""
+  password: "",
+
+  multipleStatements: true
 });
 
 db.connect(function(err) {

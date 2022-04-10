@@ -94,21 +94,234 @@ router.post('/upload', (req, res) => {
 	}
 	console.log(req.body);
 });
+// Add comment
+router.post('/add-comment', (req, res) => {
+	const login = req.session.userLogin;
+	const body = req.body.body.trim().replace(/ +(?= )/g, '');
+	// const videoId = req.headers.referer.slice(-1);
+	const videoId = req.headers.referer.split('/')[4];
+	console.log("videoId:");
+	console.log(videoId);
+	console.log("videoId FULL:");
+	console.log(req.headers.referer);
+	if (!login) {
+		res.json({
+			ok: false,
+			error: 'login failed!',
+			fields: ['']
+		});
+	} else if (!body) {
+		res.json({
+			ok: false,
+			error: 'not all fields are filled in!',
+			fields: ['body']
+		});
+	} else if (body.length < 1 || body.length > 500) {
+		res.json({
+			ok: false,
+			error: 'body length from 1 to 500 characters!',
+			fields: ['body']
+		});
+	} else {
+		let sql = `SELECT * FROM users WHERE login = '${login}' `;
+		db.query(sql, (err, result) => {
+			userAvatar = result[0].avatar;
+			if (err) throw err;
+			else {
+				// Если все проверки пройдены = Добавляем комент!
+				let sql = `INSERT INTO comments (video, user_avatar, author, body) VALUES ('${videoId}', '${userAvatar}', '${login}', '${body}')`;
+				db.query(sql, (err, result) => {
+					if (err) throw err;
+					if (result) {
+						console.log(result);
+						res.json({
+							ok: true
+						});
+					}
+				});
+			}
+		});
+	}
+	console.log(req.body);
+});
+
+// Check Rate
+// Проверяет на наличие поставленной оценки
+router.post('/check-rate', (req, res) => {
+	const login = req.session.userLogin;
+	const videoId = req.headers.referer.slice(-1);
+	// Проверяем залогинен или нет
+	if (!login) {
+		res.json({
+			code: '00',
+			msg: 'Вы не залогинились!'
+		});
+	} else {
+		let checkRate = `SELECT * FROM rated_videos WHERE user_login = '${login}' AND video_id = ${videoId};`;
+		db.query(checkRate, function(err, result) {
+			if (err) throw err;
+
+			if (result[0]) {
+				if (result[0].like_dislike == "l") {
+					res.json({
+						code: '+1',
+						msg: 'Вы уже Лайкали!'
+					});
+				} else if (result[0].like_dislike == "d") {
+					res.json({
+						code: '-1',
+						msg: 'Вы уже Дислайкали!'
+					});
+				}
+			} else {
+				res.json({
+					code: 'N',
+					msg: 'Вы не оценивали'
+				});
+			}
+		});
+	}
+});
+// Like
+router.post('/like', (req, res) => {
+	const login = req.session.userLogin;
+	const videoId = req.headers.referer.slice(-1);
+
+	// Проверяем залогинен или нет
+	if (!login) {
+		res.json({
+			code: '00',
+			msg: 'Вы не залогинились!'
+		});
+	} else {
+	// Ищем в БД если вообще лайк/дислайк
+	let query1 = `SELECT * FROM rated_videos WHERE user_login = '${login}' AND video_id = ${videoId};`;
+	// Убираем лайк с видео и удаляем запись с лайком
+    let query2 = `
+    	UPDATE videos SET likes = likes-1 WHERE videos.id = ${videoId};
+		DELETE FROM rated_videos WHERE user_login = '${login}' AND video_id = '${videoId}';
+    `;
+    // Добавляем лайк и убираем дислайк у видео + запись лайков/дизлайков имеет статус L
+    let query3 = `
+    	UPDATE videos SET likes = likes+1 WHERE videos.id = ${videoId};
+    	UPDATE videos SET dislikes = dislikes-1 WHERE videos.id = ${videoId};
+    	UPDATE rated_videos SET like_dislike = 'l' WHERE user_login = '${login}' AND video_id = '${videoId}';
+    `;
+    let query4 = `
+    	UPDATE videos SET likes = likes+1 WHERE videos.id = ${videoId};
+    	INSERT INTO rated_videos (user_login, video_id, like_dislike) VALUES ('${login}', '${videoId}', 'l');
+    `;
+
+    db.query(query1, function(err, result) {
+		console.log("Rate: ")
+		if (err) throw err;
+		if (result[0]) {
+			if (result[0].like_dislike == "l") {
+				db.query(query2, function(err, result) {
+					if (err) throw err;
+					res.json({
+						code: '+1',
+						msg: 'Вы уже Лайкали!'
+					});
+				});
+			} else if (result[0].like_dislike == "d") {
+				db.query(query3, function(err, result) {
+					if (err) throw err;
+					res.json({
+						code: '-1',
+						msg: 'Вы уже Дислайкали!'
+					});
+				});
+			}
+		} else if (!result[0]) {
+			db.query(query4, function(err, result) {
+				if (err) throw err;
+				res.json({
+					code: 'N',
+					msg: 'Лайк поставлен!'
+				});
+			});
+		}
+	});
+	}
+});
+// Dislike
+router.post('/dislike', (req, res) => {
+	const login = req.session.userLogin;
+	const videoId = req.headers.referer.slice(-1);
+
+	// Проверяем залогинен или нет
+	if (!login) {
+		res.json({
+			code: '00',
+			msg: 'Вы не залогинились!'
+		});
+	} else {
+
+	// Добавляем лайк к видео
+    let query1 = `SELECT * FROM rated_videos WHERE user_login = '${login}' AND video_id = ${videoId};`;
+    let query2 = `
+    	UPDATE videos SET dislikes = dislikes+1 WHERE videos.id = ${videoId};
+    	UPDATE videos SET likes = likes-1 WHERE videos.id = ${videoId};
+    	UPDATE rated_videos SET like_dislike = 'd' WHERE user_login = '${login}' AND video_id = '${videoId}';
+    `;
+    let query3 = `
+    	UPDATE videos SET dislikes = dislikes-1 WHERE videos.id = ${videoId};
+		DELETE FROM rated_videos WHERE user_login = '${login}' AND video_id = '${videoId}'
+    `;
+    let query4 = `
+    	UPDATE videos SET dislikes = dislikes+1 WHERE videos.id = ${videoId};
+    	INSERT INTO rated_videos (user_login, video_id, like_dislike) VALUES ('${login}', '${videoId}', 'd');
+    `;
+
+    db.query(query1, function(err, result) {
+		console.log("Rate: ")
+		if (err) throw err;
+		if (result[0]) {
+			if (result[0].like_dislike == "l") {
+				db.query(query2, function(err, result) {
+					if (err) throw err;
+					res.json({
+						code: '+1',
+						msg: 'Вы уже Лайкали!'
+					});
+				});
+			} else if (result[0].like_dislike == "d") {
+				db.query(query3, function(err, result) {
+					if (err) throw err;
+					res.json({
+						code: '-1',
+						msg: 'Вы уже Дислайкали!'
+					});
+				});
+			}
+		} else if (!result[0]) {
+			db.query(query4, function(err, result) {
+				if (err) throw err;
+				res.json({
+					code: 'N',
+					msg: 'Дислайк поставлен!'
+				});
+			});
+		}
+	});
+	}
+});
 
 // Video page
 router.get('/:video', async (req, res, next) => {
 	const userId = req.session.userId;
 	const userLogin = req.session.userLogin;
-	const videId = req.params.video;
-	console.log(`URL: ${videId}`)
-	if (!videId) {
+	const videoId = req.params.video;
+	if (!videoId) {
 		const err = new Error('Not Found');
 		err.status = 404;
 		next(err);
 		console.log('Error 404!!!');
 	} else {
 		try {
-			let sql = `SELECT * FROM videos WHERE id = '${videId}'`;
+			// Показываю видео
+			let sql = `SELECT * FROM videos WHERE id = '${videoId}';`;
 			const queryToDB = await db.query(sql, (err, result) => {
 				if (err) throw err;
 				if (!result[0]) {
@@ -119,24 +332,62 @@ router.get('/:video', async (req, res, next) => {
 					});
 					console.log(`Video not found. Result: ${result}`)
 					console.log('Video not found!')
-				} else {
-					const video = result[0];
-					console.log(video)
-					// Если видео найдено ПОКАЗЫВАЕМ
-					res.render('video/play', {
-						video,
-						user: {
-							id: userId,
-							login: userLogin
-						}
+				} else {// Если видео найдено ПОКАЗЫВАЕМ
+					videoToPlay = result[0];
+
+					// Подгружаю коменты
+					let sql1 = `SELECT * FROM comments WHERE video = ${videoId}`;
+					db.query(sql1, (err, result) => {
+						let comments = result;
+						if (err) throw err;
+						if (!result[0]) {console.log('Comments not found!')}
+
+						let sql = `SELECT * FROM videos ORDER BY id LIMIT ${videoId}, 3`;
+						db.query(sql, (err, result) => {
+							if (err) throw err;
+							res.render('video/play', {
+								video: videoToPlay,
+								user: {
+									id: userId,
+									login: userLogin
+								},
+								data: result,
+								comments: comments
+							});
+						});
 					});
-					console.log(`Video ${videId} found!`);
+
+					// Добавляем +1 к просмотрам видео
+					let sql = `UPDATE videos SET views = views+1 WHERE videos.id = ${videoId} `;
+					db.query(sql, (err, result) => {
+						if (err) throw err;
+					});
 				}
 			});
 		} catch {
 			throw new Error("Server error!")
 		}
 	}
-})
+});
+// Подгружать видео на страницу PLAY
+router.post('/more', (req, res) => {
+	const quantity = req.body.videos;
+	console.log(req.body.videos)
+
+	let sql = `SELECT * FROM videos ORDER BY id LIMIT ${quantity}, 3`;
+	db.query(sql, (err, result) => {
+		if (err) throw err;
+		if (!result[0]) {
+			res.json({
+				ok: false
+			});
+		} else {
+			res.json({
+				ok: true,
+				data: result
+			});
+		}
+	});
+});
 
 module.exports = router;

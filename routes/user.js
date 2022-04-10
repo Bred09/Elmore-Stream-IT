@@ -19,6 +19,7 @@ router.get('/:login', (req, res, next) => {
 	} else {
 		let sql = `SELECT * FROM users WHERE login = '${login}'`;
 		db.query(sql, (err, result) => {
+			userData = result[0];
 			if (err) throw err;
 			if (!result[0]) {
 				// Если видео не найден
@@ -35,7 +36,7 @@ router.get('/:login', (req, res, next) => {
 					if (result) {
 						if (!result[0]) {console.log(`Видео юзера ${login} не найдены`);}
 						res.render('character', {
-							login,
+							userData,
 							user: {
 								id: userId,
 								login: userLogin

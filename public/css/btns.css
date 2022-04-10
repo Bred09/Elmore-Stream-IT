@@ -12,10 +12,10 @@
   text-decoration: underline;
 }
 
-.blue-link {
+.blue-lnk {
   color: #009fff;
 }
-.blue-link:hover {
+.blue-lnk:hover {
   text-decoration: underline;
 }
 
@@ -46,12 +46,18 @@
   color: #34b44a;
   font-size: 16px;
   font-weight: bold;
-  padding: 10px;
-  border-radius: 6px;
 }
 .green-inp:focus-within {
   border-bottom: solid 1px black;
   opacity: 1;
+}
+
+.inp {
+  border: solid 2px #737b8e;
+  color: #737b8e;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 6px;
 }
 
 .alr {

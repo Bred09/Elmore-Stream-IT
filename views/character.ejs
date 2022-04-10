@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<link href="/css/video/upload/style.css" rel="stylesheet" type="text/css"/>
 		<link rel="icon" type="image/x-icon" href="/media/favicon.svg">
-		<title><%= login %></title>
+		<title><%= userData.login %></title>
 		<!-- main css files -->
 		<link rel="stylesheet" href="<%= assetFingerprint('/css/main.css') %>" type="text/css"/>
 		<link rel="stylesheet" href="<%= assetFingerprint('/css/btns.css') %>" type="text/css"/>
@@ -15,10 +15,11 @@
 	<body>
 	<%- include("layouts/header") %>
 
-	
 	<!-- Display -->
 		<div id="display">
-			<h1><%= login %></h1>
+			<img src="<%= userData.avatar %>" alt="">
+			<h1><%= userData.login %></h1>
+				
 			<% if(data == '') { %>
 				<h3>The user doesn't have a video yet</h3>
 			<% } %>

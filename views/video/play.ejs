@@ -11,7 +11,6 @@
 		<!-- main css files -->
 		<link rel="stylesheet" href="<%= assetFingerprint('/css/main.css') %>" type="text/css"/>
 		<link rel="stylesheet" href="<%= assetFingerprint('/css/btns.css') %>" type="text/css"/>
-		<link href="<%= assetFingerprint('/css/form-box.css') %>" rel="stylesheet" type="text/css"/>
 		<!-- layouts -->
 		<link href="<%= assetFingerprint('/css/header.css') %>" rel="stylesheet" type="text/css"/>
 		<link href="<%= assetFingerprint('/css/footer.css') %>" rel="stylesheet" type="text/css"/>
@@ -21,23 +20,102 @@
 
 		
 	<!-- Display -->
-		<div class="display">
-			<iframe width="1068" height="600" src="https://video.sibnet.ru/shell.php?videoid=<%= video.path %>&share=0&autoplay=1" frameborder="0" scrolling="no" allowfullscreen></iframe>
-			<p><%= video.id %></p>
-			<p><%= video.author %></p>
-			<p><%= video.poster %></p>
-			<p><%= video.title %></p>
-			<p><%= video.description %></p>
-			<p><%= video.path %></p>
-			<p><%= video.views %></p>
-			<p><%= video.likes %></p>
-			<p><%= video.dislikes %></p>
-			<p><%= video.loaded %></p>
+	<div class="wrapper-box">
+		<div class="box">
+			<!-- RIGHT -->
+			<div class="display">
+				<h1 class="title-frm"><%= video.title %></h1>
+				<h3 class="posted-frm">posted by <a class="blue-lnk" href="/character/<%= video.author %>"><%= video.author %></a></h3>
+				<div class="frame">
+					<iframe width="100%" height="100%" src="https://video.sibnet.ru/shell.php?videoid=<%= video.path %>&share=0&autoplay=1" frameborder="0" scrolling="no" allowfullscreen></iframe>
+				</div>
+
+				<div class="desc">
+					<div class="info-box">
+						<span><b>Description:</b> <%= video.description %></span>
+						<span class="views-box"><b><%= video.views %></b> views</span>
+					</div>
+					<div class="options">
+						<div class="add-comment">
+							<span><b>add a comment</b></span>
+							<br>
+							<textarea required name="comment" rows="6" class="body-cmt"></textarea>
+							<br>
+							<button class="btn green-btn add-cmt">Add comment</button>
+						</div>
+						<div class="lds">
+							<div class="likes-dis">
+								<img class="like like-btn" src="/media/img/like.svg" alt="likes"><span class="like-count"><%= video.likes %></span>
+								<img class="dislike dislike-btn" src="/media/img/dislike.svg" alt="dislikes"><span class="dislike-count"><%= video.dislikes %></span>
+							</div>
+							<div class="share">
+								<span>SHARE TO</span>
+								<p>
+									<a href="https://vk.com/"><img src="/media/img/vk.png" alt=""></a>
+									<a href="#"><img src="/media/img/earth.svg" alt=""></a>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div class="comments">
+					<h3>Comments:</h3>
+					<% comments.forEach(function(cmt) { %>
+						<div class="comment-box">
+							<div class="comment">
+								<div>
+									<p class="author-cmt">
+										<img class="avatar" src="<%= cmt.user_avatar %>" alt=""><%= cmt.author %>
+									</p>
+								</div>
+								<div class="lt"></div><div class="body"><%= cmt.body %></div>
+								<div class="l-d">
+									<p>
+										<img class="like-cmnt-btn" src="/media/img/like.svg" alt="likes"> <span class="like-c-count"><%= cmt.likes %></span>
+										<img class="dislike-cmnt-btn" src="/media/img/dislike.svg" alt="dislikes"> <span class="dislike-c-count"><%= cmt.dislikes %></span>
+									</p>
+								</div>
+							</div>
+							<hr>
+							<div class="reply">
+								<textarea class="inp reply-inp" type="text" placeholder="Type text..."></textarea><button class="btn green-btn reply-btn">reply</button>
+							</div>
+						</div>
+					<% }); %>
+				</div>
+			</div>
+
+			<!-- LEFT -->
+			<div class="similar">
+				<p class="rec"><img class="camera" src="/media/img/camera.svg" alt="camera">VIDEOS YOU MIGHT LIKE TOO</p>
+				<div class="wrapper">
+				<% data.forEach(function(videos) { %>
+					<div class="video-box">
+						<a href="/video/<%= videos.id %>" class="video-link">
+							<div class="video">
+								<img src="https://video.sibnet.ru/upload/cover/video_<%= videos.poster %>_0.jpg" class="poster" alr="<%= videos.title %>"></img>
+								<br>
+								<br>
+								<span class="title info"><%= videos.title %></span><br>
+								<span class="posted info">
+									<object>
+										posted by <a href="/character/<%= videos.author %>" class="blue-lnk"><%= videos.author %></a>
+									</object><br>
+								</span>
+								<span class="views info"><%= videos.views %> views</span>
+							</div>
+						</a>
+					</div>
+				<% }); %>
+				</div>
+				<div class="more-btn-box"><button class="btn green-btn more">more videos</button></div>
+			</div>
 		</div>
+	</div>
 
 
 	<%- include("../layouts/footer") %>
+	<script src="/js/video/play/script.js"></script>
 	</body>
 </html>
-
-

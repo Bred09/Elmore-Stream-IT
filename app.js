@@ -16,7 +16,7 @@ const app = express();
 
 // sessions
 var sessionStore = new MySQLStore({
-	expiration: 600000,
+	expiration: 10800000,
 	createDatabaseTable: true,
 	schema: {
 		tableName: 'sessiontbl',

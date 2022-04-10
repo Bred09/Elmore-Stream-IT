@@ -33,7 +33,7 @@ $('.more').on('click', (e) => {
                                 <span class="title info">${answer[i].title}</span><br>
                                 <span class="posted info">
                                     <object>
-                                        posted by <a href="/character/${answer[i].author}" class="blue-link">${answer[i].author}</a>
+                                        posted by <a href="/character/${answer[i].author}" class="blue-lnk">${answer[i].author}</a>
                                     </object><br>
                                 </span>
                                 <span class="views info">${answer[i].views} views</span>

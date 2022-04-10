@@ -2,11 +2,11 @@ const router = require('express').Router();
 // db
 const db = require('../db');
 
-let sql = `SELECT * FROM videos ORDER BY id LIMIT 0, 25`;
-
 router.get('', (req, res) => {
 	const id = req.session.userId;
 	const login = req.session.userLogin;
+	
+	let sql = `SELECT * FROM videos ORDER BY id LIMIT 0, 25`;
 	db.query(sql, (err, result) => {
 		if (err) throw err;
 		res.render('main', {
