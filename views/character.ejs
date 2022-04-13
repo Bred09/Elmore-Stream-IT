@@ -17,7 +17,7 @@
 
 	<!-- Display -->
 		<div id="display">
-			<img src="<%= userData.avatar %>" alt="">
+			<img class="avatar <%= userData.role %>" src="<%= userData.avatar %>" alt="" />
 			<h1><%= userData.login %></h1>
 				
 			<% if(data == '') { %>
@@ -38,8 +38,8 @@
 					</a>
 				</div>
 			<% }); %>
-			<a href="/auth/logout"><button>Logout</button></a>
-			<a href="/video/upload"><button>Upload new video</button></a>
+			<a href="/auth/logout"><button class="lred-btn btn">Logout</button></a>
+			<a href="/video/upload"><button class="lgreen-btn btn">Upload new video</button></a>
 		</div>
 
 	<%- include("layouts/footer") %>

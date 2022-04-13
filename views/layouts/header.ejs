@@ -7,6 +7,11 @@
 			Find
 		</button>
 	</div>
+	<% if(user.login) { %>
+	<div class="signinup">
+		<a href='/character/<%= user.login %>' class='user green-lnk' id="login"><%= user.login %></a>
+	</div>
+	<% } else { %>
 	<div class="signinup">
 		<a href='/auth/create' class='user green-lnk' id="create">
 			Create Account
@@ -18,5 +23,6 @@
 				Login
 		</a>
 	</div>
+	<% } %>
 	<hr id='hr2'>
 </div>

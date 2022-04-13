@@ -5,19 +5,19 @@ const db = require('../db');
 
 // User page
 router.get('/:login', (req, res, next) => {
-	const userId = req.session.userId;
-	const userLogin = req.session.userLogin;
-	const login = req.params.login;
+	const id = req.session.userId;
+	const login = req.session.userLogin;
+	const userLogin = req.params.login;
 
-	console.log(`URL: ${login}`)
+	console.log(`URL: ${userLogin}`)
 
-	if (!login) {
+	if (!userLogin) {
 		const err = new Error('Not Found');
 		err.status = 404;
 		next(err);
 		console.log('Error 404!!!');
 	} else {
-		let sql = `SELECT * FROM users WHERE login = '${login}'`;
+		let sql = `SELECT * FROM users WHERE login = '${userLogin}'`;
 		db.query(sql, (err, result) => {
 			userData = result[0];
 			if (err) throw err;
@@ -30,16 +30,16 @@ router.get('/:login', (req, res, next) => {
 				console.log(`User not found. Result: ${result}`)
 				console.log('User not found!')
 			} else {
-				let sql = `SELECT * FROM videos WHERE author = '${login}'`;
+				let sql = `SELECT * FROM videos WHERE author = '${userLogin}'`;
 				db.query(sql, (err, result) => {
 					if (err) throw err;
 					if (result) {
-						if (!result[0]) {console.log(`Видео юзера ${login} не найдены`);}
+						if (!result[0]) {console.log(`Видео юзера ${userLogin} не найдены`);}
 						res.render('character', {
 							userData,
 							user: {
-								id: userId,
-								login: userLogin
+								id,
+								login
 							},
 							data: result
 						});

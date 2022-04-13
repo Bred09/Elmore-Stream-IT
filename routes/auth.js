@@ -5,7 +5,8 @@ const db = require('../db');
 
 // Create new account page
 router.get('/create', (req, res) => {
-	res.render('create-page');
+	const login = req.session.userLogin || false;
+	res.render('create-page', {user:login});
 });
 // Create new
 router.post('/create', (req, res) => {
@@ -81,7 +82,8 @@ router.post('/create', (req, res) => {
 
 // Login page
 router.get('/login', (req, res) => {
-	res.render('login-page');
+	const login = req.session.userLogin || false;
+	res.render('login-page', {user:login});
 });
 
 // Sigin in
@@ -139,7 +141,8 @@ router.get('/logout', (req, res) => {
 
 // Reset password page
 router.get('/reset', (req, res) => {
-	res.render('reset-page');
+	const login = req.session.userLogin || false;
+	res.render('reset-page', {user:login});
 });
 
 module.exports = router;

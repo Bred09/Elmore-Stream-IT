@@ -60,6 +60,43 @@ app.use('/character/', routes.user);
 app.use('/video/', routes.video);
 
 
+app.get('/polygon', (req, res) => {
+	res.render('polygon');
+})
+
+  
+
+
+
+
+app.get('/', (req, res) => {
+	if (req.subdomains[0] === 'dop') {
+		console.log(req.subdomains)
+		console.log("req.subdomains")
+	}
+})
+
+
+// function fun(arg) {
+// 	let res = db.query("SELECT * FROM users WHERE id = 1", (err, result) => {
+// 		if (err) throw err;
+		
+// 	return result;
+// 	})
+// return res
+// }
+// a = fun()
+// console.log(a)
+
+
+
+
+
+
+
+
+
+
 
 // Start server
 app.listen(PORT, () => {
