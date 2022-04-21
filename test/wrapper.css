@@ -1,11 +1,66 @@
-.wrapper {
-  background: gray;
+body {
+  /* font-family: "Gilroy", sans-serif; */
+  line-height: 1;
+  height: 100%;
+  font-size: 0px;
+  max-width: 1440px;
+  font-family: "Poppins";
 }
 
-img {
-  height: 1px;
-  width: 1px;
+
+/* --------------------- */
+.block{
+  max-width: 1440px;
+  display: inline-block;
 }
-img:hover {
-  transform: scale(30);
+.container {
+  text-align: center;
+  display: inline-block;
+  margin-top: calc;
+}
+.fcontainer{
+  padding-left: 165px;
+  display: inline-block;
+}
+.container:not(:last-child){
+  margin-right: 35px;
+  display: inline-block;
+}
+.title {
+  padding-top: 290px;
+  padding-bottom: 58px;
+  margin-left: 128px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 42px;
+  line-height: 1.48;
+  text-align: center;
+  letter-spacing: 0.8px;
+  color: #323232;
+}
+
+.image {
+  display: inline-block;
+  margin-bottom: 14px;
+}
+
+.subtitle {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 42px;
+  letter-spacing: 0.5px;
+  color: #323232;
+}
+
+.text {
+  margin-top: 2px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 27px;
+  max-width: 248px;
+  letter-spacing: 1.15px;
+  color: #323232;
+  
 }

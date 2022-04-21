@@ -17,7 +17,6 @@
 </head>
 	<body>
 	<%- include("../layouts/header") %>
-
 		
 	<!-- Display -->
 	<div class="wrapper-box">
@@ -50,8 +49,8 @@
 							</div>
 							<div class="share">
 								<span>SHARE TO</span>
-								<p>
-									<a href="https://vk.com/"><img src="/media/img/vk.png" alt=""></a>
+								<p onclick="comingSoon()">
+									<a href="#"><img src="/media/img/vk.png" alt=""></a>
 									<a href="#"><img src="/media/img/earth.svg" alt=""></a>
 								</p>
 							</div>
@@ -59,18 +58,20 @@
 					</div>
 				</div>
 				<hr>
-				<div class="comments">
 					<h3>Comments:</h3>
+				<div class="comments messages">
 					<% comments.forEach(function(cmt) { %>
 						<div class="comment-box">
 							<div class="comment">
 								<div>
 									<p class="author-cmt">
-										<img class="avatar" src="<%= cmt.user_avatar %>" alt=""><%= cmt.author %>
+										<img class="avatar" src="<%= cmt.user_avatar %>" alt="">
+										<br>
+										<%= cmt.author %>
 									</p>
 								</div>
 								<div class="lt"></div><div class="body"><%= cmt.body %></div>
-								<div class="l-d">
+								<div class="l-d" onclick="comingSoon()">
 									<p>
 										<img class="like-cmnt-btn" src="/media/img/like.svg" alt="likes"> <span class="like-c-count"><%= cmt.likes %></span>
 										<img class="dislike-cmnt-btn" src="/media/img/dislike.svg" alt="dislikes"> <span class="dislike-c-count"><%= cmt.dislikes %></span>
@@ -79,7 +80,7 @@
 							</div>
 							<hr>
 							<div class="reply">
-								<textarea class="inp reply-inp" type="text" placeholder="Type text..."></textarea><button class="btn green-btn reply-btn">reply</button>
+								<textarea class="inp reply-inp" type="text" placeholder="Type text..."></textarea><button onclick="comingSoon()" class="btn green-btn reply-btn">reply</button>
 							</div>
 						</div>
 					<% }); %>
@@ -116,6 +117,62 @@
 
 
 	<%- include("../layouts/footer") %>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+	let userLoged = "<%= user.login %>" || false;
+	if (userLoged) {
+		let socket = io();
+
+		let btn = $('.add-cmt');
+		let messages = $('.messages');
+		btn.on('click', function (e) {
+			let avatar = "<%= user.avatar %>";
+			let author = "<%= user.login %>";
+			let input = $('.body-cmt').val()
+			console.log(input)
+
+			let data = {
+				avatar: avatar,
+				author: author,
+				body: input
+			}
+			if (author) {
+				socket.emit('chat message', JSON.stringify(data))
+			}
+		})
+
+      socket.on('chat message', function(msg) {
+      	let coment = JSON.parse(msg);
+      	let item = `
+      		<div class="comment-box">
+				<div class="comment">
+					<div>
+						<p class="author-cmt">
+							<img class="avatar" src="${coment.avatar}" alt="">
+							<br>
+							${coment.author}
+						</p>
+					</div>
+					<div class="lt"></div><div class="body">${coment.body}</div>
+					<div class="l-d" onclick="comingSoon()">
+						<p>
+							<img class="like-cmnt-btn" src="/media/img/like.svg" alt="likes"> <span class="like-c-count">0</span>
+							<img class="dislike-cmnt-btn" src="/media/img/dislike.svg" alt="dislikes"> <span class="dislike-c-count">0</span>
+						</p>
+					</div>
+				</div>
+				<hr>
+				<div class="reply">
+					<textarea class="inp reply-inp" type="text" placeholder="Type text..."></textarea><button class="btn green-btn reply-btn">reply</button>
+				</div>
+			</div>
+      	`;
+        $(".messages").prepend(item);
+      });
+	}
+</script>
+
+	<div class="allow-box" style="position: fixed; top: 10px; right: 10px;">
 	<script src="/js/video/play/script.js"></script>
 	</body>
 </html>

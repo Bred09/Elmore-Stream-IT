@@ -61,7 +61,7 @@
 }
 
 .lds {
-	align-content: space-between;
+	display: grid;
 }
 .lds > * {
 	border-radius: 4px;
@@ -101,7 +101,6 @@
 	font-size: 20px;
 	font-weight: bold;
 	padding: 10px;
-	height: 96px;
 }
 .share p {
 	display: flex;
@@ -132,6 +131,9 @@
 }
 .author-cmt {
 	color: #2d2d2d;
+}
+.author-cmt .avatar {
+	border-width: 4px;
 }
 .body {
 	display: flex;

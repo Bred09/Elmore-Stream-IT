@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<link href="/css/video/upload/style.css" rel="stylesheet" type="text/css"/>
+		<link href="/css/character/style.css" rel="stylesheet" type="text/css"/>
 		<link rel="icon" type="image/x-icon" href="/media/favicon.svg">
 		<title><%= userData.login %></title>
 		<!-- main css files -->
@@ -15,32 +15,35 @@
 	<body>
 	<%- include("layouts/header") %>
 
-	<!-- Display -->
-		<div id="display">
-			<img class="avatar <%= userData.role %>" src="<%= userData.avatar %>" alt="" />
+	<div id="wrapper-box">
+		<div class="user-box">
+			<img class="avatar <%= userData.role %>" src="<%= userData.avatar %>" alt="Avatar" />
 			<h1><%= userData.login %></h1>
 				
 			<% if(data == '') { %>
 				<h3>The user doesn't have a video yet</h3>
 			<% } %>
-			<% data.forEach(function(user) { %>
-				<div class="video-box">
-					<a href="/video/<%= user.id %>" class="video-link">
-						<div class="video">
-							<img src="https://video.sibnet.ru/upload/cover/video_<%= user.poster %>_0.jpg" class="poster"></img>
-							<br>
-							<br>
-							<span class="title info"><%= user.title %></span><br>
-							<span class="posted info">likes <%= user.likes %></a></span>
-							<span class="posted info">dislikes <%= user.dislikes %></a></span><br>
-							<span class="views info"><%= user.views %> views</span>
-						</div>
-					</a>
-				</div>
-			<% }); %>
-			<a href="/auth/logout"><button class="lred-btn btn">Logout</button></a>
+			
+			<a href="/auth/logout"><button class="lred-btn btn">sign out</button></a>
 			<a href="/video/upload"><button class="lgreen-btn btn">Upload new video</button></a>
 		</div>
+		<div class="wrapper">
+		<% data.forEach(function(user) { %>
+			<div class="video-box">
+				<a href="/video/<%= user.id %>" class="video-link">
+					<div class="video">
+						<img src="https://video.sibnet.ru/upload/cover/video_<%= user.poster %>_0.jpg" class="poster"></img>
+						<span class="title info"><%= user.title %></span>
+						<span class="posted info">likes <%= user.likes %></a></span>
+						<span class="posted info">dislikes <%= user.dislikes %></a></span>
+						<span class="views info"><%= user.views %> views</span>
+						<span class="coments info">0 coments</span>
+					</div>
+				</a>
+			</div>
+		<% }); %>
+		</div>
+	</div>
 
 	<%- include("layouts/footer") %>
 	</body>

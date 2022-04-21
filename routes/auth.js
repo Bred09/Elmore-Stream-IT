@@ -118,6 +118,7 @@ router.post('/in', (req, res) => {
 				// Если юзер найден ВПУСКАЕМ ЕГО
 				req.session.userId = result[0]['id'];
 				req.session.userLogin = result[0]['login'];
+				req.session.userAvatar = result[0]['avatar'];
 				console.log(`WELCOME ${req.session.userLogin} req.session.userId: ${req.session.userId} sessionID: ${req.session.id}`);
 				res.json({
 					ok: true

@@ -1,0 +1,13 @@
+.video {
+	border: solid 2px gray;
+	border-radius: 16px;
+}
+
+.poster {
+	max-width: 200px;
+}
+
+.wrapper {
+	max-width: 1280px;
+	margin: 0 auto;
+}

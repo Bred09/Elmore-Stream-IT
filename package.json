@@ -19,12 +19,13 @@
   },
   "homepage": "https://github.com/Bred09/Elmore-Stream-IT#readme",
   "dependencies": {
-    "ejs": "^3.1.6",
+    "ejs": "^3.0.2",
     "express": "^4.17.3",
     "express-mysql-session": "^2.1.7",
     "express-session": "^1.17.2",
     "multer": "^1.4.4",
     "mysql": "^2.18.1",
+    "socket.io": "^4.4.1",
     "static-asset": "^0.6.0"
   }
 }

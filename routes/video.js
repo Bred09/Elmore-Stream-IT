@@ -106,20 +106,19 @@ router.post('/add-comment', (req, res) => {
 	console.log(req.headers.referer);
 	if (!login) {
 		res.json({
-			ok: false,
-			error: 'login failed!',
-			fields: ['']
+			code: "NL",
+			msg: 'Login failed!'
 		});
 	} else if (!body) {
 		res.json({
-			ok: false,
-			error: 'not all fields are filled in!',
+			code: "NONE",
+			msg: 'not all fields are filled in!',
 			fields: ['body']
 		});
-	} else if (body.length < 1 || body.length > 500) {
+	} else if (body.length < 1 || body.length > 1000) {
 		res.json({
-			ok: false,
-			error: 'body length from 1 to 500 characters!',
+			code: 1500,
+			msg: 'body length from 1 to 1000 characters!',
 			fields: ['body']
 		});
 	} else {
@@ -129,8 +128,8 @@ router.post('/add-comment', (req, res) => {
 			if (err) throw err;
 			else {
 				// Если все проверки пройдены = Добавляем комент!
-				let sql = `INSERT INTO comments (video, user_avatar, author, body) VALUES ('${videoId}', '${userAvatar}', '${login}', '${body}')`;
-				db.query(sql, (err, result) => {
+				let sql = `INSERT INTO comments (video, user_avatar, author, body) VALUES (?, ?, ?, ?)`;
+				db.query(sql, [videoId, userAvatar, login, body], (err, result) => {
 					if (err) throw err;
 					if (result) {
 						console.log(result);
@@ -153,8 +152,8 @@ router.post('/check-rate', (req, res) => {
 	// Проверяем залогинен или нет
 	if (!login) {
 		res.json({
-			code: '00',
-			msg: 'Вы не залогинились!'
+			code: 'NL',
+			msg: 'Login failed!'
 		});
 	} else {
 		let checkRate = `SELECT * FROM rated_videos WHERE user_login = '${login}' AND video_id = ${videoId};`;
@@ -190,8 +189,8 @@ router.post('/like', (req, res) => {
 	// Проверяем залогинен или нет
 	if (!login) {
 		res.json({
-			code: '00',
-			msg: 'Вы не залогинились!'
+			code: 'NL',
+			msg: 'Login failed!'
 		});
 	} else {
 	// Ищем в БД если вообще лайк/дислайк
@@ -253,8 +252,8 @@ router.post('/dislike', (req, res) => {
 	// Проверяем залогинен или нет
 	if (!login) {
 		res.json({
-			code: '00',
-			msg: 'Вы не залогинились!'
+			code: 'NL',
+			msg: 'Login failed!'
 		});
 	} else {
 
@@ -312,6 +311,7 @@ router.post('/dislike', (req, res) => {
 router.get('/:video', async (req, res, next) => {
 	const userId = req.session.userId;
 	const userLogin = req.session.userLogin;
+	const userAvatar = req.session.userAvatar;
 	const videoId = req.params.video;
 	if (!videoId) {
 		const err = new Error('Not Found');
@@ -336,20 +336,21 @@ router.get('/:video', async (req, res, next) => {
 					videoToPlay = result[0];
 
 					// Подгружаю коменты
-					let sql1 = `SELECT * FROM comments WHERE video = ${videoId}`;
+					let sql1 = `SELECT * FROM comments WHERE video = ${videoId} ORDER BY comments.id DESC`;
 					db.query(sql1, (err, result) => {
 						let comments = result;
 						if (err) throw err;
 						if (!result[0]) {console.log('Comments not found!')}
 
-						let sql = `SELECT * FROM videos ORDER BY id LIMIT ${videoId}, 3`;
+						let sql = `SELECT * FROM videos ORDER BY id LIMIT ${videoId}, 3;`;
 						db.query(sql, (err, result) => {
 							if (err) throw err;
 							res.render('video/play', {
 								video: videoToPlay,
 								user: {
 									id: userId,
-									login: userLogin
+									login: userLogin,
+									avatar: userAvatar
 								},
 								data: result,
 								comments: comments

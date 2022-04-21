@@ -6,6 +6,7 @@ a {
 /*убирает стандартную обводку файрфокс и сафари*/
 input, textarea {
   outline:none;
+  resize: vertical
 }
 
 body{

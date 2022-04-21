@@ -23,8 +23,8 @@ router.post('/', (req, res) => {
 	const quantity = req.body.videos;
 	console.log(req.body.videos)
 
-	let sql = `SELECT * FROM videos ORDER BY id LIMIT ${quantity}, 10`;
-	db.query(sql, (err, result) => {
+	let sql = `SELECT * FROM videos ORDER BY id LIMIT ?, 10`;
+	db.query(sql, [quantity], (err, result) => {
 		if (err) throw err;
 		if (!result[0]) {
 			res.json({

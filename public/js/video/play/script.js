@@ -1,8 +1,34 @@
+// Уведомление
+let alw = function allow(){
+    $(".allow-box").append(`
+            <div class="allow alert alr error-alr" style="margin-bottom: 10px;">
+                <div class="img">
+                    <img src="/media/img/error.png" />
+                </div>
+
+                <span class="title">
+                    Errore! <br>
+                    <span class="text">
+                    ${msg}
+                    </span>
+                </span>
+            </div>
+        `)
+
+    $( ".allow" ).click(function() {
+        $( this ).hide( 500, function() {
+            $( this ).remove();
+        });
+    });
+}
+
 // Отправляем данные формы на бэк
 $('.add-cmt').on('click', function(e) {
+    let body = $('.body-cmt').val()
     var data = {
-        body: $('.body-cmt').val()
+        body
     }
+    $('.body-cmt').val("")
     console.log(data);
 
     $.ajax({
@@ -14,9 +40,11 @@ $('.add-cmt').on('click', function(e) {
         console.log(data);
         if (data.ok == true) {
             console.log('OK!')
-            $(location).attr("href","")
         } else {
-            console.log(data['error'])
+            msg = data.msg;
+            alw(msg)
+            console.log(data.msg)
+            console.log(data['msg'])
         }
     });
 });
@@ -65,6 +93,10 @@ $(document).on('click', '.like-btn', function() {
             $('.like-count').text(likeCount + 1)
             $('.like-btn').addClass('active');
             console.log(data.msg)
+        } else if (data.code == "NL") {
+            msg = data.msg
+            alw(msg)
+            console.log(data.msg)
         }
     });
 });
@@ -90,6 +122,10 @@ $(document).on('click', '.dislike-btn', function() {
         } else if (data.code == "N") {
             $('.dislike-count').text(dislikeCount + 1)
             $('.dislike-btn').addClass('active');
+            console.log(data.msg)
+        } else if (data.code == "NL") {
+            msg = data.msg
+            alw(msg)
             console.log(data.msg)
         }
     });
@@ -147,3 +183,11 @@ $('.more').on('click', (e) => {
     })
 });
 
+// Coming soon function
+function comingSoon() {
+    let box = `<div class="coming-soon" style="position:  fixed; top: 0; left: 0; width: 100%; height: 100%; text-align: center; background: rgba(0,0,0,0.8)"><img style="margin-top: 2%; width: 80%;" src="/media/comingsoon.png" alt="Cooming soon..."></div>`;
+    $('body').append(box);
+    $('.coming-soon').on('click', (e) => {
+        $('.coming-soon').remove();
+    })
+}

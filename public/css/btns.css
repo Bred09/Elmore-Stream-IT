@@ -87,7 +87,7 @@
 .green-inp {
   border: solid 1px black;
   opacity: 0.5;
-  color: #34b44a;
+  color: #34b44a !important;
   font-size: 16px;
   font-weight: bold;
 }
@@ -134,18 +134,18 @@
 
 /*Roles*/
 .avatar {
-  padding: 6px;
   border-radius: 14%;
-  border: solid 6px;
+  border-width: 6px;
+  border-style: solid;
   border-color: #216fb3;
-  width: 16%;
+  width: 140px;
 }
 .gumball {
-  border-color: #4ac2e4;
+  border-color: #4ac2e4 !important;
 }
 .darwin {
-  border-color: #ff7412;
+  border-color: #ff7412 !important;
 }
 .anais {
-  border-color: #f9b6ba;
+  border-color: #f9b6ba !important;
 }

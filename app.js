@@ -10,9 +10,23 @@ const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
 // routes
 const routes = require('./routes');
-//express
+// express
 const app = express();
+// socket.io
+const http = require('http');
+const server = http.createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(server);
 
+io.on('connection', (socket) => {
+  socket.on('chat message', msg => {
+    io.emit('chat message', msg);
+  });
+});
+
+io.on('connection', (socket) => {
+  console.log('a user connected');
+});
 
 // sessions
 var sessionStore = new MySQLStore({
@@ -59,7 +73,7 @@ app.use('/character/', routes.user);
 // video upload
 app.use('/video/', routes.video);
 
-
+// Test polygon
 app.get('/polygon', (req, res) => {
 	res.render('polygon');
 })
@@ -77,28 +91,18 @@ app.get('/', (req, res) => {
 })
 
 
-// function fun(arg) {
-// 	let res = db.query("SELECT * FROM users WHERE id = 1", (err, result) => {
-// 		if (err) throw err;
-		
-// 	return result;
-// 	})
-// return res
-// }
-// a = fun()
-// console.log(a)
-
-
-
-
-
-
+function fun(arg) {
+	let a = "Hello, world!";
+	return a
+}
+let b = fun()
+console.log(b)
 
 
 
 
 
 // Start server
-app.listen(PORT, () => {
+server.listen(PORT, () => {
 	console.log(`Server Run on port: ${PORT}`)
 })
