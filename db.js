@@ -5,7 +5,7 @@ const db = mysql.createConnection({
   host: "localhost",
   user: "root",
   database: "esi",
-  password: "",
+  password: "MyPasswordForphpMyAdmin=159920042002",
 
   multipleStatements: true
 });
