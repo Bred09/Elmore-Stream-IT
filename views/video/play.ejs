@@ -65,7 +65,9 @@
 							<div class="comment">
 								<div>
 									<p class="author-cmt">
-										<img class="avatar" src="<%= cmt.user_avatar %>" alt="">
+										<div class="avatar-frame <%= cmt.role %>">
+											<img class="avatar" src="<%= cmt.user_avatar %>" alt="Avatar" />
+										</div>
 										<br>
 										<%= cmt.author %>
 									</p>
@@ -148,7 +150,9 @@
 				<div class="comment">
 					<div>
 						<p class="author-cmt">
-							<img class="avatar" src="${coment.avatar}" alt="">
+							<div class="avatar-frame ${coment.role}">
+								<img class="avatar" src="${coment.avatar}" alt="Avatar" />
+							</div>
 							<br>
 							${coment.author}
 						</p>

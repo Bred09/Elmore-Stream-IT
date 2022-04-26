@@ -17,7 +17,9 @@
 
 	<div id="wrapper-box">
 		<div class="user-box">
-			<img class="avatar <%= userData.role %>" src="<%= userData.avatar %>" alt="Avatar" />
+			<div class="avatar-frame <%= userData.role %>">
+				<img class="avatar" src="<%= userData.avatar %>" alt="Avatar" />
+			</div>
 			<h1><%= userData.login %></h1>
 				
 			<% if(data == '') { %>

@@ -124,10 +124,15 @@
 	display: flex;
 	justify-content: space-between;
 }
+.avatar-frame {
+	width: 64px !important;
+	height: 64px !important;
+	padding: 2px !important;
+}
 .avatar {
 	border-radius: 14%;
 	border: solid 2px #216fb3;
-	width: 60px;
+	width: 60px !important;
 }
 .author-cmt {
 	color: #2d2d2d;

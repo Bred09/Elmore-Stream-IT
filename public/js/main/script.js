@@ -51,4 +51,3 @@ $('.more').on('click', (e) => {
       console.log('err')
     })
 });
-

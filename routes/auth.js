@@ -2,6 +2,10 @@ const router = require('express').Router();
 // db
 const db = require('../db');
 
+// Validate password
+const beginWithoutDigit = /^\D.*$/
+const withoutSpecialChars = /^[^-() /]*$/
+const containsLetters = /^.*[a-zA-Z]+.*$/
 
 // Create new account page
 router.get('/create', (req, res) => {
@@ -38,7 +42,7 @@ router.post('/create', (req, res) => {
 	      error: 'the password can have only Latin characters and numbers without spaces!',
 	      fields: ['login']
 	    });
-	} else if (!/^[a-zA-Z0-9]+$/.test(password)) {
+	} else if (beginWithoutDigit.test(password) && withoutSpecialChars.test(password) && containsLetters.test(password)) {
 	    res.json({
 	      ok: false,
 	      error: 'the password can have only Latin characters and numbers without spaces!',
@@ -97,12 +101,6 @@ router.post('/in', (req, res) => {
 			error: 'not all fields are filled in!',
 			fields: ['login', 'password']
 		});
-	} else if (!/^[a-zA-Z0-9]+$/.test(password)) {
-	    res.json({
-	      ok: false,
-	      error: 'the password can have only Latin characters and numbers without spaces!',
-	      fields: ['password']
-	    });
 	} else {
 		let sql = `SELECT * FROM users WHERE login = '${login}' AND password = '${password}'`;
 		db.query(sql, (err, result) => {

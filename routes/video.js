@@ -309,9 +309,9 @@ router.post('/dislike', (req, res) => {
 
 // Video page
 router.get('/:video', async (req, res, next) => {
-	const userId = req.session.userId;
-	const userLogin = req.session.userLogin;
-	const userAvatar = req.session.userAvatar;
+	const userId = req.session.userId || false;
+	const userLogin = req.session.userLogin || false;
+	const userAvatar = req.session.userAvatar || false;
 	const videoId = req.params.video;
 	if (!videoId) {
 		const err = new Error('Not Found');

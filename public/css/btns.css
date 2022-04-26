@@ -1,3 +1,4 @@
+/*Buttons*/
 .btn, .alr {
   border: solid 2px;
   border-radius: 6px;
@@ -5,7 +6,7 @@
   color: #fff;
   font-size: 20px;
 }
-
+/*Character buttons*/
 .gumball-btn, .anais-btn, .darwin-btn {
   font-size: 16px;
   border-color: #000;
@@ -31,7 +32,7 @@
   background: #fc999e;
 }
 
-
+/*btns*/
 .green-lnk {
   font-size: 14px;
   color: #34b44a;
@@ -84,6 +85,26 @@
   color: #fff;
 }
 
+.yellow-btn {
+  background-color: #FFFEC0;
+  padding: 8px 10px;
+  border: solid 2px #32B624;
+  border-radius: 5px;
+  font-size: 22px;
+}
+.yellow-btn:hover {
+  opacity: 0.8;
+}
+
+/*inputs*/
+.inp {
+  border: solid 2px #737b8e;
+  color: #737b8e;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 6px;
+}
+
 .green-inp {
   border: solid 1px black;
   opacity: 0.5;
@@ -95,14 +116,7 @@
   opacity: 1;
 }
 
-.inp {
-  border: solid 2px #737b8e;
-  color: #737b8e;
-  font-weight: bold;
-  padding: 10px;
-  border-radius: 6px;
-}
-
+/*Alerts*/
 .alr {
   background: #ececec;
   font-weight: bold;
@@ -133,23 +147,40 @@
 }
 
 /*Roles*/
+.avatar-frame {
+  width: 140px;
+  height: 140px;
+  padding: 10px;
+  border-radius: 14%;
+  background: #216fb3;
+}
 .avatar {
   border-radius: 14%;
-  border-width: 6px;
-  border-style: solid;
-  border-color: #216fb3;
   width: 140px;
 }
 .gumball {
-  border-color: #4ac2e4 !important;
+  background: #4ac2e4 !important;
 }
 .darwin {
-  border-color: #ff7412 !important;
+  background: #ff7412 !important;
 }
 .anais {
-  border-color: #f9b6ba !important;
+  background: #f9b6ba !important;
+}
+.penny {
+  background: linear-gradient(0deg, rgba(251,130,103,1) 0%, rgba(253,231,27,1) 50%);
+}
+.tobias {
+  background: linear-gradient(0deg, rgba(242,180,65,1) 25%, rgba(237,103,92,1) 60%, rgba(237,103,92,1) 70%, rgba(124,211,241,1) 90%) !important;
+}
+.joe {
+  background: #f5e700;
 }
 
 .admin {
-  border-color: #ff4500 !important;
+  background: linear-gradient(45deg, rgba(33,111,179,1) 0%, rgba(255,0,0,1) 80%);
+}
+
+.character {
+  background: linear-gradient(45deg, rgba(255,0,0,1) 0%, rgba(255,255,0,1) 80%);
 }
