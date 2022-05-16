@@ -9,8 +9,18 @@ const containsLetters = /^.*[a-zA-Z]+.*$/
 
 // Create new account page
 router.get('/create', (req, res) => {
-	const login = req.session.userLogin || false;
-	res.render('create-page', {user:login});
+// Session {
+	const userId = req.session.userId || false;
+	const userLogin = req.session.userLogin || false;
+	const userAvatar = req.session.userAvatar || false;
+// }
+	res.render('create-page', {
+		userData: {
+			userId,
+			userLogin,
+			userAvatar
+		},
+	});
 });
 // Create new
 router.post('/create', (req, res) => {
@@ -86,8 +96,18 @@ router.post('/create', (req, res) => {
 
 // Login page
 router.get('/login', (req, res) => {
-	const login = req.session.userLogin || false;
-	res.render('login-page', {user:login});
+// Session {
+	const userId = req.session.userId || false;
+	const userLogin = req.session.userLogin || false;
+	const userAvatar = req.session.userAvatar || false;
+// }
+	res.render('login-page', {
+		userData: {
+			userId,
+			userLogin,
+			userAvatar
+		},
+	});
 });
 
 // Sigin in
@@ -140,8 +160,18 @@ router.get('/logout', (req, res) => {
 
 // Reset password page
 router.get('/reset', (req, res) => {
-	const login = req.session.userLogin || false;
-	res.render('reset-page', {user:login});
+// Session {
+	const userId = req.session.userId || false;
+	const userLogin = req.session.userLogin || false;
+	const userAvatar = req.session.userAvatar || false;
+// }
+	res.render('reset-page', {
+		userData: {
+			userId,
+			userLogin,
+			userAvatar
+		},
+	});
 });
 
 module.exports = router;

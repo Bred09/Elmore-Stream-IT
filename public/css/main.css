@@ -3,7 +3,7 @@ a {
   text-decoration: none;
 }
 a:hover {
-  cursor: pointer;
+  cursor: url("/media/cursore/cursor.png"), auto;
 }
 
 /*убирает стандартную обводку файрфокс и сафари*/
@@ -21,6 +21,6 @@ html {
   padding: 0;
 }
 *, html{
-  cursor: url("/media/cursore/cursor.png"), auto;
+  cursor: url("/media/cursore/cursor.png"), auto !important;
   font-family: sans-serif;
 }

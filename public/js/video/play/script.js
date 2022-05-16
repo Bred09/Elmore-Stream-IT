@@ -1,5 +1,26 @@
+//Sound alert
+
+// init bunch of sounds
+ion.sound({
+    sounds: [
+        {name: "tap"},
+        {name: "branch_break"},
+        // custom sound
+        {name: "msg"}
+    ],
+
+    // main config
+    path: "/media/sounds/",
+    preload: true,
+    multiplay: true,
+    volume: 0.9
+});
+
 // Уведомление
 let alw = function allow(){
+    // Звуковое уведомление
+    ion.sound.play("tap");
+    
     $(".allow-box").append(`
             <div class="allow alert alr error-alr" style="margin-bottom: 10px;">
                 <div class="img">

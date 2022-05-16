@@ -2,60 +2,61 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<link rel="icon" type="image/x-icon" href="/media/favicon.svg">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/x-icon" href="/media/favicon.svg">
 	<link rel="stylesheet" href="/css/btns.css" type="text/css">
 	<link rel="stylesheet" href="/css/main.css" type="text/css">
 	<title>Polygon</title>
+	<!-- In the head of your document with your other CSS includes... -->
+<!-- Video.js base CSS -->
+<link href="/css/play/video-js.css" rel="stylesheet">
+<!-- City -->
+<link rel="stylesheet" href="/css/play/tawog.css" type="text/css">
 </head>
+
 <body>
 <style>
+
+
+
 body {
 	background: gray;
 }
-body>div {
-	width: 1080px;
-	height: 3000px;
+
+#my-video {
+	height: 100%;
+	width: 100%;
 }
-body>div>div {
-	background: #fff;
-	padding: 40px;
+.video-js .vjs-tech {
+	position: inherit !important;
 }
+
 </style>
 
+<div class="q">
 
-
-<div>
-<div>
-
-
-<div class="avatar-frame tobias">
-	<img class="avatar <%= userData.role %>" src="<%= userData.avatar %>" alt="Avatar" />
+	<video id="my-video" class="video-js vjs-gad" controls="" preload="auto" poster="https://video.sibnet.ru/upload/cover/video_4653472_0.jpg" data-setup="{}">
+		<source src="https://drive.google.com/uc?export=view&confirm=no_antivirus&id=1UA23r9WNtYq0VxBNdN7VYXK5XQIFD8FI" type="video/mp4">
+		<source src="https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1UA23r9WNtYq0VxBNdN7VYXK5XQIFD8FI" type="video/mp4">
+		<!-- <source src="https://drive.google.com/file/d/1UA23r9WNtYq0VxBNdN7VYXK5XQIFD8FI/view" type="video/mp4"> -->
+		<!-- <source src="/media/cut/alan.mp4" type="video/mp4"> -->
+		<source src="/media/cut/alan.mp4" type="video/mp4">
+			<p class="vjs-no-js">
+					To view this video please enable JavaScript, and consider upgrading to a
+					web browser that
+				<a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+			</p>
+	</video>
 </div>
 
-
-	<h1>Hello</h1>
-	<img class="avatar <%= userData.role %>" src="<%= userData.avatar %>" alt="Avatar" />
-	<button class="gumball-btn btn">Gumball</button>
-	<button class="anais-btn btn">Anais</button>
-	<button class="darwin-btn btn">Darwin</button>
-	<br>
-	<button class="green-btn btn">Green</button>
-	<button class="red-btn btn">Red</button>
-	<button class="lgreen-btn btn">Light green</button>
-	<button class="lred-btn btn">Red</button>
-	<a class="green-lnk">Green link</a>
-	<a class="blue-lnk">Blue link</a>
-	<input class="inp" type="text" name="" id="">
-	<input class="inp green-inp" type="text" name="" id="">
-	<img class="like like-btn" src="/media/img/like.svg" alt="likes"><span class="like-count">2</span>
-	<img class="dislike dislike-btn" src="/media/img/dislike.svg" alt="dislikes"><span class="dislike-count">1</span>
-</div>
-</div>
+ <marquee>ваша бегущая строка</marquee>
+ <marquee scrollamount="20" scrolldelay="1"><img src="https://i.pinimg.com/originals/55/a6/ff/55a6ff63f1d7d7c17a690e3aadbb4b28.gif" alt=""></marquee>
 
 
-<script>
-console.log('Work!')
-</script>
+<!-- <script src="https://vjs.zencdn.net/4.0.4/video.js"></script> -->
+  <script src="/js/video/play/video.min.js"></script>
+  <script src="/js/video/play/videoplayer.js"></script>
+<script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=5zmp36n45gb&amp;m=0&amp;c=ff0000&amp;cr1=ffffff&amp;f=arial&amp;l=33" async="async"></script>
+
 </body>
 </html>

@@ -29,13 +29,16 @@ const upload = multer({
 
 // Upload new video page
 router.get('/upload', (req, res) => {
-	const id = req.session.userId;
-	const login = req.session.userLogin;
+// Session {
+	const userId = req.session.userId || false;
+	const userLogin = req.session.userLogin || false;
+	const userAvatar = req.session.userAvatar || false;
+// }
 
 	res.render('video/upload', {
 		user: {
 			id,
-			login
+			userLogin
 		}
 	})
 })
@@ -96,15 +99,18 @@ router.post('/upload', (req, res) => {
 });
 // Add comment
 router.post('/add-comment', (req, res) => {
-	const login = req.session.userLogin;
+	// Session {
+	const userId = req.session.userId || false;
+	const userLogin = req.session.userLogin || false;
+	const userAvatar = req.session.userAvatar || false;
+	// }
 	const body = req.body.body.trim().replace(/ +(?= )/g, '');
-	// const videoId = req.headers.referer.slice(-1);
 	const videoId = req.headers.referer.split('/')[4];
 	console.log("videoId:");
 	console.log(videoId);
 	console.log("videoId FULL:");
 	console.log(req.headers.referer);
-	if (!login) {
+	if (!userLogin) {
 		res.json({
 			code: "NL",
 			msg: 'Login failed!'
@@ -122,21 +128,14 @@ router.post('/add-comment', (req, res) => {
 			fields: ['body']
 		});
 	} else {
-		let sql = `SELECT * FROM users WHERE login = '${login}' `;
-		db.query(sql, (err, result) => {
-			userAvatar = result[0].avatar;
+		// Если все проверки пройдены = Добавляем комент!
+		let sql = `INSERT INTO comments (video, author_id, body) VALUES (?, ?, ?)`;
+		db.query(sql, [videoId, userId, body], (err, result) => {
 			if (err) throw err;
-			else {
-				// Если все проверки пройдены = Добавляем комент!
-				let sql = `INSERT INTO comments (video, user_avatar, author, body) VALUES (?, ?, ?, ?)`;
-				db.query(sql, [videoId, userAvatar, login, body], (err, result) => {
-					if (err) throw err;
-					if (result) {
-						console.log(result);
-						res.json({
-							ok: true
-						});
-					}
+			if (result) {
+				console.log(result);
+				res.json({
+					ok: true
 				});
 			}
 		});
@@ -147,16 +146,20 @@ router.post('/add-comment', (req, res) => {
 // Check Rate
 // Проверяет на наличие поставленной оценки
 router.post('/check-rate', (req, res) => {
-	const login = req.session.userLogin;
+// Session {
+	const userId = req.session.userId || false;
+	const userLogin = req.session.userLogin || false;
+	const userAvatar = req.session.userAvatar || false;
+// }
 	const videoId = req.headers.referer.slice(-1);
 	// Проверяем залогинен или нет
-	if (!login) {
+	if (!userLogin) {
 		res.json({
 			code: 'NL',
 			msg: 'Login failed!'
 		});
 	} else {
-		let checkRate = `SELECT * FROM rated_videos WHERE user_login = '${login}' AND video_id = ${videoId};`;
+		let checkRate = `SELECT * FROM rated_videos WHERE user_login = '${userLogin}' AND video_id = ${videoId};`;
 		db.query(checkRate, function(err, result) {
 			if (err) throw err;
 
@@ -183,32 +186,36 @@ router.post('/check-rate', (req, res) => {
 });
 // Like
 router.post('/like', (req, res) => {
-	const login = req.session.userLogin;
+// Session {
+	const userId = req.session.userId || false;
+	const userLogin = req.session.userLogin || false;
+	const userAvatar = req.session.userAvatar || false;
+// }
 	const videoId = req.headers.referer.slice(-1);
 
 	// Проверяем залогинен или нет
-	if (!login) {
+	if (!userLogin) {
 		res.json({
 			code: 'NL',
 			msg: 'Login failed!'
 		});
 	} else {
 	// Ищем в БД если вообще лайк/дислайк
-	let query1 = `SELECT * FROM rated_videos WHERE user_login = '${login}' AND video_id = ${videoId};`;
+	let query1 = `SELECT * FROM rated_videos WHERE user_login = '${userLogin}' AND video_id = ${videoId};`;
 	// Убираем лайк с видео и удаляем запись с лайком
     let query2 = `
     	UPDATE videos SET likes = likes-1 WHERE videos.id = ${videoId};
-		DELETE FROM rated_videos WHERE user_login = '${login}' AND video_id = '${videoId}';
+		DELETE FROM rated_videos WHERE user_login = '${userLogin}' AND video_id = '${videoId}';
     `;
     // Добавляем лайк и убираем дислайк у видео + запись лайков/дизлайков имеет статус L
     let query3 = `
     	UPDATE videos SET likes = likes+1 WHERE videos.id = ${videoId};
     	UPDATE videos SET dislikes = dislikes-1 WHERE videos.id = ${videoId};
-    	UPDATE rated_videos SET like_dislike = 'l' WHERE user_login = '${login}' AND video_id = '${videoId}';
+    	UPDATE rated_videos SET like_dislike = 'l' WHERE user_login = '${userLogin}' AND video_id = '${videoId}';
     `;
     let query4 = `
     	UPDATE videos SET likes = likes+1 WHERE videos.id = ${videoId};
-    	INSERT INTO rated_videos (user_login, video_id, like_dislike) VALUES ('${login}', '${videoId}', 'l');
+    	INSERT INTO rated_videos (user_login, video_id, like_dislike) VALUES ('${userLogin}', '${videoId}', 'l');
     `;
 
     db.query(query1, function(err, result) {
@@ -246,11 +253,15 @@ router.post('/like', (req, res) => {
 });
 // Dislike
 router.post('/dislike', (req, res) => {
-	const login = req.session.userLogin;
+// Session {
+	const userId = req.session.userId || false;
+	const userLogin = req.session.userLogin || false;
+	const userAvatar = req.session.userAvatar || false;
+// }
 	const videoId = req.headers.referer.slice(-1);
 
 	// Проверяем залогинен или нет
-	if (!login) {
+	if (!userLogin) {
 		res.json({
 			code: 'NL',
 			msg: 'Login failed!'
@@ -258,19 +269,19 @@ router.post('/dislike', (req, res) => {
 	} else {
 
 	// Добавляем лайк к видео
-    let query1 = `SELECT * FROM rated_videos WHERE user_login = '${login}' AND video_id = ${videoId};`;
+    let query1 = `SELECT * FROM rated_videos WHERE user_login = '${userLogin}' AND video_id = ${videoId};`;
     let query2 = `
     	UPDATE videos SET dislikes = dislikes+1 WHERE videos.id = ${videoId};
     	UPDATE videos SET likes = likes-1 WHERE videos.id = ${videoId};
-    	UPDATE rated_videos SET like_dislike = 'd' WHERE user_login = '${login}' AND video_id = '${videoId}';
+    	UPDATE rated_videos SET like_dislike = 'd' WHERE user_login = '${userLogin}' AND video_id = '${videoId}';
     `;
     let query3 = `
     	UPDATE videos SET dislikes = dislikes-1 WHERE videos.id = ${videoId};
-		DELETE FROM rated_videos WHERE user_login = '${login}' AND video_id = '${videoId}'
+		DELETE FROM rated_videos WHERE user_login = '${userLogin}' AND video_id = '${videoId}'
     `;
     let query4 = `
     	UPDATE videos SET dislikes = dislikes+1 WHERE videos.id = ${videoId};
-    	INSERT INTO rated_videos (user_login, video_id, like_dislike) VALUES ('${login}', '${videoId}', 'd');
+    	INSERT INTO rated_videos (user_login, video_id, like_dislike) VALUES ('${userLogin}', '${videoId}', 'd');
     `;
 
     db.query(query1, function(err, result) {
@@ -309,9 +320,11 @@ router.post('/dislike', (req, res) => {
 
 // Video page
 router.get('/:video', async (req, res, next) => {
+// Session {
 	const userId = req.session.userId || false;
 	const userLogin = req.session.userLogin || false;
 	const userAvatar = req.session.userAvatar || false;
+// }
 	const videoId = req.params.video;
 	if (!videoId) {
 		const err = new Error('Not Found');
@@ -336,21 +349,25 @@ router.get('/:video', async (req, res, next) => {
 					videoToPlay = result[0];
 
 					// Подгружаю коменты
-					let sql1 = `SELECT * FROM comments WHERE video = ${videoId} ORDER BY comments.id DESC`;
+					let sql1 = `SELECT * FROM comments JOIN users ON comments.author_id = users.id`;
+					let sql2 = `
+						SELECT * FROM comments JOIN users ON comments.author_id = users.id ORDER BY comments.id DESC
+					`;
 					db.query(sql1, (err, result) => {
 						let comments = result;
 						if (err) throw err;
 						if (!result[0]) {console.log('Comments not found!')}
+						console.log(comments);
 
 						let sql = `SELECT * FROM videos ORDER BY id LIMIT ${videoId}, 3;`;
 						db.query(sql, (err, result) => {
 							if (err) throw err;
 							res.render('video/play', {
 								video: videoToPlay,
-								user: {
-									id: userId,
-									login: userLogin,
-									avatar: userAvatar
+								userData: {
+									userId,
+									userLogin,
+									userAvatar
 								},
 								data: result,
 								comments: comments
