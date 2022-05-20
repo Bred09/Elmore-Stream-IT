@@ -1,39 +1,34 @@
-let player = videojs('my-video', {
+const player = videojs('my-video', {
+    autoplay: true,
     controlBar: {
-        playToggle: {
-            replay: true
-        },
-        volumePanel: {
-            inline: false
-        },
-        autoplay: 'muted'
+        'pictureInPictureToggle': false
     }
 });
 
 
-const controlPanel = player.controlBar;
+var controlPanel = player.controlBar;
 
-let videoUrlObj = location.href.split("/");
-let lastObj = videoUrlObj.length;
-let videoId = location.href.split("/")[--lastObj];
+var videoUrlObj = location.href.split("/");
+var lastObj = videoUrlObj.length;
+var videoId = location.href.split("/")[--lastObj];
 
-const prevBtn = controlPanel.addChild('button', { className: 'vjs-text-visible' });
+var prevBtn = controlPanel.addChild('button', { className: 'vjs-text-visible' });
 prevBtn.addClass('prev-btn');
-let prevBtnDOM = prevBtn.el();
+var prevBtnDOM = prevBtn.el();
 prevBtnDOM.onclick = () => {
     if (Number(videoId) != 1) {
         window.location.href = `/video/${Number(--videoId)}`;
     }
 }
 
-const nextBtn = controlPanel.addChild('button', { className: 'vjs-text-visible' });
+var nextBtn = controlPanel.addChild('button', { className: 'vjs-text-visible' });
 nextBtn.addClass('next-btn');
-let nextBtnDOM = nextBtn.el();
+var nextBtnDOM = nextBtn.el();
 nextBtnDOM.onclick = () => {
     window.location.href = `/video/${Number(++videoId)}`;
 }
 
-const complaintBtn = controlPanel.addChild('button', { className: 'vjs-text-visible' });
+var complaintBtn = controlPanel.addChild('button', { className: 'vjs-text-visible' });
 complaintBtn.addClass('complaint-btn');
 let complaintBtnDOM = complaintBtn.el();
 complaintBtnDOM.onclick = () => {
@@ -43,9 +38,9 @@ complaintBtnDOM.onclick = () => {
     }
 }
 
-const loopBtn = controlPanel.addChild('button', { className: 'vjs-text-visible' });
+var loopBtn = controlPanel.addChild('button', { className: 'vjs-text-visible' });
 loopBtn.addClass('loop-btn');
-let loopBtnDOM = loopBtn.el();
+var loopBtnDOM = loopBtn.el();
 loopBtnDOM.onclick = () => {
     // Enable/Disable replay mode
     let yesOrNo = player.loop() == false ? true : false;
@@ -56,7 +51,6 @@ loopBtnDOM.onclick = () => {
     loopBtnDOM.style.backgroundImage = onOrOff;
     console.log(loopBtnDOM.style.backgroundImage)
 }
-
 
 var Component = videojs.getComponent('Component');
 var myComponent = new Component(player);

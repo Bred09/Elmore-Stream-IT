@@ -32,7 +32,7 @@
 				<h1 class="title-frm"><%= video.title %></h1>
 				<h3 class="posted-frm">posted by <a class="blue-lnk" href="/character/<%= video.author %>"><%= video.author %></a></h3>
 				<div class="frame">
-					<video id="my-video" class="video-js vjs-gad vjs-default-skin vjs-big-play-centered disablePictureInPicture" poster="https://video.sibnet.ru/upload/cover/video_<%= video.poster %>_0.jpg" controls="" preload="auto" data-setup="{}">
+					<video id="my-video" controls class="video-js vjs-gad vjs-default-skin vjs-big-play-centered" poster="https://video.sibnet.ru/upload/cover/video_<%= video.poster %>_0.jpg" preload="auto">
 						<source src="/media/video/<%= video.path %>" type="video/mp4">
 
 							<!-- JavaScript not supported -->
@@ -98,10 +98,6 @@
 									<img class="dislike-cmnt-btn" src="/media/img/dislike.svg" alt="dislikes"> <span class="dislike-c-count"><%= cmt.dislikes %></span>
 								</p>
 							</div>
-						</div>
-						<hr>
-						<div class="reply">
-							<textarea class="inp reply-inp" type="text" placeholder="Type text..."></textarea><button onclick="comingSoon()" class="btn green-btn reply-btn">reply</button>
 						</div>
 					</div>
 				<% }); %>
@@ -212,6 +208,5 @@
 	<div class="allow-box" style="position: fixed; top: 10px; right: 10px;">
 		<script src="/js/ion.sound.min.js"></script>
 	<script src="/js/video/play/script.js"></script>
-	<script src="/js/video/play/videoplayer.js"></script>
 	</body>
 </html>

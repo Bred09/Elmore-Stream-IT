@@ -6,7 +6,7 @@ const db = mysql.createConnection({
   user: "root",
   database: "esi",
   password: "6dnBT8Cf5S",
-  port: '/var/run/mysqld/mysqld.sock',
+  port: 3306,
 
   multipleStatements: true
 });
