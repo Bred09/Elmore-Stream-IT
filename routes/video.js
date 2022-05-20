@@ -319,81 +319,52 @@ router.post('/dislike', (req, res) => {
 });
 
 // Video page
-router.get('/:video', async (req, res, next) => {
-// Session {
+router.get('/:video', (req, res, next) => {
+	// Session {
 	const userId = req.session.userId || false;
+	const userRole = req.session.userRole || false;
 	const userLogin = req.session.userLogin || false;
 	const userAvatar = req.session.userAvatar || false;
-// }
-	const videoId = req.params.video;
+	// }
+	const videoId = Number(req.params.video);
 	if (!videoId) {
 		const err = new Error('Not Found');
 		err.status = 404;
 		next(err);
 		console.log('Error 404!!!');
 	} else {
-		try {
-			// Показываю видео
-			let sql = `SELECT * FROM videos WHERE id = '${videoId}';`;
-			const queryToDB = await db.query(sql, (err, result) => {
-				if (err) throw err;
-				if (!result[0]) {
-					// Если видео не найден
-					res.json({
-						ok: false,
-						error: 'Video not found!'
-					});
-					console.log(`Video not found. Result: ${result}`)
-					console.log('Video not found!')
-				} else {// Если видео найдено ПОКАЗЫВАЕМ
-					videoToPlay = result[0];
+		let sql = `
+			SELECT * FROM videos WHERE id = ?;
+			SELECT COUNT(*) FROM comments WHERE video = ?;
+			SELECT *, NULL AS password FROM comments JOIN users ON comments.author_id = users.id WHERE video = ? ORDER BY comments.id DESC;
+			SELECT * FROM videos ORDER BY id LIMIT ?, 3;
+		`;
 
-					// Подгружаю коменты
-					let sql1 = `SELECT * FROM comments JOIN users ON comments.author_id = users.id`;
-					let sql2 = `
-						SELECT * FROM comments JOIN users ON comments.author_id = users.id ORDER BY comments.id DESC
-					`;
-					db.query(sql1, (err, result) => {
-						let comments = result;
-						if (err) throw err;
-						if (!result[0]) {console.log('Comments not found!')}
-						console.log(comments);
+		db.query(sql, [videoId, videoId, videoId, videoId], (err, result) => {
+			if (err) throw err;
 
-						let sql = `SELECT * FROM videos ORDER BY id LIMIT ${videoId}, 3;`;
-						db.query(sql, (err, result) => {
-							if (err) throw err;
-							res.render('video/play', {
-								video: videoToPlay,
-								userData: {
-									userId,
-									userLogin,
-									userAvatar
-								},
-								data: result,
-								comments: comments
-							});
-						});
-					});
-
-					// Добавляем +1 к просмотрам видео
-					let sql = `UPDATE videos SET views = views+1 WHERE videos.id = ${videoId} `;
-					db.query(sql, (err, result) => {
-						if (err) throw err;
-					});
-				}
+			res.render('video/play', {
+				userData: {
+					userRole,
+					userId,
+					userLogin,
+					userAvatar
+				},
+				video: result[0][0],
+				commentsCount: result[1][0]["COUNT(*)"],
+				comments: result[2],
+				data: result[3]
 			});
-		} catch {
-			throw new Error("Server error!")
-		}
+		})
 	}
 });
 // Подгружать видео на страницу PLAY
 router.post('/more', (req, res) => {
-	const quantity = req.body.videos;
-	console.log(req.body.videos)
+	const quantity = req.body.videos + 1;
+	console.log(quantity)
 
-	let sql = `SELECT * FROM videos ORDER BY id LIMIT ${quantity}, 3`;
-	db.query(sql, (err, result) => {
+	let sql = `SELECT * FROM videos ORDER BY id LIMIT ?, 3`;
+	db.query(sql, [quantity], (err, result) => {
 		if (err) throw err;
 		if (!result[0]) {
 			res.json({

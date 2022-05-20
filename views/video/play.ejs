@@ -32,7 +32,7 @@
 				<h1 class="title-frm"><%= video.title %></h1>
 				<h3 class="posted-frm">posted by <a class="blue-lnk" href="/character/<%= video.author %>"><%= video.author %></a></h3>
 				<div class="frame">
-					<video id="my-video" class="video-js vjs-gad vjs-default-skin vjs-big-play-centered" poster="<%= video.poster %>" controls="" preload="auto" data-setup="{}">
+					<video id="my-video" class="video-js vjs-gad vjs-default-skin vjs-big-play-centered disablePictureInPicture" poster="https://video.sibnet.ru/upload/cover/video_<%= video.poster %>_0.jpg" controls="" preload="auto" data-setup="{}">
 						<source src="/media/video/<%= video.path %>" type="video/mp4">
 
 							<!-- JavaScript not supported -->
@@ -76,7 +76,7 @@
 
 				<hr>
 
-				<h3 class="messages">Comments:</h3>
+				<h3 class="messages">Comments (<%= commentsCount %>):</h3>
 				<% comments.forEach(function(cmt) { %>
 					<div class="comment-box">
 						<div class="comment">
@@ -147,6 +147,7 @@
 		let btn = $('.add-cmt');
 		let messages = $('.messages');
 		btn.on('click', function (e) {
+			let role = "<%= userData.userRole %>";
 			let avatar = "<%= userData.userAvatar %>";
 			let author = "<%= userData.userLogin %>";
 			let input = $('.body-cmt').val()
@@ -155,6 +156,7 @@
 			console.log(userLoged)
 
 			let data = {
+				role: role,
 				avatar: avatar,
 				author: author,
 				body: input
@@ -165,22 +167,25 @@
 		})
 		
 		socket.on('chat message', function(msg) {
-			// Sound notify
-			ion.sound.play("branch_break");
-
 			let coment = JSON.parse(msg);
+			// Sound notify
+			if (coment.author != "<%= userData.userLogin %>") {
+				ion.sound.play("msg");
+			}
       		let item = `
 				<div class="comment-box">
 					<div class="comment">
-						<div>
-							<p class="author-cmt">
-								<div class="avatar-frame ${coment.role}">
-									<img class="avatar" src="${coment.avatar}" alt="Avatar" />
-								</div>
-								<br>
-								${coment.author}
-							</p>
-						</div>
+						<a href="/character/${coment.author}">
+							<div>
+								<p class="author-cmt">
+									<div class="avatar-frame ${coment.role}">
+										<img class="avatar" src="${coment.avatar}" alt="Avatar" />
+									</div>
+									<br>
+									${coment.author}
+								</p>
+							</div>
+						</a>
 						<div class="lt"></div><div class="body">${coment.body}</div>
 						<div class="l-d" onclick="comingSoon()">
 							<p>

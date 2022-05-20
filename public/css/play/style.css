@@ -147,6 +147,10 @@
 	height: 64px !important;
 	padding: 2px !important;
 }
+.character::after {
+	right: -12px !important;
+	top: -8px !important;
+}
 .avatar {
 	border-radius: 14%;
 	width: 64px !important;
@@ -296,6 +300,11 @@ border-left: 100px solid transparent;
   .title-frm, .posted-frm{
   	text-align: center;
   }
+	
+	.vjs-volume-panel {
+		display: none !important;;
+	}
+	
 	.options {
 		display: flex;
 		flex-wrap: wrap;

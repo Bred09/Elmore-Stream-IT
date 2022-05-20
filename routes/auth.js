@@ -135,6 +135,7 @@ router.post('/in', (req, res) => {
 			} else {
 				// Если юзер найден ВПУСКАЕМ ЕГО
 				req.session.userId = result[0]['id'];
+				req.session.userRole = result[0]['role'];
 				req.session.userLogin = result[0]['login'];
 				req.session.userAvatar = result[0]['avatar'];
 				console.log(`WELCOME ${req.session.userLogin} req.session.userId: ${req.session.userId} sessionID: ${req.session.id}`);
