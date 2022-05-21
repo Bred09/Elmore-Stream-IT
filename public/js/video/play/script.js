@@ -46,8 +46,10 @@ let alw = function allow(){
 
 // Отправляем данные формы на бэк
 $('.add-cmt').on('click', function(e) {
-    let body = $('.body-cmt').val()
+    let videoId = location.href.split('/')[4];
+    let body = $('.body-cmt').val();
     var data = {
+        videoId,
         body
     }
     $('.body-cmt').val("")

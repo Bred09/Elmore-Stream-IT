@@ -33,7 +33,7 @@
 				<h3 class="posted-frm">posted by <a class="blue-lnk" href="/character/<%= video.author %>"><%= video.author %></a></h3>
 				<div class="frame">
 					<video id="my-video" controls class="video-js vjs-gad vjs-default-skin vjs-big-play-centered" poster="https://video.sibnet.ru/upload/cover/video_<%= video.poster %>_0.jpg" preload="auto">
-						<source src="/media/video/<%= video.path %>" type="video/mp4">
+						<source src="/media/video/<%= video.path %>.mp4" type="video/mp4">
 
 							<!-- JavaScript not supported -->
 							<p class="vjs-no-js">
@@ -76,7 +76,7 @@
 
 				<hr>
 
-				<h3 class="messages">Comments (<%= commentsCount %>):</h3>
+				<h3 class="messages">Comments (<span class="cmtCount"><%= commentsCount %></span>):</h3>
 				<% comments.forEach(function(cmt) { %>
 					<div class="comment-box">
 						<div class="comment">
@@ -136,6 +136,8 @@
 <script src="/socket.io/socket.io.js"></script>
 <script>
 	let userLoged = "<%= userData.userLogin %>";
+	let commentsCount = $('.cmtCount');
+	console.log(commentsCount)
 	
 	if (userLoged != "false") {
 		let socket = io();
@@ -146,24 +148,39 @@
 			let role = "<%= userData.userRole %>";
 			let avatar = "<%= userData.userAvatar %>";
 			let author = "<%= userData.userLogin %>";
-			let input = $('.body-cmt').val()
-			console.log(input)
-			console.log("userLoged")
-			console.log(userLoged)
+			let input = $('.body-cmt').val();
+			let episode = location.href.split('/')[4];;
+			console.log(videoId)
 
 			let data = {
 				role: role,
 				avatar: avatar,
 				author: author,
-				body: input
+				body: input,
+				episode: Number(episode)
 			}
+			console.log("DATA")
+			console.log(data)
 			if (author && input) {
 				socket.emit('chat message', JSON.stringify(data))
+				let nmbrCmnt = Number(commentsCount[0].innerHTML)
+				commentsCount.html(++nmbrCmnt);
 			}
 		})
 		
 		socket.on('chat message', function(msg) {
+			let currentEpisode = location.href.split('/')[4];;
 			let coment = JSON.parse(msg);
+			let dopka = `
+				<hr>
+				<div class="reply">
+					<span>Commentary from <a href="/video/${coment.episode}"><span>${coment.episode}</span> episode</a></span>
+				</div>
+			`;
+
+			if (coment.episode == currentEpisode) {
+				dopka = "";
+			}
 			// Sound notify
 			if (coment.author != "<%= userData.userLogin %>") {
 				ion.sound.play("msg");
@@ -190,10 +207,7 @@
 							</p>
 						</div>
 					</div>
-					<hr>
-					<div class="reply">
-						<textarea class="inp reply-inp" type="text" placeholder="Type text..."></textarea><button class="btn green-btn reply-btn">reply</button>
-					</div>
+					${dopka}
 				</div>
 			`;
 			$(".messages").after(item);

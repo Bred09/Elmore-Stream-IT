@@ -105,11 +105,13 @@ router.post('/add-comment', (req, res) => {
 	const userAvatar = req.session.userAvatar || false;
 	// }
 	const body = req.body.body.trim().replace(/ +(?= )/g, '');
-	const videoId = req.headers.referer.split('/')[4];
+	const videoId = req.body.videoId;
 	console.log("videoId:");
 	console.log(videoId);
 	console.log("videoId FULL:");
 	console.log(req.headers.referer);
+	console.log("BODy");
+	console.log(req.body);
 	if (!userLogin) {
 		res.json({
 			code: "NL",
@@ -140,7 +142,6 @@ router.post('/add-comment', (req, res) => {
 			}
 		});
 	}
-	console.log(req.body);
 });
 
 // Check Rate
