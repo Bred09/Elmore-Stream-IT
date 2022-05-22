@@ -40,7 +40,7 @@ function complaintBtnOn() {
     }
 }
 
-complaintBtn.on('click', complaintBtnOn);
+complaintBtn.on('pointerup', complaintBtnOn);
 
 var loopBtn = controlPanel.addChild('button', { className: 'vjs-text-visible' });
 loopBtn.addClass('loop-btn');
@@ -55,7 +55,3 @@ function loopOn() {
     loopBtnDOM.style.backgroundImage = onOrOff;
     console.log(loopBtnDOM.style.backgroundImage)
 }
-
-loopBtn.on("click", loopOn);
-
-loopBtnDOM.addEventListener('touchstart', loopOn)
