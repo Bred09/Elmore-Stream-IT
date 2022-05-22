@@ -19,8 +19,6 @@ function prevBtnOn() {
     }
 }
 
-prevBtn.on('click', prevBtnOn);
-prevBtn.on('touchend', prevBtnOn);
 prevBtn.on('pointerup', prevBtnOn);
 
 var nextBtn = controlPanel.addChild('button', { className: 'vjs-text-visible' });
@@ -30,8 +28,6 @@ function nextBtnOn() {
     window.location.href = `/video/${Number(++videoId)}`;
 }
 
-nextBtn.on('click', nextBtnOn);
-nextBtn.on('touchend', nextBtnOn);
 nextBtn.on('pointerup', nextBtnOn);
 
 var complaintBtn = controlPanel.addChild('button', { className: 'vjs-text-visible' });
@@ -44,8 +40,6 @@ function complaintBtnOn() {
     }
 }
 
-complaintBtn.on('click', complaintBtnOn);
-complaintBtn.on('touchend', complaintBtnOn);
 complaintBtn.on('pointerup', complaintBtnOn);
 
 var loopBtn = controlPanel.addChild('button', { className: 'vjs-text-visible' });
@@ -62,6 +56,4 @@ function loopOn() {
     console.log(loopBtnDOM.style.backgroundImage)
 }
 
-loopBtn.on('click', loopOn);
-loopBtn.on('touchend', loopOn);
 loopBtn.on('pointerup', loopOn);
