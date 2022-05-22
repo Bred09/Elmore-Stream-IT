@@ -6,7 +6,8 @@
 	overflow: hidden
 }
 
-.video-js .vjs-tech, .vjs-text-track-display {
+.video-js .vjs-tech,
+.vjs-text-track-display {
 	position: inherit;
 }
 
@@ -30,6 +31,7 @@
 	border: none !important;
 	font-size: 6em;
 }
+
 /* BigPlayButton hover */
 .video-js:hover .vjs-big-play-button,
 .video-js .vjs-big-play-button:focus,
@@ -38,14 +40,24 @@
 }
 
 /* Кнопки контрол бара */
-.prev-btn, .video-js .vjs-play-control, .next-btn, .complaint-btn, .vjs-volume-panel>.vjs-mute-control, .loop-btn, .vjs-fullscreen-control {
+.prev-btn,
+.video-js .vjs-play-control,
+.next-btn,
+.complaint-btn,
+.vjs-volume-panel>.vjs-mute-control,
+.loop-btn,
+.vjs-fullscreen-control {
 	position: relative !important;
 	background-size: 76% 76% !important;
 	background-repeat: no-repeat !important;
 	background-position: center !important;
 }
+
 /* Границы слева */
-.video-js .vjs-play-control, .next-btn, .complaint-btn, .vjs-fullscreen-control {
+.video-js .vjs-play-control,
+.next-btn,
+.complaint-btn,
+.vjs-fullscreen-control {
 	border-left: solid 2px #a5a5a5 !important;
 }
 
@@ -54,43 +66,56 @@
 	order: 1;
 	background-image: url("/media/videoplayer/previous.svg");
 }
+
 .video-js .vjs-play-control {
 	order: 2;
 }
+
 .video-js .vjs-paused {
 	background-image: url("/media/videoplayer/playstop.svg");
-	background-position: -28% center !important;
-	background-size: 100px auto !important;
+	background-position: center top !important;
+	background-size: 100% auto !important;
 }
+
 .video-js .vjs-playing {
 	background-image: url("/media/videoplayer/playstop.svg");
-	background-size: 100px auto !important;
-	background-position: 124% center !important;
+	background-position: 0 bottom !important;
+	background-size: 100% auto !important;
 }
+
 .video-js .next-btn {
 	order: 3;
 	background-image: url("/media/videoplayer/next.svg");
 }
+
 .video-js .complaint-btn {
 	order: 4;
 	background-image: url("/media/videoplayer/complaint.svg");
 }
+
 .vjs-custom-control-spacer {
 	order: 5;
 }
+
 .vjs-volume-panel {
 	order: 6;
 }
-.vjs-volume-panel .vjs-vol-1,.vjs-vol-2,.vjs-vol-3 {
+
+.vjs-volume-panel .vjs-vol-1,
+.vjs-vol-2,
+.vjs-vol-3 {
 	background-image: url("/media/videoplayer/sound.svg") !important;
 }
+
 .vjs-volume-panel .vjs-vol-0 {
 	background-image: url("/media/videoplayer/mute.svg") !important;
 }
+
 .video-js .loop-btn {
 	order: 7;
 	background-image: url("/media/videoplayer/repeat.svg");
 }
+
 .video-js .vjs-fullscreen-control {
 	order: 8;
 	background-image: url("/media/videoplayer/full.svg");
@@ -102,9 +127,13 @@
 
 /* Стандартные кнопки с контентом */
 
-.video-js .vjs-big-play-button .vjs-icon-placeholder::before, .video-js .vjs-play-control .vjs-icon-placeholder::before, .vjs-icon-play::before,
-.video-js .vjs-mute-control .vjs-icon-placeholder::before, .vjs-icon-volume-high::before,
-.video-js .vjs-fullscreen-control .vjs-icon-placeholder::before, .vjs-icon-fullscreen-enter::before {
+.video-js .vjs-big-play-button .vjs-icon-placeholder::before,
+.video-js .vjs-play-control .vjs-icon-placeholder::before,
+.vjs-icon-play::before,
+.video-js .vjs-mute-control .vjs-icon-placeholder::before,
+.vjs-icon-volume-high::before,
+.video-js .vjs-fullscreen-control .vjs-icon-placeholder::before,
+.vjs-icon-fullscreen-enter::before {
 	content: none !important;
 }
 
@@ -120,6 +149,7 @@
 	border-left: none;
 	border-right: none;
 }
+
 /* Прогрес бар прошедшее/слева + звук */
 .video-js .vjs-play-progress,
 .video-js .vjs-volume-level {
@@ -127,7 +157,9 @@
 }
 
 /* Прогрес бар будущее/справа */
-.video-js .vjs-slider, .video-js .vjs-load-progress, .vjs-load-progress > div {
+.video-js .vjs-slider,
+.video-js .vjs-load-progress,
+.vjs-load-progress>div {
 	background: #8cde99 !important;
 }
 
@@ -135,12 +167,14 @@
 .video-js .vjs-progress-control:hover .vjs-progress-holder {
 	font-size: inherit;
 }
+
 .video-js .vjs-progress-control:hover .vjs-time-tooltip {
 	font-size: 1.6666666667em !important;
 }
 
 /* Отметка прогресс бара */
-.video-js .vjs-play-progress:before, .vjs-slider-horizontal .vjs-volume-level::before {
+.video-js .vjs-play-progress:before,
+.vjs-slider-horizontal .vjs-volume-level::before {
 	content: " \0020" !important;
 	width: 2em;
 	height: 2em;
@@ -166,12 +200,15 @@
 .video-js .vjs-volume-bar {
 	margin: 1em 0;
 }
+
 /* Volume ползунок */
 .vjs-slider-horizontal .vjs-volume-level::before {
 	right: -1em;
 }
+
 /* линия */
-.vjs-slider-horizontal .vjs-volume-level,.vjs-volume-bar.vjs-slider-horizontal {
+.vjs-slider-horizontal .vjs-volume-level,
+.vjs-volume-bar.vjs-slider-horizontal {
 	height: 1em;
 }
 
@@ -195,7 +232,8 @@
 }
 
 .video-js .vjs-volume-menu-button.vjs-volume-menu-button-horizontal:hover .vjs-menu .vjs-menu-content {
-	height: 3em !important;;
+	height: 3em !important;
+	;
 	width: 6.35em;
 	background: red !important;
 }
