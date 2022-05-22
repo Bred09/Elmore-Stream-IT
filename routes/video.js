@@ -29,11 +29,11 @@ const upload = multer({
 
 // Upload new video page
 router.get('/upload', (req, res) => {
-// Session {
+	// Session {
 	const userId = req.session.userId || false;
 	const userLogin = req.session.userLogin || false;
 	const userAvatar = req.session.userAvatar || false;
-// }
+	// }
 
 	res.render('video/upload', {
 		user: {
@@ -48,7 +48,7 @@ router.post('/upload', (req, res) => {
 	const title = req.body.title.trim().replace(/ +(?= )/g, '');
 	const description = req.body.description.trim().replace(/ +(?= )/g, '');
 	const path = req.body.path.trim().replace(/ +(?= )/g, '');
-// Upload file
+	// Upload file
 	// upload(req, res, err => {
 	// 	let error = '';
 	// 	if (err) {
@@ -147,11 +147,11 @@ router.post('/add-comment', (req, res) => {
 // Check Rate
 // Проверяет на наличие поставленной оценки
 router.post('/check-rate', (req, res) => {
-// Session {
+	// Session {
 	const userId = req.session.userId || false;
 	const userLogin = req.session.userLogin || false;
 	const userAvatar = req.session.userAvatar || false;
-// }
+	// }
 	const videoId = req.headers.referer.slice(-1);
 	// Проверяем залогинен или нет
 	if (!userLogin) {
@@ -161,7 +161,7 @@ router.post('/check-rate', (req, res) => {
 		});
 	} else {
 		let checkRate = `SELECT * FROM rated_videos WHERE user_login = '${userLogin}' AND video_id = ${videoId};`;
-		db.query(checkRate, function(err, result) {
+		db.query(checkRate, function (err, result) {
 			if (err) throw err;
 
 			if (result[0]) {
@@ -187,11 +187,11 @@ router.post('/check-rate', (req, res) => {
 });
 // Like
 router.post('/like', (req, res) => {
-// Session {
+	// Session {
 	const userId = req.session.userId || false;
 	const userLogin = req.session.userLogin || false;
 	const userAvatar = req.session.userAvatar || false;
-// }
+	// }
 	const videoId = req.headers.referer.slice(-1);
 
 	// Проверяем залогинен или нет
@@ -201,64 +201,64 @@ router.post('/like', (req, res) => {
 			msg: 'Login failed!'
 		});
 	} else {
-	// Ищем в БД если вообще лайк/дислайк
-	let query1 = `SELECT * FROM rated_videos WHERE user_login = '${userLogin}' AND video_id = ${videoId};`;
-	// Убираем лайк с видео и удаляем запись с лайком
-    let query2 = `
+		// Ищем в БД если вообще лайк/дислайк
+		let query1 = `SELECT * FROM rated_videos WHERE user_login = '${userLogin}' AND video_id = ${videoId};`;
+		// Убираем лайк с видео и удаляем запись с лайком
+		let query2 = `
     	UPDATE videos SET likes = likes-1 WHERE videos.id = ${videoId};
 		DELETE FROM rated_videos WHERE user_login = '${userLogin}' AND video_id = '${videoId}';
     `;
-    // Добавляем лайк и убираем дислайк у видео + запись лайков/дизлайков имеет статус L
-    let query3 = `
+		// Добавляем лайк и убираем дислайк у видео + запись лайков/дизлайков имеет статус L
+		let query3 = `
     	UPDATE videos SET likes = likes+1 WHERE videos.id = ${videoId};
     	UPDATE videos SET dislikes = dislikes-1 WHERE videos.id = ${videoId};
     	UPDATE rated_videos SET like_dislike = 'l' WHERE user_login = '${userLogin}' AND video_id = '${videoId}';
     `;
-    let query4 = `
+		let query4 = `
     	UPDATE videos SET likes = likes+1 WHERE videos.id = ${videoId};
     	INSERT INTO rated_videos (user_login, video_id, like_dislike) VALUES ('${userLogin}', '${videoId}', 'l');
     `;
 
-    db.query(query1, function(err, result) {
-		console.log("Rate: ")
-		if (err) throw err;
-		if (result[0]) {
-			if (result[0].like_dislike == "l") {
-				db.query(query2, function(err, result) {
-					if (err) throw err;
-					res.json({
-						code: '+1',
-						msg: 'Вы уже Лайкали!'
+		db.query(query1, function (err, result) {
+			console.log("Rate: ")
+			if (err) throw err;
+			if (result[0]) {
+				if (result[0].like_dislike == "l") {
+					db.query(query2, function (err, result) {
+						if (err) throw err;
+						res.json({
+							code: '+1',
+							msg: 'Вы уже Лайкали!'
+						});
 					});
-				});
-			} else if (result[0].like_dislike == "d") {
-				db.query(query3, function(err, result) {
+				} else if (result[0].like_dislike == "d") {
+					db.query(query3, function (err, result) {
+						if (err) throw err;
+						res.json({
+							code: '-1',
+							msg: 'Вы уже Дислайкали!'
+						});
+					});
+				}
+			} else if (!result[0]) {
+				db.query(query4, function (err, result) {
 					if (err) throw err;
 					res.json({
-						code: '-1',
-						msg: 'Вы уже Дислайкали!'
+						code: 'N',
+						msg: 'Лайк поставлен!'
 					});
 				});
 			}
-		} else if (!result[0]) {
-			db.query(query4, function(err, result) {
-				if (err) throw err;
-				res.json({
-					code: 'N',
-					msg: 'Лайк поставлен!'
-				});
-			});
-		}
-	});
+		});
 	}
 });
 // Dislike
 router.post('/dislike', (req, res) => {
-// Session {
+	// Session {
 	const userId = req.session.userId || false;
 	const userLogin = req.session.userLogin || false;
 	const userAvatar = req.session.userAvatar || false;
-// }
+	// }
 	const videoId = req.headers.referer.slice(-1);
 
 	// Проверяем залогинен или нет
@@ -269,53 +269,53 @@ router.post('/dislike', (req, res) => {
 		});
 	} else {
 
-	// Добавляем лайк к видео
-    let query1 = `SELECT * FROM rated_videos WHERE user_login = '${userLogin}' AND video_id = ${videoId};`;
-    let query2 = `
+		// Добавляем лайк к видео
+		let query1 = `SELECT * FROM rated_videos WHERE user_login = '${userLogin}' AND video_id = ${videoId};`;
+		let query2 = `
     	UPDATE videos SET dislikes = dislikes+1 WHERE videos.id = ${videoId};
     	UPDATE videos SET likes = likes-1 WHERE videos.id = ${videoId};
     	UPDATE rated_videos SET like_dislike = 'd' WHERE user_login = '${userLogin}' AND video_id = '${videoId}';
     `;
-    let query3 = `
+		let query3 = `
     	UPDATE videos SET dislikes = dislikes-1 WHERE videos.id = ${videoId};
 		DELETE FROM rated_videos WHERE user_login = '${userLogin}' AND video_id = '${videoId}'
     `;
-    let query4 = `
+		let query4 = `
     	UPDATE videos SET dislikes = dislikes+1 WHERE videos.id = ${videoId};
     	INSERT INTO rated_videos (user_login, video_id, like_dislike) VALUES ('${userLogin}', '${videoId}', 'd');
     `;
 
-    db.query(query1, function(err, result) {
-		console.log("Rate: ")
-		if (err) throw err;
-		if (result[0]) {
-			if (result[0].like_dislike == "l") {
-				db.query(query2, function(err, result) {
-					if (err) throw err;
-					res.json({
-						code: '+1',
-						msg: 'Вы уже Лайкали!'
+		db.query(query1, function (err, result) {
+			console.log("Rate: ")
+			if (err) throw err;
+			if (result[0]) {
+				if (result[0].like_dislike == "l") {
+					db.query(query2, function (err, result) {
+						if (err) throw err;
+						res.json({
+							code: '+1',
+							msg: 'Вы уже Лайкали!'
+						});
 					});
-				});
-			} else if (result[0].like_dislike == "d") {
-				db.query(query3, function(err, result) {
+				} else if (result[0].like_dislike == "d") {
+					db.query(query3, function (err, result) {
+						if (err) throw err;
+						res.json({
+							code: '-1',
+							msg: 'Вы уже Дислайкали!'
+						});
+					});
+				}
+			} else if (!result[0]) {
+				db.query(query4, function (err, result) {
 					if (err) throw err;
 					res.json({
-						code: '-1',
-						msg: 'Вы уже Дислайкали!'
+						code: 'N',
+						msg: 'Дислайк поставлен!'
 					});
 				});
 			}
-		} else if (!result[0]) {
-			db.query(query4, function(err, result) {
-				if (err) throw err;
-				res.json({
-					code: 'N',
-					msg: 'Дислайк поставлен!'
-				});
-			});
-		}
-	});
+		});
 	}
 });
 
@@ -357,6 +357,12 @@ router.get('/:video', (req, res, next) => {
 				data: result[3]
 			});
 		})
+
+		// Добавляем +1 к просмотрам видео
+		let sql1 = `UPDATE videos SET views = views+1 WHERE videos.id = ${videoId} `;
+		db.query(sql1, (err, result) => {
+			if (err) throw err;
+		});
 	}
 });
 // Подгружать видео на страницу PLAY
