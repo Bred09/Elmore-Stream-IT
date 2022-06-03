@@ -78,6 +78,17 @@ app.get('/polygon', (req, res) => {
 	res.render('polygon');
 })
 
+
+// ========================= temp
+// Move
+app.get('/move', (req, res) => {
+	res.render('Move/main-page');
+})
+// collections
+app.get('/collections', (req, res) => {
+	res.render('Move/collections');
+})
+// ==================
   
 
 

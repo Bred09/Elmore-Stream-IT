@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#1a1a1b">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#317d4f">
+    <style>
+        .rouded-image{
+            width: 60%;
+            border-radius: 100%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+            padding: 0.4em;
+            margin-bottom: 1em;
+        }
+    </style>
+    <title>Test</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand p-0" href="#">
+        <img src="11.png" alt="Logo" width="60">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">
+            Личный кабинет</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="2stranitca.html">Подборки</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="2stranitca.html">Новые фильмы</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="2stranitca.html"><strong>Новые Сериалы</strong></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="2stranitca.html"><strong>Лучшие фильмы</strong></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="2stranitca.html"><strong>Лучшие сериалы</strong></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+    <div class="container text-center my-5">
+        <div class="row">
+        <div class="col-lg-6 col-md-8 mx-auto">
+    <img  class="rouded-image"src="3.jpg" alt="Anime"></img>
+    <h1 class="fw-light">Saveliy Fursov</h1>
+    <p class="lead text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit.<br> Vitae iste, expedita deserunt dicta cumque possimus.<br> Aliquid laboriosam explicabo mollitia dolor.
+    </p>
+    <a href="https://vk.com/huort" target="_blank" class="btn btn-primary">
+         Follow me
+    </a>
+    <a href="https://vk.com/thisterriblelife" target="_blank" class="btn btn-secondary">
+         Terrible Life
+    </a>
+       </div>
+       </div>
+    </div>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Получить свежую подборку на почту Gmail</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Напишите нам на наш почтовый ящик</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Ваша почта:</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">Требования к подборке:</label>
+            <textarea class="form-control" id="message-text"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Выйти</button>
+        <button type="button" class="btn btn-primary">Отправить запрос</button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
