@@ -387,3 +387,122 @@ router.post('/more', (req, res) => {
 });
 
 module.exports = router;
+
+
+
+
+// Варианты для паралельных запросов в БД 
+
+
+
+// var mysql      = require('mysql');
+// var credentials = {...}
+
+// router.get('/api/url/', function (req, res) {
+//     return_data = {}
+//     var connection = mysql.createConnection(credentials);
+//     query1 = "SELECT column1 FROM table1 WHERE column2 = 'foo'";
+//     query2 = "SELECT column1 FROM table2 WHERE column2 = 'bar'";
+//     connection.query(query1, {}, function(err, results) {
+//         return_data.table1 = results;
+//         connection.query(query2, {}, function(err, results) {
+//             return_data.table2 = results;
+//             connection.end();
+//             res.send(return_data);
+//         });
+//     });
+// });
+
+
+// // -----------------------------------------------------------------------
+
+
+// var mysql      = require('mysql');
+// var async      = require('async');
+// var credentials = {...}
+
+// router.get('/api/url/', function (req, res) {
+//     var connection = mysql.createConnection(credentials);
+//     var query1 = "SELECT column1 FROM table1 WHERE column2 = 'foo'";
+//     var query2 = "SELECT column1 FROM table2 WHERE column2 = 'bar'";
+
+//     var return_data = {};
+
+//     async.parallel([
+//        function(parallel_done) {
+//            connection.query(query1, {}, function(err, results) {
+//                if (err) return parallel_done(err);
+//                return_data.table1 = results;
+//                parallel_done();
+//            });
+//        },
+//        function(parallel_done) {
+//            connection.query(query2, {}, function(err, results) {
+//                if (err) return parallel_done(err);
+//                return_data.table2 = results;
+//                parallel_done();
+//            });
+//        }
+//     ], function(err) {
+//          if (err) console.log(err);
+//          connection.end();
+//          res.send(return_data);
+//     });
+// });
+
+
+// // ----------------------------------------------------------------------------
+
+
+
+// var connection =  mysql.createConnection( { multipleStatements: true } );
+
+// connection.query('select column1; select column2; select column3;',    
+// function(err, result){
+//   if(err){
+//       throw err;
+//   }else{
+//       console.log(result[0]);       // Column1 as a result
+//       console.log(result[1]);       // Column2 as a result
+//       console.log(result[2]);       // Column3 as a result
+//   }
+// });
+
+
+
+
+// // ============================================================================
+
+
+// var mysql      = require('mysql');
+// var async      = require('async');
+// var credentials = {connectionLimit: 10,...}
+
+// router.get('/api/url/', function (req, res) {
+//     var pool = mysql.createPool(credentials);
+//     var query1 = "SELECT column1 FROM table1 WHERE column2 = 'foo'";
+//     var query2 = "SELECT column1 FROM table2 WHERE column2 = 'bar'";
+
+//     var return_data = {};
+
+//     async.parallel([
+//        function(parallel_done) {
+//            pool.query(query1, {}, function(err, results) {
+//                if (err) return parallel_done(err);
+//                return_data.table1 = results;
+//                parallel_done();
+//            });
+//        },
+//        function(parallel_done) {
+//            pool.query(query2, {}, function(err, results) {
+//                if (err) return parallel_done(err);
+//                return_data.table2 = results;
+//                parallel_done();
+//            });
+//        }
+//     ], function(err) {
+//          if (err) console.log(err);
+//          pool.end();
+//          res.send(return_data);
+//     });
+// });
