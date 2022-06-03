@@ -5,15 +5,21 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="icon" type="image/x-icon" href="/media/favicon.svg">
 <!-- Styles -->
+		<!-- In the head of your document with your other CSS includes... -->
+	<!-- Video.js base CSS -->
+	<link href="/css/play/video-js.css" rel="stylesheet">
+	<!-- Tawog -->
+	<link rel="stylesheet" href="/css/play/videoplayer.css" type="text/css">
+	
 	<link rel="stylesheet" href="<%= assetFingerprint('/css/play/style.css') %>" type="text/css">
 <!-- Title -->
 	<title><%= video.title %></title>
-		<!-- main css files -->
-		<link rel="stylesheet" href="<%= assetFingerprint('/css/main.css') %>" type="text/css"/>
-		<link rel="stylesheet" href="<%= assetFingerprint('/css/btns.css') %>" type="text/css"/>
-		<!-- layouts -->
-		<link href="<%= assetFingerprint('/css/header.css') %>" rel="stylesheet" type="text/css"/>
-		<link href="<%= assetFingerprint('/css/footer.css') %>" rel="stylesheet" type="text/css"/>
+<!-- main css files -->
+	<link rel="stylesheet" href="<%= assetFingerprint('/css/main.css') %>" type="text/css"/>
+	<link rel="stylesheet" href="<%= assetFingerprint('/css/btns.css') %>" type="text/css"/>
+	<!-- layouts -->
+	<link href="<%= assetFingerprint('/css/header.css') %>" rel="stylesheet" type="text/css"/>
+	<link href="<%= assetFingerprint('/css/footer.css') %>" rel="stylesheet" type="text/css"/>
 </head>
 	<body>
 	<%- include("../layouts/header") %>
@@ -26,9 +32,19 @@
 				<h1 class="title-frm"><%= video.title %></h1>
 				<h3 class="posted-frm">posted by <a class="blue-lnk" href="/character/<%= video.author %>"><%= video.author %></a></h3>
 				<div class="frame">
-					<iframe width="100%" height="100%" src="https://video.sibnet.ru/shell.php?videoid=<%= video.path %>&share=0&autoplay=1" frameborder="0" scrolling="no" allowfullscreen></iframe>
-				</div>
+					<video id="my-video" controls class="video-js vjs-gad vjs-default-skin vjs-big-play-centered" poster="https://video.sibnet.ru/upload/cover/video_<%= video.poster %>_0.jpg" preload="auto">
+						<source src="/media/video/<%= video.path %>.mp4" type="video/mp4">
 
+							<!-- JavaScript not supported -->
+							<p class="vjs-no-js">
+									To view this video please enable JavaScript, and consider upgrading to a
+									web browser that
+								<a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+							</p>
+					</video>
+				</div>
+			</div>
+			<div class="comments">
 				<div class="desc">
 					<div class="info-box">
 						<span><b>Description:</b> <%= video.description %></span>
@@ -44,8 +60,8 @@
 						</div>
 						<div class="lds">
 							<div class="likes-dis">
-								<img class="like like-btn" src="/media/img/like.svg" alt="likes"><span class="like-count"><%= video.likes %></span>
-								<img class="dislike dislike-btn" src="/media/img/dislike.svg" alt="dislikes"><span class="dislike-count"><%= video.dislikes %></span>
+								<div><img class="like like-btn" src="/media/img/like.svg" alt="likes"><span class="like-count"><%= video.likes %></span></div>
+								<div><img class="dislike dislike-btn" src="/media/img/dislike.svg" alt="dislikes"><span class="dislike-count"><%= video.dislikes %></span></div>
 							</div>
 							<div class="share">
 								<span>SHARE TO</span>
@@ -57,41 +73,39 @@
 						</div>
 					</div>
 				</div>
+
 				<hr>
-					<h3>Comments:</h3>
-				<div class="comments messages">
-					<% comments.forEach(function(cmt) { %>
-						<div class="comment-box">
-							<div class="comment">
+
+				<h3 class="messages">Comments (<span class="cmtCount"><%= commentsCount %></span>):</h3>
+				<% comments.forEach(function(cmt) { %>
+					<div class="comment-box">
+						<div class="comment">
+							<a href="/character/<%= cmt.login %>">
 								<div>
 									<p class="author-cmt">
 										<div class="avatar-frame <%= cmt.role %>">
-											<img class="avatar" src="<%= cmt.user_avatar %>" alt="Avatar" />
+											<img class="avatar" src="<%= cmt.avatar %>" alt="Avatar" />
 										</div>
 										<br>
-										<%= cmt.author %>
+										<%= cmt.login %>
 									</p>
 								</div>
-								<div class="lt"></div><div class="body"><%= cmt.body %></div>
-								<div class="l-d" onclick="comingSoon()">
-									<p>
-										<img class="like-cmnt-btn" src="/media/img/like.svg" alt="likes"> <span class="like-c-count"><%= cmt.likes %></span>
-										<img class="dislike-cmnt-btn" src="/media/img/dislike.svg" alt="dislikes"> <span class="dislike-c-count"><%= cmt.dislikes %></span>
-									</p>
-								</div>
-							</div>
-							<hr>
-							<div class="reply">
-								<textarea class="inp reply-inp" type="text" placeholder="Type text..."></textarea><button onclick="comingSoon()" class="btn green-btn reply-btn">reply</button>
+							</a>
+							<div class="lt"></div><div class="body"><%= cmt.body %></div>
+							<div class="l-d" onclick="comingSoon()">
+								<p>
+									<img class="like-cmnt-btn" src="/media/img/like.svg" alt="likes"> <span class="like-c-count"><%= cmt.likes %></span>
+									<img class="dislike-cmnt-btn" src="/media/img/dislike.svg" alt="dislikes"> <span class="dislike-c-count"><%= cmt.dislikes %></span>
+								</p>
 							</div>
 						</div>
-					<% }); %>
-				</div>
+					</div>
+				<% }); %>
 			</div>
 
 			<!-- LEFT -->
 			<div class="similar">
-				<p class="rec"><img class="camera" src="/media/img/camera.svg" alt="camera">VIDEOS YOU MIGHT LIKE TOO</p>
+				<span class="rec"><img class="camera" src="/media/img/camera.svg" alt="camera">VIDEOS YOU MIGHT LIKE TOO</span>
 				<div class="wrapper">
 				<% data.forEach(function(videos) { %>
 					<div class="video-box">
@@ -121,62 +135,92 @@
 	<%- include("../layouts/footer") %>
 <script src="/socket.io/socket.io.js"></script>
 <script>
-	let userLoged = "<%= user.login %>" || false;
-	if (userLoged) {
+	let userLoged = "<%= userData.userLogin %>";
+	let commentsCount = $('.cmtCount');
+	console.log(commentsCount)
+	
+	if (userLoged != "false") {
 		let socket = io();
 
 		let btn = $('.add-cmt');
 		let messages = $('.messages');
 		btn.on('click', function (e) {
-			let avatar = "<%= user.avatar %>";
-			let author = "<%= user.login %>";
-			let input = $('.body-cmt').val()
-			console.log(input)
+			let role = "<%= userData.userRole %>";
+			let avatar = "<%= userData.userAvatar %>";
+			let author = "<%= userData.userLogin %>";
+			let input = $('.body-cmt').val();
+			let episode = location.href.split('/')[4];;
+			console.log(videoId)
 
 			let data = {
+				role: role,
 				avatar: avatar,
 				author: author,
-				body: input
+				body: input,
+				episode: Number(episode)
 			}
-			if (author) {
+			console.log("DATA")
+			console.log(data)
+			if (author && input) {
 				socket.emit('chat message', JSON.stringify(data))
+				let nmbrCmnt = Number(commentsCount[0].innerHTML)
+				commentsCount.html(++nmbrCmnt);
 			}
 		})
-
-      socket.on('chat message', function(msg) {
-      	let coment = JSON.parse(msg);
-      	let item = `
-      		<div class="comment-box">
-				<div class="comment">
-					<div>
-						<p class="author-cmt">
-							<div class="avatar-frame ${coment.role}">
-								<img class="avatar" src="${coment.avatar}" alt="Avatar" />
-							</div>
-							<br>
-							${coment.author}
-						</p>
-					</div>
-					<div class="lt"></div><div class="body">${coment.body}</div>
-					<div class="l-d" onclick="comingSoon()">
-						<p>
-							<img class="like-cmnt-btn" src="/media/img/like.svg" alt="likes"> <span class="like-c-count">0</span>
-							<img class="dislike-cmnt-btn" src="/media/img/dislike.svg" alt="dislikes"> <span class="dislike-c-count">0</span>
-						</p>
-					</div>
-				</div>
+		
+		socket.on('chat message', function(msg) {
+			let currentEpisode = location.href.split('/')[4];;
+			let coment = JSON.parse(msg);
+			let dopka = `
 				<hr>
 				<div class="reply">
-					<textarea class="inp reply-inp" type="text" placeholder="Type text..."></textarea><button class="btn green-btn reply-btn">reply</button>
+					<span>Commentary from <a href="/video/${coment.episode}"><span>${coment.episode}</span> episode</a></span>
 				</div>
-			</div>
-      	`;
-        $(".messages").prepend(item);
-      });
+			`;
+
+			if (coment.episode == currentEpisode) {
+				dopka = "";
+			}
+			// Sound notify
+			if (coment.author != "<%= userData.userLogin %>") {
+				ion.sound.play("msg");
+			}
+      		let item = `
+				<div class="comment-box">
+					<div class="comment">
+						<a href="/character/${coment.author}">
+							<div>
+								<p class="author-cmt">
+									<div class="avatar-frame ${coment.role}">
+										<img class="avatar" src="${coment.avatar}" alt="Avatar" />
+									</div>
+									<br>
+									${coment.author}
+								</p>
+							</div>
+						</a>
+						<div class="lt"></div><div class="body">${coment.body}</div>
+						<div class="l-d" onclick="comingSoon()">
+							<p>
+								<img class="like-cmnt-btn" src="/media/img/like.svg" alt="likes"> <span class="like-c-count">0</span>
+								<img class="dislike-cmnt-btn" src="/media/img/dislike.svg" alt="dislikes"> <span class="dislike-c-count">0</span>
+							</p>
+						</div>
+					</div>
+					${dopka}
+				</div>
+			`;
+			$(".messages").after(item);
+		});
+	} else {
+		console.log("Nah idi! Nicho ne poluchilos")
 	}
 </script>
+<script src="/js/video/play/video.min.js"></script>
+<script src="/js/video/play/videoplayer.js"></script>
 
 	<div class="allow-box" style="position: fixed; top: 10px; right: 10px;">
+		<script src="/js/ion.sound.min.js"></script>
 	<script src="/js/video/play/script.js"></script>
 	</body>
 </html>

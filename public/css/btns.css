@@ -1,33 +1,43 @@
 /*Buttons*/
-.btn, .alr {
+.btn,
+.alr {
   border: solid 2px;
   border-radius: 6px;
   padding: 8px;
   color: #fff;
   font-size: 20px;
 }
+
 /*Character buttons*/
-.gumball-btn, .anais-btn, .darwin-btn {
+.gumball-btn,
+.anais-btn,
+.darwin-btn {
   font-size: 16px;
   border-color: #000;
   font-weight: bold;
   text-shadow: 2px 2px 1px #000;
 }
+
 .gumball-btn {
   background: #4ac2e4;
 }
+
 .gumball-btn:hover {
   background: #00a0ce;
 }
+
 .darwin-btn {
   background: #ff7412;
 }
+
 .darwin-btn:hover {
   background: #db5a00;
 }
+
 .anais-btn {
   background: #f9b6ba;
 }
+
 .anais-btn:hover {
   background: #fc999e;
 }
@@ -37,6 +47,7 @@
   font-size: 14px;
   color: #34b44a;
 }
+
 .green-lnk:hover {
   text-decoration: underline;
 }
@@ -44,6 +55,7 @@
 .blue-lnk {
   color: #009fff;
 }
+
 .blue-lnk:hover {
   text-decoration: underline;
 }
@@ -53,6 +65,7 @@
   color: #34b44a;
   border-color: #34b44a;
 }
+
 .lgreen-btn:hover {
   background: #34b44a;
   color: #fff;
@@ -63,6 +76,7 @@
   color: #34b44a;
   border-color: #34b44a;
 }
+
 .green-btn:hover {
   background: #9fffaa;
 }
@@ -71,6 +85,7 @@
   background-color: #ee5863;
   border-color: #5f0007;
 }
+
 .red-btn:hover {
   background-color: #d33742;
 }
@@ -80,6 +95,7 @@
   border-color: #ee5863;
   color: #ee5863;
 }
+
 .lred-btn:hover {
   background-color: #ee5863;
   color: #fff;
@@ -92,6 +108,7 @@
   border-radius: 5px;
   font-size: 22px;
 }
+
 .yellow-btn:hover {
   opacity: 0.8;
 }
@@ -112,6 +129,7 @@
   font-size: 16px;
   font-weight: bold;
 }
+
 .green-inp:focus-within {
   opacity: 1;
 }
@@ -122,15 +140,18 @@
   font-weight: bold;
   min-width: 200px;
 }
+
 .alr .img {
   min-width: 24%;
   float: left;
   height: 100%;
   margin-right: 16px;
 }
+
 .alr .img img {
   max-width: 70%;
 }
+
 .alr .title .text {
   color: #727272;
   font-size: 14px;
@@ -153,34 +174,68 @@
   padding: 10px;
   border-radius: 14%;
   background: #216fb3;
+  position: relative;
 }
+
+.character::after {
+  content: "";
+  position: absolute;
+  right: -28px;
+  top: -20px;
+  background-image: url("/media/avatars/star.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 40%;
+  width: 40%;
+}
+
 .avatar {
   border-radius: 14%;
   width: 140px;
+  height: 100%;
 }
+
 .gumball {
   background: #4ac2e4 !important;
 }
+
 .darwin {
   background: #ff7412 !important;
 }
+
+.gumball-darwin {
+  background: rgb(255, 116, 18) !important;
+  background: linear-gradient(-90deg, rgba(255, 116, 18, 1) 0%, rgba(255, 116, 18, 1) 40%, rgba(74, 194, 228, 1) 60%, rgba(74, 194, 228, 1) 100%) !important;
+}
+
 .anais {
   background: #f9b6ba !important;
 }
+
 .penny {
-  background: linear-gradient(0deg, rgba(251,130,103,1) 0%, rgba(253,231,27,1) 50%);
+  background: linear-gradient(0deg, rgba(251, 130, 103, 1) 0%, rgba(253, 231, 27, 1) 50%) !important;
 }
+
 .tobias {
-  background: linear-gradient(0deg, rgba(242,180,65,1) 25%, rgba(237,103,92,1) 60%, rgba(237,103,92,1) 70%, rgba(124,211,241,1) 90%) !important;
+  background: linear-gradient(0deg, rgba(242, 180, 65, 1) 25%, rgba(237, 103, 92, 1) 60%, rgba(237, 103, 92, 1) 70%, rgba(124, 211, 241, 1) 90%) !important;
 }
+
+.jamie {
+  background: linear-gradient(0deg, rgba(190, 183, 159, 1) 0%, rgba(190, 183, 159, 1) 10%, rgba(230, 184, 50, 1) 40%, rgba(255, 220, 13, 1) 100%) !important;
+}
+
+.carrie {
+  background: linear-gradient(45deg, rgba(0, 0, 0, 1) 0%, rgba(255, 255, 255, 1) 15%, rgba(255, 255, 255, 1) 35%, rgba(0, 0, 0, 1) 50%, rgba(255, 255, 255, 1) 65%, rgba(255, 255, 255, 1) 85%, rgba(0, 0, 0, 1) 100%) !important;
+}
+
 .joe {
-  background: #f5e700;
+  background: #f5e700 !important;
 }
 
 .admin {
-  background: linear-gradient(45deg, rgba(33,111,179,1) 0%, rgba(255,0,0,1) 80%);
+  background: linear-gradient(45deg, rgba(33, 111, 179, 1) 0%, rgba(255, 0, 0, 1) 80%);
 }
 
 .character {
-  background: linear-gradient(45deg, rgba(255,0,0,1) 0%, rgba(255,255,0,1) 80%);
+  background: linear-gradient(45deg, rgba(255, 0, 0, 1) 0%, rgba(255, 255, 0, 1) 80%);
 }

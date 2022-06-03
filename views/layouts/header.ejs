@@ -7,9 +7,9 @@
 			Find
 		</button>
 	</div>
-	<% if(user.login) { %>
+	<% if(userData.userLogin) { %>
 	<div class="signinup">
-		<a href='/character/<%= user.login %>' class='user green-lnk' id="login"><%= user.login %></a>
+		<a href='/character/<%= userData.userLogin %>' class='user green-lnk' id="login"><%= userData.userLogin %></a>
 	</div>
 	<% } else { %>
 	<div class="signinup">
@@ -33,9 +33,9 @@
 	</div>
 
 	<div class="menu">
-	<% if(user.login) { %>
+	<% if(userData.userLogin) { %>
 		<li>
-			<a href='/character/<%= user.login %>' class='user green-lnk' id="login"><%= user.login %></a>
+			<a href='/character/<%= userData.userLogin %>' class='user green-lnk' id="login"><%= userData.userLogin %></a>
 		</li>
 	<% } else { %>
 		<li>
@@ -59,7 +59,7 @@
 function showMenu(x) {
     x.classList.toggle("change");
     let menu = document.querySelector(".menu");
-    menu.style.right = menu.style.right == "0px" ? "-200%" : "0px";
+    menu.style.display = menu.style.display == "inherit" ? "none" : "inherit";
 }
 </script>
 <!-- END } -->

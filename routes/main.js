@@ -3,17 +3,23 @@ const router = require('express').Router();
 const db = require('../db');
 
 router.get('', (req, res) => {
-	const id = req.session.userId;
-	const login = req.session.userLogin;
-	
+// Session {
+	const userId = req.session.userId || false;
+	const userLogin = req.session.userLogin || false;
+	const userAvatar = req.session.userAvatar || false;
+// }
+	console.log(userId)
+	console.log(userLogin)
+	console.log(userAvatar)
 	let sql = `SELECT * FROM videos ORDER BY id LIMIT 0, 25`;
 	db.query(sql, (err, result) => {
 		if (err) throw err;
 		res.render('main', {
 			data: result,
-			user: {
-				id,
-				login
+			userData: {
+				userId,
+				userLogin,
+				userAvatar
 			}
 		});
 	});

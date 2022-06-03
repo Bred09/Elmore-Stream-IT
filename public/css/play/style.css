@@ -4,21 +4,34 @@
 }
 
 .box {
+	margin: 0 auto;
+	max-width: 1800px;
+	padding: 0 4%;
+	/* 	adaptiv */
 	display: grid;
-	grid:  1fr / 4fr 28%;
-	grid-gap: 0 40px;
-	max-width: 1440px;
-	padding: 0 2%;
+	grid-template-columns: 1fr 1fr 26%;
+	grid-template-rows: auto;
+	gap: 0px 40px;
+	grid-auto-flow: row dense;
+	grid-template-areas:
+		"display display similar"
+		"comments comments similar"
+		"comments comments similar";
 }
+.display {
+	grid-area: display;
+}
+.similar {
+	grid-area: similar;
+}
+.comments {
+	grid-area: comments;
+}
+
 
 /*DISPLAY*/
 .title-frm, .posted-frm {
 	margin: 0 0 6px 0;
-}
-
-.frame iframe {
-	min-height: 560px;
-  border-radius: 6px;
 }
 
 /*description*/
@@ -71,10 +84,15 @@
 	background: #eeeeee;
 	font-size: 24px;
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-evenly;
 	position: relative;
 	top: -16px;
 	align-items: center;
+	padding: 4px;
+}
+.likes-dis > div {
+	display: grid;
+	justify-items: center;
 }
 .likes-dis .like, .like-count, .dislike {
 	margin-right: 10px;
@@ -129,10 +147,13 @@
 	height: 64px !important;
 	padding: 2px !important;
 }
+.character::after {
+	right: -12px !important;
+	top: -8px !important;
+}
 .avatar {
 	border-radius: 14%;
-	border: solid 2px #216fb3;
-	width: 60px !important;
+	width: 64px !important;
 }
 .author-cmt {
 	color: #2d2d2d;
@@ -187,14 +208,12 @@ border-left: 100px solid transparent;
 .rec {
 	color: #009fff;
 	font-weight: 600;
-	margin: 0 0 16px 0;
+	display: flex;
+	align-items: center;
 }
 .camera {
-	width: 16%;
-	margin-right: 16px;
-	position: relative;
-	top: 8px;
-	left: 10px;
+	width: 60px;
+	margin: 6px 10px;
 }
 
 /*similar fields*/
@@ -237,4 +256,72 @@ border-left: 100px solid transparent;
 .more-btn-box {
 	padding: 20px 0;
 	text-align: center;
+}
+
+/*Videoplayer*/
+.frame {
+	border: solid 2px #737b8e;
+}
+#my-video {
+	width: 100%;
+	height: 100%;
+}
+
+/*Adaptiv*/
+@media screen and (max-width: 1080px) {
+	.box {
+		grid-template-areas:
+		"display display display"
+		"comments comments similar"
+		"comments comments similar";
+	}
+}
+
+@media screen and (max-width: 848px) {
+  .find-box {
+    display: none;
+  }
+  #hr2 {
+    display: none;
+  }
+	.box {
+		grid-template-areas:
+		"display display display"
+		"comments comments comments"
+		"similar similar similar";
+	}
+}
+@media screen and (max-width: 500px) {
+	#logo {
+		width: 70%;
+	}
+
+	.title-frm,
+	.posted-frm {
+		text-align: center;
+	}
+
+	.vjs-volume-panel {
+		display: none !important;
+	}
+	.loop-btn {
+		display: none !important;
+	}
+
+	.options {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.options>div {
+		width: 100%;
+		margin: 6px 0;
+	}
+
+	.comment {
+		display: inherit !important;
+	}
+	.comment>.body {
+		width: auto;
+	}
 }

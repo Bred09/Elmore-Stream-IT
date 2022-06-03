@@ -79,18 +79,16 @@
   display: none;
 }
 .menu {
-  position: fixed;
-  top: 140px;
-  right: -120%;
+  display: none;
+  position: absolute;
+  top: 100px;
+  right: 0px;
   background: #FFFEC0;
   transition: 0.4s;
-  border-top: solid 2px #32B624;
-  padding-top: 10%;
-  text-align: center;
-  list-style-type: none;
+  border: solid 2px #32B624;
+  border-right: none;
+  padding: 10%;
   z-index: 9;
-  height: 100%;
-  width: 100%;
 }
 
 /*Adaptiv*/
@@ -101,6 +99,11 @@
 
   .menu-btn {
     display: inherit;
+  }
+}
+@media screen and (min-width: 1080px) {
+  .menu {
+    display: none !important;
   }
 }
 

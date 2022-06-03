@@ -1,0 +1,263 @@
+#my-video {
+	display: flex !important;
+	justify-content: center;
+	align-items: center;
+	font-size: 14px;
+	overflow: hidden
+}
+
+.video-js .vjs-tech,
+.vjs-text-track-display {
+	position: inherit;
+}
+
+
+/* Изображ. загрузки */
+.video-js .vjs-loading-spinner {
+	border-color: #aaacb1;
+}
+
+/* BidPlayButton */
+.video-js .vjs-big-play-button {
+	background-image: url("/media/videoplayer/big_play_btn.svg") !important;
+	background-size: 100% 100% !important;
+	background-repeat: no-repeat !important;
+	background-position: center !important;
+	margin-left: -1em;
+	margin-top: -1em;
+	width: 2em;
+	height: 2em;
+	background-color: transparent !important;
+	border: none !important;
+	font-size: 6em;
+}
+
+/* BigPlayButton hover */
+.video-js:hover .vjs-big-play-button,
+.video-js .vjs-big-play-button:focus,
+.video-js .vjs-big-play-button:active {
+	background-color: #5e5e5e;
+}
+
+/* Кнопки контрол бара */
+.prev-btn,
+.video-js .vjs-play-control,
+.next-btn,
+.complaint-btn,
+.vjs-volume-panel>.vjs-mute-control,
+.loop-btn,
+.vjs-fullscreen-control {
+	position: relative !important;
+	background-size: 76% 76% !important;
+	background-repeat: no-repeat !important;
+	background-position: center !important;
+}
+
+/* Границы слева */
+.video-js .vjs-play-control,
+.next-btn,
+.complaint-btn,
+.vjs-fullscreen-control {
+	border-left: solid 2px #a5a5a5 !important;
+}
+
+/* Позицонирование элементов контрол бара */
+.video-js .prev-btn {
+	order: 1;
+	background-image: url("/media/videoplayer/previous.svg");
+}
+
+.video-js .vjs-play-control {
+	order: 2;
+}
+
+.video-js .vjs-paused {
+	background-image: url("/media/videoplayer/playstop.svg");
+	background-position: center top !important;
+	background-size: 100% auto !important;
+}
+
+.video-js .vjs-playing {
+	background-image: url("/media/videoplayer/playstop.svg");
+	background-position: 0 bottom !important;
+	background-size: 100% auto !important;
+}
+
+.video-js .next-btn {
+	order: 3;
+	background-image: url("/media/videoplayer/next.svg");
+}
+
+.video-js .complaint-btn {
+	order: 4;
+	background-image: url("/media/videoplayer/complaint.svg");
+}
+
+.vjs-custom-control-spacer {
+	order: 5;
+}
+
+.vjs-volume-panel {
+	order: 6;
+}
+
+.vjs-volume-panel .vjs-vol-1,
+.vjs-vol-2,
+.vjs-vol-3 {
+	background-image: url("/media/videoplayer/sound.svg") !important;
+}
+
+.vjs-volume-panel .vjs-vol-0 {
+	background-image: url("/media/videoplayer/mute.svg") !important;
+}
+
+.video-js .loop-btn {
+	order: 7;
+	background-image: url("/media/videoplayer/repeat.svg");
+}
+
+.video-js .vjs-fullscreen-control {
+	order: 8;
+	background-image: url("/media/videoplayer/full.svg");
+}
+
+.video-js button {
+	background: none;
+}
+
+/* Стандартные кнопки с контентом */
+
+.video-js .vjs-big-play-button .vjs-icon-placeholder::before,
+.video-js .vjs-play-control .vjs-icon-placeholder::before,
+.vjs-icon-play::before,
+.video-js .vjs-mute-control .vjs-icon-placeholder::before,
+.vjs-icon-volume-high::before,
+.video-js .vjs-fullscreen-control .vjs-icon-placeholder::before,
+.vjs-icon-fullscreen-enter::before {
+	content: none !important;
+}
+
+/* Прогрес бар */
+.video-js .vjs-progress-control {
+	position: absolute;
+	left: 0;
+	right: 0;
+	width: 100%;
+	height: 1em;
+	top: -1em;
+	border: solid 2px #b0b0b0;
+	border-left: none;
+	border-right: none;
+}
+
+/* Прогрес бар прошедшее/слева + звук */
+.video-js .vjs-play-progress,
+.video-js .vjs-volume-level {
+	background-color: #539c5e !important;
+}
+
+/* Прогрес бар будущее/справа */
+.video-js .vjs-slider,
+.video-js .vjs-load-progress,
+.vjs-load-progress>div {
+	background: #8cde99 !important;
+}
+
+/* Текущее время при наведении */
+.video-js .vjs-progress-control:hover .vjs-progress-holder {
+	font-size: inherit;
+}
+
+.video-js .vjs-progress-control:hover .vjs-time-tooltip {
+	font-size: 1.6666666667em !important;
+}
+
+/* Отметка прогресс бара */
+.video-js .vjs-play-progress:before,
+.vjs-slider-horizontal .vjs-volume-level::before {
+	content: " \0020" !important;
+	width: 2em;
+	height: 2em;
+	background-image: url("/media/videoplayer/point.svg");
+	background-size: 100% 100% !important;
+	background-repeat: no-repeat !important;
+	background-position: center !important;
+	top: -0.5em;
+}
+
+/* Оставшее время */
+.video-js .vjs-time-control {
+	display: none;
+}
+
+/* Контрол панель */
+.video-js .vjs-control-bar {
+	background-color: #ecebd6 !important;
+	font-size: 14px
+}
+
+/* Volume */
+.video-js .vjs-volume-bar {
+	margin: 1em 0;
+}
+
+/* Volume ползунок */
+.vjs-slider-horizontal .vjs-volume-level::before {
+	right: -1em;
+}
+
+/* линия */
+.vjs-slider-horizontal .vjs-volume-level,
+.vjs-volume-bar.vjs-slider-horizontal {
+	height: 1em;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+.vjs-paused.vjs-has-started.video-js .vjs-big-play-button,
+.video-js.vjs-ended .vjs-big-play-button,
+.video-js.vjs-paused .vjs-big-play-button {
+	display: block
+}
+
+.video-js .vjs-load-progress div,
+.vjs-seeking .vjs-big-play-button,
+.vjs-waiting .vjs-big-play-button {
+	display: none !important
+}
+
+.video-js .vjs-menu-button-inline:hover,
+.video-js.vjs-no-flex .vjs-menu-button-inline {
+	width: 8.35em
+}
+
+.video-js .vjs-volume-menu-button.vjs-volume-menu-button-horizontal:hover .vjs-menu .vjs-menu-content {
+	height: 3em !important;
+	;
+	width: 6.35em;
+	background: red !important;
+}
+
+.video-js .vjs-spacer,
+.video-js {
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-flex: 1 1 auto;
+	-moz-box-flex: 1 1 auto;
+	-webkit-flex: 1 1 auto;
+	-ms-flex: 1 1 auto;
+	flex: 1 1 auto
+}
+
+.video-js .vjs-progress-control .vjs-load-progress,
+.video-js .vjs-progress-control .vjs-play-progress,
+.video-js .vjs-progress-control .vjs-progress-holder {
+	height: 100%
+}
+
+.video-js .vjs-progress-control .vjs-progress-holder {
+	margin: 0
+}

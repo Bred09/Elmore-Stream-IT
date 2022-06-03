@@ -1,5 +1,27 @@
+//Sound alert
+
+// init bunch of sounds
+ion.sound({
+    sounds: [
+        {name: "tap"},
+        {name: "branch_break"},
+        {name: "computer_error"},
+        // custom sound
+        {name: "msg"}
+    ],
+
+    // main config
+    path: "/media/sounds/",
+    preload: true,
+    multiplay: true,
+    volume: 0.9
+});
+
 // Уведомление
 let alw = function allow(){
+    // Звук error
+    ion.sound.play("computer_error");
+    
     $(".allow-box").append(`
             <div class="allow alert alr error-alr" style="margin-bottom: 10px;">
                 <div class="img">
@@ -24,8 +46,10 @@ let alw = function allow(){
 
 // Отправляем данные формы на бэк
 $('.add-cmt').on('click', function(e) {
-    let body = $('.body-cmt').val()
+    let videoId = location.href.split('/')[4];
+    let body = $('.body-cmt').val();
     var data = {
+        videoId,
         body
     }
     $('.body-cmt').val("")
@@ -182,12 +206,3 @@ $('.more').on('click', (e) => {
       console.log('err')
     })
 });
-
-// Coming soon function
-function comingSoon() {
-    let box = `<div class="coming-soon" style="position:  fixed; top: 0; left: 0; width: 100%; height: 100%; text-align: center; background: rgba(0,0,0,0.8)"><img style="margin-top: 2%; width: 80%;" src="/media/comingsoon.png" alt="Cooming soon..."></div>`;
-    $('body').append(box);
-    $('.coming-soon').on('click', (e) => {
-        $('.coming-soon').remove();
-    })
-}
