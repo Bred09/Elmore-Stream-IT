@@ -1,48 +1,87 @@
 <!DOCTYPE html>
- <html>
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="icon" type="image/x-icon" href="/media/favicon.svg">
-<!-- Styles -->
-		<link rel="stylesheet" href="<%= assetFingerprint('/css/main/wrapper.css') %>" type="text/css"/>
-		<link rel="stylesheet" href="<%= assetFingerprint('/css/main/style.css') %>" type="text/css"/>
-		<title>Elmore Stream IT</title>
-<!-- main css files -->
-		<link rel="stylesheet" href="<%= assetFingerprint('/css/main.css') %>" type="text/css"/>
-		<link rel="stylesheet" href="<%= assetFingerprint('/css/btns.css') %>" type="text/css"/>
-<!-- layouts -->
-		<link href="<%= assetFingerprint('/css/header.css') %>" rel="stylesheet" type="text/css"/>
-		<link href="<%= assetFingerprint('/css/footer.css') %>" rel="stylesheet" type="text/css"/>
-	</head>
-	<body>
-		<%- include("layouts/header") %>
-	<!-- туловище сайта -->
-	<div class="wrapper-box">
-		<h1>Suggested</h1>
+<html>
 
-		<div class='wrapper'>
-			<% data.forEach(function(user) { %>
-				<div class="video-box">
-					<a href="/video/<%= user.id %>" class="video-link">
-						<div class="video">
-							<img src="https://video.sibnet.ru/upload/cover/video_<%= user.poster %>_0.jpg" class="poster" alr="<%= user.title %>"></img>
-							<br>
-							<br>
-							<span class="title info"><%= user.title %></span><br>
-							<span class="posted info">
-								<object>
-									posted by <a href="/character/<%= user.author %>" class="blue-lnk"><%= user.author %></a>
-								</object><br>
-							</span>
-							<span class="views info"><%= user.views %> views</span>
-						</div>
-					</a>
-				</div>
-			<% }); %>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/x-icon" href="/media/favicon.svg">
+	<!-- Styles -->
+	<link rel="stylesheet" href="<%= assetFingerprint('/css/main/wrapper.css') %>" type="text/css" />
+	<link rel="stylesheet" href="<%= assetFingerprint('/css/main/style.css') %>" type="text/css" />
+	<title>Elmore Stream IT</title>
+	<!-- main css files -->
+	<link rel="stylesheet" href="<%= assetFingerprint('/css/main.css') %>" type="text/css" />
+	<link rel="stylesheet" href="<%= assetFingerprint('/css/btns.css') %>" type="text/css" />
+	<!-- layouts -->
+	<link href="<%= assetFingerprint('/css/header.css') %>" rel="stylesheet" type="text/css" />
+	<link href="<%= assetFingerprint('/css/footer.css') %>" rel="stylesheet" type="text/css" />
+
+	<!-- Yandex.Metrika counter -->
+	<script type="text/javascript">
+		(function (m, e, t, r, i, k, a) {
+			m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+			m[i].l = 1 * new Date(); k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+		})
+			(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+		ym(89318678, "init", {
+			clickmap: true,
+			trackLinks: true,
+			accurateTrackBounce: true
+		});
+	</script>
+	<noscript>
+		<div><img src="https://mc.yandex.ru/watch/89318678" style="position:absolute; left:-9999px;" alt="" /></div>
+	</noscript>
+	<!-- /Yandex.Metrika counter -->
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q9DB6XQ87G"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', 'G-Q9DB6XQ87G');
+	</script>
+</head>
+
+<body>
+	<%- include("layouts/header") %>
+		<!-- туловище сайта -->
+		<div class="wrapper-box">
+			<h1>Suggested</h1>
+
+			<div class='wrapper'>
+				<% data.forEach(function(user) { %>
+					<div class="video-box">
+						<a href="/video/<%= user.id %>" class="video-link">
+							<div class="video">
+								<img src="https://video.sibnet.ru/upload/cover/video_<%= user.poster %>_0.jpg"
+									class="poster" alr="<%= user.title %>"></img>
+								<br>
+								<br>
+								<span class="title info">
+									<%= user.title %>
+								</span><br>
+								<span class="posted info">
+									<object>
+										posted by <a href="/character/<%= user.author %>" class="blue-lnk">
+											<%= user.author %>
+										</a>
+									</object><br>
+								</span>
+								<span class="views info">
+									<%= user.views %> views
+								</span>
+							</div>
+						</a>
+					</div>
+					<% }); %>
+			</div>
+			<button class="btn green-btn more">more videos</button>
 		</div>
-		<button class="btn green-btn more">more videos</button>
-	</div>
-<%- include("layouts/footer") %>
-<script src="/js/main/script.js"></script>
-	</body>
+		<%- include("layouts/footer") %>
+			<script src="/js/main/script.js"></script>
+</body>
+
+</html>

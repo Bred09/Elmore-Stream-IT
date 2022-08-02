@@ -73,6 +73,10 @@ app.use('/character/', routes.user);
 // video upload
 app.use('/video/', routes.video);
 
+
+// Dashboard
+app.get('/admin', routes.admin);
+
 // Test polygon
 app.get('/polygon', (req, res) => {
 	res.render('polygon');

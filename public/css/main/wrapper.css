@@ -1,18 +1,24 @@
 .wrapper-box {
   padding: 0 2%;
+  max-width: 1708px;
+  margin: 0 auto;
 }
+
 .wrapper {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   grid-gap: 0 30px;
-/*   t r b l */
+  /*   t r b l */
 }
+
 .video-box {
   border-radius: 6px;
 }
-.video-box:hover{
+
+.video-box:hover {
   background: #fdcf0b;
 }
+
 .video-box:hover .info {
   color: #fff;
 }
@@ -25,18 +31,22 @@
 .video {
   padding: 10px;
 }
+
 .poster {
   width: 100%;
   border-radius: 6px;
 }
+
 .title {
   font-size: 20px;
   font-weight: bold;
 }
+
 .posted {
   font-size: 14px;
   font-weight: bold;
 }
+
 .views {
   font-size: 14px;
   color: gray;
