@@ -49,10 +49,10 @@ router.post('/create', (req, res) => {
 	} else if (!/^[a-zA-Z0-9]+$/.test(login)) {
 	    res.json({
 	      ok: false,
-	      error: 'the password can have only Latin characters and numbers without spaces!',
+	      error: 'the login can have only Latin characters and numbers without spaces!',
 	      fields: ['login']
 	    });
-	} else if (beginWithoutDigit.test(password) && withoutSpecialChars.test(password) && containsLetters.test(password)) {
+	} else if (!beginWithoutDigit.test(password) && !withoutSpecialChars.test(password) && !containsLetters.test(password)) {
 	    res.json({
 	      ok: false,
 	      error: 'the password can have only Latin characters and numbers without spaces!',

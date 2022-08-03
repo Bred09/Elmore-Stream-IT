@@ -1,11 +1,9 @@
+
+static-asset нужен чтобы задать путь к css файлу
+
 # Деплой Node.js, с уcтановкой Nginx и SSL Let's Encrypt
 
-[![DigitalOcean Referral Badge](https://nodejs.org/static/images/logo.svg)](https://www.digitalocean.com/?refcode=96eb2d860a30&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge)
-
-## Установка сервера
-Сервер будет установлен на Digital Ocean. Получите 100$ при регистрации, перейдя по [этой реферальной ссылке](https://www.digitalocean.com/?refcode=96eb2d860a30&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge).
-
-- На старнице Droplets, создайте новый Ubuntu сервер, и подключите ssh ключ.
+[![DigitalOcean Referral Badge](https://nodejs.org/static/images/logo.svg)](https://nodejs.org)
 
 ## Установка необходимых библиотек
 
@@ -91,8 +89,11 @@ sudo service nginx restart
 ```
 
 ## Привязка домена
-- Добавьте домен в DigitalOcean (страница Networking, вкладка Domains).
-- Добавьте две записи типа 'A'. В первой Hostname равен '@', во второй 'www'. Нажмите на поле с IP и выберете droplet (сервер).
+В любом сервисе для подключения домена к серверу, нужны следующие действия:
+- Прописать NS серверы хостинга(WebTime, FirstVDS) в регистратор домена(Reg.ru)
+- Добавить DNS записи в хостинге с указанием IP адреса сервера
+
+### Привязка домена на примере DigitalOcean
 - На странице регистратора вашего домена добавьте DNS записи:
 ```
 ns1.digitalocean.com
@@ -109,3 +110,21 @@ certbot renew --dry-run
 ```
 
 **Да будет свет**
+- Спасибо Неону :)
+
+# Настройка сайта, БД и пр.
+
+## Создание MySQL user для удаленного подключения
+
+- Create user
+```
+CREATE USER 'login'@'%' IDENTIFIED BY 'password';
+```
+- Set GRANT
+```
+GRANT ALL PRIVILEGES ON *.* TO 'login'@'%' WITH GRANT OPTION;
+```
+- Upgate privileges
+```
+FLUSH PRIVILEGES;
+```
