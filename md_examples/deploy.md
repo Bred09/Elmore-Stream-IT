@@ -113,6 +113,10 @@ certbot renew --dry-run
 - Спасибо Неону :)
 
 # Настройка сайта, БД и пр.
+- Импортировать файл.sql в базу данных `esi`
+```
+mysql -u root -p esi < esi.sql
+```
 
 ## Создание MySQL user для удаленного подключения
 
@@ -127,4 +131,11 @@ GRANT ALL PRIVILEGES ON *.* TO 'login'@'%' WITH GRANT OPTION;
 - Upgate privileges
 ```
 FLUSH PRIVILEGES;
+```
+
+## Полезные команды
+
+- Переименовать все файлы по нумерации 1.mp4; 2.mp4; N.mp4
+```
+ls -v | cat -n | while read n f; do mv -n "$f" "$n.mp4"; done
 ```
